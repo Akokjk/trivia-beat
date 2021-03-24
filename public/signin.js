@@ -1,12 +1,11 @@
 let roboto;
 
-
 function preload() {
   roboto = loadFont('assets/Roboto-Regular.ttf');
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL); //center is in the middle of the screen
+  createCanvas(windowWidth, windowHeight, WEBGL); //origin is in the middle of the screen
   background(255);
   textFont(roboto);
 }
@@ -18,5 +17,4 @@ function draw() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-
 }

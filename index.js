@@ -1,16 +1,22 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
+const fs = require('fs');
+const proc = require('process');
+
 const app = express();
 const port = 3000;
-const cookieParser = require("cookie-parser");
 
-var sout = fs.createWriteStream("/var/log/triviabeatui/node.stdout.log", {
-  flags: "a",
+// redirecting console output to logfiles
+var sout = fs.createWriteStream("/var/log/triviabeatui/node.stdout.log", { flags: "a" });
+var serr = fs.createWriteStream("/var/log/triviabeatui/node.stderr.log", { flags: "a" });
+//var sout = fs.createWriteStream("node.stdout.log", { flags: "a" });
+//var serr = fs.createWriteStream("node.stderr.log", { flags: "a" });
+proc.stdout.write = sout.write.bind(sout);
+proc.stderr.write = serr.write.bind(serr);
+
+proc.on('uncaughtException', function(err) {
+  console.error((err && err.stack) ? err.stack : err);
 });
-var serr = fs.createWriteStream("/var/log/triviabeatui/node.stderr.log", {
-  flags: "a",
-});
-proc.stdout.pipe(sout);
-proc.stderr.pipe(serr);
 
 app.use(require("cors")());
 

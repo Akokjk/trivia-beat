@@ -1,20 +1,23 @@
 let roboto;
 
+
 function preload() {
   roboto = loadFont('assets/Roboto-Regular.ttf');
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL); //origin is in the middle of the screen
-  background(255);
+  createCanvas(100, 100, WEBGL);
+  background(120);
   textFont(roboto);
+  let inp = createInput('');
+  inp.input(myInputEvent);
+  //input.position(10, 10, 'absolute')
+}
+function draw(){
+
 }
 
-function draw() {
-  fill(0)
-  text("Sign in and up", 0, 0)
-}
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+function myInputEvent() {
+  console.log('you are typing: ', this.value());
 }

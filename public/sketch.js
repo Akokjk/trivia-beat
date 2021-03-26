@@ -1,58 +1,55 @@
 //game params
-let debug = false
+let debug = false;
 let gridSize = 32;
 let game;
 var socket; //used to send and recieve information from index.js in real time
-
 
 function preload() {
   game = new Game(gridSize, gridSize, debug);
 }
 
 function setup() {
-  socket = io.connect('http://localhost:3000');
+  socket = io.connect("https://play.triviabeat.io");
   game.setup();
-  socket.on('mouse',
-     // When we receive data
-     function(data) {
-       console.log("Got: " + data.x + " " + data.y);
-       // Draw a blue circle
-       fill(0,0,255);
-       noStroke();
-       ellipse(data.x, data.y, 20, 20);
-     }
-   );
+  socket.on(
+    "mouse",
+    // When we receive data
+    function (data) {
+      console.log("Got: " + data.x + " " + data.y);
+      // Draw a blue circle
+      fill(0, 0, 255);
+      noStroke();
+      ellipse(data.x, data.y, 20, 20);
+    }
+  );
 }
 
-function getAccountName(){
+function getAccountName() {
   //get this from API lil' bitch boi!
-  return "sure"
+  return "sure";
 }
 
-function getAccountInformation(){
+function getAccountInformation() {
   //get [hearts, gems, account balance]
-  return [0, 0, 0.00]
+  return [0, 0, 0.0];
 }
 
 function draw() {
-
   game.display();
 }
 
-function yes(){
-  console.log("no")
+function yes() {
+  console.log("no");
 }
 
-function mousePressed(){
-
-
+function mousePressed() {
   //console.log("Mouse X, Y " + (mouseX-windowWidth/2) + ", "+ (mouseY-windowHeight/2));
   // Draw some white circles
-   fill(255);
-   noStroke();
-   ellipse(mouseX,mouseY,20,20);
-   // Send the mouse coordinates
-   sendmouse(mouseX,mouseY);
+  fill(255);
+  noStroke();
+  ellipse(mouseX, mouseY, 20, 20);
+  // Send the mouse coordinates
+  sendmouse(mouseX, mouseY);
 }
 
 function sendmouse(xpos, ypos) {
@@ -62,28 +59,24 @@ function sendmouse(xpos, ypos) {
   // Make a little object with  and y
   var data = {
     x: xpos,
-    y: ypos
+    y: ypos,
   };
 
   // Send that object to the socket
-  socket.emit('mouse',data);
+  socket.emit("mouse", data);
 }
-
-
-
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-  game.centerX = windowWidth/2
-  game.centerY = windowHeight/2
+  game.centerX = windowWidth / 2;
+  game.centerY = windowHeight / 2;
 }
 
-function keyPressed(){
-  if(keyCode === DELETE){
-    if(debug){
+function keyPressed() {
+  if (keyCode === DELETE) {
+    if (debug) {
       debug = false;
-    }
-    else debug = true;
-    console.log("Debug: " + debug)
+    } else debug = true;
+    console.log("Debug: " + debug);
   }
 }

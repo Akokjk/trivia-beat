@@ -5,8 +5,6 @@ const cookieParser = require('cookie-parser')
 
 app.use(require('cors')())
 
-
-
 app.use(express.static('public'))
 // app.get('/', (req, res) => {
 //   res.setHeader("")
@@ -18,12 +16,9 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
-var server = app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+var server = app.listen(port, '127.0.0.1', () => {
+  console.log(`Trivia Beat app listening at port ${port}`)
 })
-
 
 var io = require('socket.io')(server, {
   cors: {
@@ -31,7 +26,6 @@ var io = require('socket.io')(server, {
        methods: ["GET", "POST"]
    }
 });
-
 
 // Register a callback function to run when we have an individual connection
 // This is run for each individual user that connects

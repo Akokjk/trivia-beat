@@ -55,7 +55,7 @@ io.sockets.on(
     socket.on("mouse", function (data) {
       // Data comes in as whatever was sent, including objects
       console.log("Received: 'mouse' " + data.x + " " + data.y);
-      data.clients = clients; 
+      data.clients = clients;
       // Send it to all other clients
       socket.broadcast.emit("mouse", data);
 
@@ -66,6 +66,7 @@ io.sockets.on(
     socket.on("disconnect", function () {
       console.log("Client has disconnected");
       clients--;
+      socket.broadcast.emit("mouse", data.client);
     });
   }
 );

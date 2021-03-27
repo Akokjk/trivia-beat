@@ -28,9 +28,13 @@ function Menu() {
 function title(x, y) {
   fill(0);
   stroke(0);
-  var title = "Trivia Beat Clients" + clients;
+  var title = "Trivia Beat";
   textSize(2);
   text(title, 0, y);
   strokeWeight(5 / gridSize);
   line(-x, y + 1.3, x, y + 1.3);
+  textSize(.5);
+  text("Active Users: " + clients, -9, -12)
+
+
 }

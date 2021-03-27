@@ -16,8 +16,9 @@ function setup() {
     // When we receive data
     function (data) {
       console.log("Got: " + data.x + " " + data.y + " Clients: ", data.clients);
-      clients = data.clients; 
+      clients = data.clients;
     });
+    if(clients == null) clients = 1; 
 }
 
 function getAccountName() {

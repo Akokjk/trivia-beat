@@ -3,7 +3,7 @@ let debug = false;
 let gridSize = 32;
 let game;
 var socket; //used to send and recieve information from index.js in real time
-
+var clients;
 function preload() {
   game = new Game(gridSize, gridSize, debug);
 }
@@ -15,13 +15,9 @@ function setup() {
     "mouse",
     // When we receive data
     function (data) {
-      console.log("Got: " + data.x + " " + data.y);
-      // Draw a blue circle
-      fill(0, 0, 255);
-      noStroke();
-      ellipse(data.x, data.y, 20, 20);
-    }
-  );
+      console.log("Got: " + data.x + " " + data.y + " Clients: ", data.clients);
+      clients = data.clients; 
+    });
 }
 
 function getAccountName() {

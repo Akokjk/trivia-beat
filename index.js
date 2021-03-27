@@ -5,7 +5,7 @@ const proc = require('process');
 
 const app = express();
 const port = 3000;
-
+var clients = 0;
 // redirecting console output to logfiles
 var sout = fs.createWriteStream("/var/log/triviabeatui/node.stdout.log", { flags: "a" });
 var serr = fs.createWriteStream("/var/log/triviabeatui/node.stderr.log", { flags: "a" });
@@ -50,12 +50,12 @@ io.sockets.on(
   // We are given a websocket object in our function
   function (socket) {
     console.log("We have a new client: " + socket.id);
-
+    clients++;
     // When this user emits, client side: socket.emit('otherevent',some data);
     socket.on("mouse", function (data) {
       // Data comes in as whatever was sent, including objects
       console.log("Received: 'mouse' " + data.x + " " + data.y);
-
+      data.clients = clients; 
       // Send it to all other clients
       socket.broadcast.emit("mouse", data);
 
@@ -65,6 +65,7 @@ io.sockets.on(
 
     socket.on("disconnect", function () {
       console.log("Client has disconnected");
+      clients--;
     });
   }
 );

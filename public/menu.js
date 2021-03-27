@@ -17,7 +17,9 @@ function Menu() {
     title(8, -10); //the x value determines the size of the line
     grid();
 
+
     for (var i = 0; i < this.items.length; i++) {
+
       this.items[i].display();
     }
   };
@@ -26,7 +28,7 @@ function Menu() {
 function title(x, y) {
   fill(0);
   stroke(0);
-  var title = "Trivia Beat";
+  var title = "Trivia Beat Clients" + clients;
   textSize(2);
   text(title, 0, y);
   strokeWeight(5 / gridSize);

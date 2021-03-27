@@ -61,9 +61,9 @@ io.sockets.on(
       // This is a way to send to everyone including sender
       // io.sockets.emit('message', "this goes to everyone");
     });
-    socket.on("clients", function(data){
+    //socket.on("clients", function(data){
       io.sockets.emit('clients', clients);
-    })
+    //})
     socket.on("disconnect", function () {
       console.log("Client has disconnected");
       clients--;

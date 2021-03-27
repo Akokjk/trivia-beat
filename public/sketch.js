@@ -16,7 +16,7 @@ function setup() {
 
   });
   socket.on("clients", function (data) {
-    clients = data.clients
+    clients = data
   });
 }
 
@@ -32,7 +32,7 @@ function getAccountInformation() {
 }
 
 function draw() {
-  socket.emit("clients", clients);
+
   game.display();
 }
 

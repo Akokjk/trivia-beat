@@ -12,13 +12,10 @@ function setup() {
   socket = io.connect("https://play.triviabeat.io");
   game.setup();
   socket.on("mouse",function (data) {
-    console.log("Got: " + data.x + " " + data.y);
-  });
-  socket.on("clients", function(data){
+    console.log("Got: " + data.x + " " + data.y + " Clients: " + data.clients);
     clients = data.clients
-    console.log("Got clients: " + data);
-  })
-  if(clients == null) clients = 1;
+    if(clients == null) clients = 1;
+  });
 }
 
 

@@ -67,7 +67,7 @@ io.sockets.on(
     socket.on("disconnect", function () {
       console.log("Client has disconnected");
       clients--;
-      socket.broadcast.emit("mouse", data.client);
+      socket.broadcast.emit("clients", clients);
     });
   }
 );

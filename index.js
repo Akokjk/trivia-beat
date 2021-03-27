@@ -52,10 +52,10 @@ io.sockets.on(
     console.log("We have a new client: " + socket.id);
     clients++;
     // When this user emits, client side: socket.emit('otherevent',some data);
+    io.sockets.emit('clients', clients);
     socket.on("mouse", function (data) {
       // Data comes in as whatever was sent, including objects
       console.log("Received: 'mouse' " + data.x + " " + data.y);
-      data.clients = clients;
       // Send it to all other clients
       socket.broadcast.emit("mouse", data);
 

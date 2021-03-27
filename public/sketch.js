@@ -15,7 +15,8 @@ function setup() {
     console.log("Got: " + data.x + " " + data.y);
   });
   socket.on("clients", function(data){
-    clients = data.clients
+    clients = data
+    console.log("Got clients: " + data);
   })
   if(clients == null) clients = 1;
 }

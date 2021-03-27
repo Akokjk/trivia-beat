@@ -33,7 +33,7 @@ function title(x, y) {
   text(title, 0, y);
   strokeWeight(5 / gridSize);
   line(-x, y + 1.3, x, y + 1.3);
-  textSize(.5);
+  textSize(1);
   text("Active Users: " + clients, -9, -12)
 
 

@@ -15,7 +15,6 @@ function setup() {
     console.log("Got: " + data.x + " " + data.y + " Clients: " + data.clients);
 
   });
-  socket.emit("clients", data);
   socket.on("clients", function (data) {
     clients = data.clients
   });

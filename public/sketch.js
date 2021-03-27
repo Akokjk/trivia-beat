@@ -11,7 +11,14 @@ function preload() {
 function setup() {
   socket = io.connect("https://play.triviabeat.io");
   game.setup();
+  socket.on("mouse", function (data) {
+    console.log("Got: " + data.x + " " + data.y + " Clients: " + data.clients);
 
+  });
+  socket.emit("clients", data);
+  socket.on("clients", function (data) {
+    clients = data.clients
+  });
 }
 
 
@@ -26,11 +33,7 @@ function getAccountInformation() {
 }
 
 function draw() {
-  socket.on("mouse", function (data) {
-    console.log("Got: " + data.x + " " + data.y + " Clients: " + data.clients);
-    clients = data.clients
-    if(clients == null) clients = 1;
-  });
+  socket.emit("clients", clients);
   game.display();
 }
 

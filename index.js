@@ -56,15 +56,14 @@ io.sockets.on(
     socket.on("mouse", function (data) {
       // Data comes in as whatever was sent, including objects
       console.log("Received: 'mouse' " + data.x + " " + data.y);
-      // Send it to all other clients
-      data.clients = clients;
-      console.log("Clients: " + clients)
       io.sockets.emit('mouse', data);
 
       // This is a way to send to everyone including sender
       // io.sockets.emit('message', "this goes to everyone");
     });
-
+    socket.on("clients", function(data){
+      io.sockets.emit('clients', clients);
+    })
     socket.on("disconnect", function () {
       console.log("Client has disconnected");
       clients--;

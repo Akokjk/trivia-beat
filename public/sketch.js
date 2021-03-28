@@ -4,11 +4,14 @@ let gridSize = 32;
 let game;
 var socket; //used to send and recieve information from index.js in real time
 var clients =  0;
+var song
 function preload() {
   game = new Game(gridSize, gridSize, debug);
+  song = loadSound("assets/Motivator.mp3")
 }
 
 function setup() {
+  song.play(); 
   socket = io.connect("https://play.triviabeat.io");
   game.setup();
   socket.on("mouse", function (data) {
@@ -71,7 +74,6 @@ function windowResized() {
 }
 
 function keyPressed() {
-  game.song.autoplay(true);
   if (keyCode === DELETE) {
     if (debug) {
       debug = false;

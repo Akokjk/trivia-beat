@@ -1,7 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const fs = require("fs");
-const proc = require("process");
+const process = require("process");
 const cors = require("cors");
 const axios = require("axios");
 
@@ -9,17 +9,19 @@ const app = express();
 const port = 3000;
 const api = "https://api.triviabeat.io";
 
-proc.on("uncaughtException", function (err) {
+process.on("uncaughtException", function (err) {
   console.error(err && err.stack ? err.stack : err);
 });
+
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
 // if log folder exists
 if (fs.existsSync("/var/log/triviabeatui")) {
   // redirecting console output to logfiles
-  var sout = fs.createWriteStream("/var/log/triviabeatui/node.stdout.log", { flags: "a" });
-  var serr = fs.createWriteStream("/var/log/triviabeatui/node.stderr.log", { flags: "a" });
-  proc.stdout.write = sout.write.bind(sout);
-  proc.stderr.write = serr.write.bind(serr);
+  var sout = fs.createWriteStream("/var/log/triviabeatui/console.log", { flags: "a" });
+  var serr = fs.createWriteStream("/var/log/triviabeatui/error.log", { flags: "a" });
+  process.stdout.write = sout.write.bind(sout);
+  process.stderr.write = serr.write.bind(serr);
 }
 
 app.use(express.json({ limit: "1mb" }));
@@ -38,10 +40,17 @@ app.put("/login", (req, res) => {
     },
   })
     .then((response) => {
-      console.log(response);
+      console.log("----- Response Success -----");
+      console.log(response.status);
+      console.log(response.data);
+      console.log("----------------------------");
+      res.write(response.data);
     })
     .catch((error) => {
-      console.log(error);
+      console.log("----- Response Failed -----");
+      console.log(error.response.status);
+      console.log("---------------------------");
+      res.write(error.response.status);
     });
 });
 

@@ -17,7 +17,6 @@ function Login() {
   if (radio.value() == "2") {
     inp.position(40, 60);
     inp1.position(40, 80);
-    inp.input(myInputEvent);
   }
 
   function sub() {
@@ -48,7 +47,3 @@ function setup() {
   //input.position(10, 10, 'absolute')
 }
 function draw() {}
-
-function myInputEvent() {
-  console.log("you are typing: ", this.value());
-}

@@ -7,11 +7,11 @@ var clients =  0;
 var song
 function preload() {
   game = new Game(gridSize, gridSize, debug);
-  song = loadSound("assets/Motivator.mp3")
+  song = loadSound("assets/hit.wav")
 }
 
 function setup() {
-  
+
   socket = io.connect("https://play.triviabeat.io");
   game.setup();
   socket.on("mouse", function (data) {

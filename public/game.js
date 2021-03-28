@@ -26,10 +26,11 @@ function Game(gridX, gridY) {
 
 
 function pressed(){
+  song = loadSound("assets/hit.wav")
   if (!playing && song.isLoaded()) {
     playing = true;
     console.log('play');
-    song.length = 10; 
+    song.length = 10;
     song.play();
     console.log('playing');
   }

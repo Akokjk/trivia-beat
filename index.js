@@ -2,10 +2,11 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const fs = require('fs');
 const proc = require('process');
+const cors = require("cors");
 
 const app = express();
 const port = 3000;
-var clients = 0;
+
 // redirecting console output to logfiles
 var sout = fs.createWriteStream("/var/log/triviabeatui/node.stdout.log", { flags: "a" });
 var serr = fs.createWriteStream("/var/log/triviabeatui/node.stderr.log", { flags: "a" });
@@ -18,7 +19,15 @@ proc.on('uncaughtException', function(err) {
   console.error((err && err.stack) ? err.stack : err);
 });
 
-app.use(require("cors")());
+var corsOptions = {
+  origin: [ "http://localhost:3000", "https://play.triviabeat.io", "https://api.triviabeat.io" ],
+  methods: ['GET', 'PUT', 'POST', 'DELETE'],
+  optionsSuccessStatus: 204,
+  credentials: true,
+  preflightContinue: true
+};
+
+app.use(cors(corsOptions));
 
 app.use("/", express.static("public"));
 app.use("/lib", express.static("public/lib"));
@@ -44,6 +53,8 @@ var io = require("socket.io")(server, {
     methods: ["GET", "POST"],
   },
 });
+
+var clients = 0;
 
 // Register a callback function to run when we have an individual connection
 // This is run for each individual user that connects

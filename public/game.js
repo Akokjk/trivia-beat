@@ -13,7 +13,7 @@ function Game(gridX, gridY) {
     this.canvas = createCanvas(windowWidth, windowHeight);
     textFont(this.text);
     background(434);
-    canvas.mousePressed(pressed);
+    this.canvas.mousePressed(pressed);
     // userID = getItem('userId');
     // sessionId = getItem("sessionId");
     // expiration = getItem("expiration");

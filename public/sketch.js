@@ -1,13 +1,18 @@
 //game params
+
+
+
 let debug = false;
 let gridSize = 32;
 let game;
 var socket; //used to send and recieve information from index.js in real time
 var clients =  0;
-var song
+var sound
 function preload() {
   game = new Game(gridSize, gridSize, debug);
-
+  sound = new Howl({
+  src: ['assets/hit.wav']
+});
 }
 
 function setup() {

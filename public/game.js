@@ -21,16 +21,12 @@ function Game(gridX, gridY) {
     //   console.log("unable to find session or user ID")
     //
     // }
-    song = loadSound("assets/hit.wav")
   };
 
 
 function pressed(){
 
-  if (!song.isPlaying()) {
-    song.play();
-    console.log('playing');
-  }
+sound.play();
 }
 
   this.display = function () {

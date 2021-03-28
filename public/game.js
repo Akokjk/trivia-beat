@@ -25,8 +25,8 @@ function Game(gridX, gridY) {
   };
 
 
-function press(){
-  song.play(); 
+function pressed(){
+  song.play();
 }
 
   this.display = function () {

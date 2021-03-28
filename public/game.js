@@ -8,7 +8,7 @@ function Game(gridX, gridY) {
   this.text = loadFont("assets/SourceCodePro-Regular.ttf");
   this.elements.push(new Menu());
   this.canvas;
-
+  var playing = false;
   this.setup = function () {
     this.canvas = createCanvas(windowWidth, windowHeight);
     textFont(this.text);
@@ -27,6 +27,12 @@ function Game(gridX, gridY) {
 
 function pressed(){
   song.play();
+  if (!playing && song.isLoaded()) {
+    playing = true;
+    console.log('play');
+    song.play();
+    console.log('playing');
+  }
 }
 
   this.display = function () {

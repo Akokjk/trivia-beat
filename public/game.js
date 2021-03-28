@@ -21,7 +21,7 @@ function Game(gridX, gridY) {
     //   console.log("unable to find session or user ID")
     //
     // }
-    song.autoplay(true);
+    this.song.autoplay(true);
   };
 
   this.display = function () {

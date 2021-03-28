@@ -16,7 +16,12 @@ function Game(gridX, gridY) {
     this.canvas = createCanvas(windowWidth, windowHeight);
     textFont(this.text);
     background(434);
-    this.canvas.mousePressed(pressed);
+    this.canvas.mousePressed(() => {
+      sound = new Howl({
+      src: ['assets/hit.wav']
+    });
+      sound.play();
+    });
     userID = getItem('userId');
     sessionId = getItem("sessionId");
     expiration = getItem("expiration");
@@ -29,10 +34,6 @@ function Game(gridX, gridY) {
   };
 
 
-function pressed(){
-
-sound.play();
-}
 
   this.display = function () {
     clear();

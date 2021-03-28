@@ -10,9 +10,7 @@ var clients =  0;
 var sound
 function preload() {
   game = new Game(gridSize, gridSize, debug);
-  sound = new Howl({
-  src: ['assets/hit.wav']
-});
+
 }
 
 function setup() {

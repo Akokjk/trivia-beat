@@ -10,8 +10,8 @@ const port = 3000;
 // redirecting console output to logfiles
 var sout = fs.createWriteStream("/var/log/triviabeatui/node.stdout.log", { flags: "a" });
 var serr = fs.createWriteStream("/var/log/triviabeatui/node.stderr.log", { flags: "a" });
-//var sout = fs.createWriteStream("node.stdout.log", { flags: "a" });
-//var serr = fs.createWriteStream("node.stderr.log", { flags: "a" });
+var sout = fs.createWriteStream("node.stdout.log", { flags: "a" });
+var serr = fs.createWriteStream("node.stderr.log", { flags: "a" });
 proc.stdout.write = sout.write.bind(sout);
 proc.stderr.write = serr.write.bind(serr);
 
@@ -35,6 +35,38 @@ app.use("/lib", express.static("public/lib"));
 //   res.setHeader("")
 //    res.sendFile('index.html', {root: __dirname })
 // })
+
+
+app.post('/login', (req, res) => {
+  var options = {
+    host: 'api.triviabeat.io',
+    path: '/session',
+    port: '80',
+    method: 'PUT',
+    body: {
+      "email": req.headers.email,
+      "password": req.headers.password
+    },
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  console.log(options.body)
+  var http = require("http");
+  callback = function(response) {
+  var str = ''
+  response.on('data', function (chunk) {
+    str += chunk;
+  });
+  console.log(response.statusCode)
+  response.on('end', function () {
+    console.log(str);
+  });
+  }
+  var req = http.request(options, callback);
+  req.end();
+
+})
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "https://api.triviabeat.io");

@@ -20,30 +20,26 @@ function Login(){
     inp.input(myInputEvent);
   }
 
+  function sub(){
+    console.log(inp.value() + inp1.value())
+    httpDo(
+      "/login",
+      {
+        method: 'POST',
+        // Other Request options, like special headers for apis
+        headers: {
+          email: inp.value(), password: inp1.value()
+        }
 
-}
-
-function sub(){
-  console.log(inp.value() + inp1.value())
-  httpDo(
-  "https://api.triviabeat.io/session",
-  {
-    method: 'PUT',
-    mode: 'cors',
-    // Other Request options, like special headers for apis
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: {
-      email: inp.value(),
-      password: inp1.value()
-    }
-  },
-  function(res) {
-    console.log(res);
+      },
+      function(res) {
+         console.log(res);
+      }
+    );
   }
-);
 }
+
+
 
 
 

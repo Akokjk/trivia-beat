@@ -3,12 +3,10 @@ const cookieParser = require("cookie-parser");
 const fs = require("fs");
 const proc = require("process");
 const cors = require("cors");
-const https = require("https");
-const axios = require('axios');
-
+const axios = require("axios");
 
 const app = express();
-app.use(express.json({ limit: '1mb' }));
+app.use(express.json({ limit: "1mb" }));
 const port = 3000;
 
 proc.on("uncaughtException", function (err) {
@@ -41,31 +39,27 @@ app.use(cors(corsOptions));
 app.use("/", express.static("public"));
 app.use("/lib", express.static("public/lib"));
 
-app.put('/login', (req, res) => {
-
+app.put("/login", (req, res) => {
   /*headers: {
     "Content-Type": 'application/json'
   }*/
 
-  var api = "https://api.triviabeat.io/session"
+  var api = "https://api.triviabeat.io/session";
   axios({
     method: "PUT",
     url: api,
     data: {
-      'email': req.headers.email,
-      'password': req.headers.password
-    }
+      email: req.headers.email,
+      password: req.headers.password,
+    },
   })
-  .then(response => {
-    console.log(response);
-  })
-  .catch(error => {
-    console.log(error);
-  });
-
-
-
-})
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");

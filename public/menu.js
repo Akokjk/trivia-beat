@@ -1,5 +1,3 @@
-
-
 function Menu() {
   //params
   this.debug = true;
@@ -17,8 +15,7 @@ function Menu() {
   this.display = function () {
     //draw items
 
-
-    if(this.visible){
+    if (this.visible) {
       title(8, -10); //the x value determines the size of the line
       grid();
       for (var i = 0; i < this.items.length; i++) {
@@ -37,7 +34,5 @@ function title(x, y) {
   strokeWeight(5 / gridSize);
   line(-x, y + 1.3, x, y + 1.3);
   textSize(1);
-  text("Active Users: " + clients, -9, -12)
-
-
+  text("Active Users: " + clients, -9, -12);
 }

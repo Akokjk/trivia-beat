@@ -1,31 +1,25 @@
 //game params
 
-
-
 let debug = false;
 let gridSize = 32;
 let game;
 var socket; //used to send and recieve information from index.js in real time
-var clients =  0;
-var sound
+var clients = 0;
+var sound;
 function preload() {
   game = new Game(gridSize, gridSize, debug);
-
 }
 
 function setup() {
-
-  socket = io.connect("https://play.triviabeat.io/", {secure: true});
+  socket = io.connect("https://play.triviabeat.io/", { secure: true });
   game.setup();
   socket.on("mouse", function (data) {
     console.log("Got: " + data.x + " " + data.y + " Clients: " + data.clients);
-
   });
   socket.on("clients", function (data) {
-    clients = data
+    clients = data;
   });
 }
-
 
 function getAccountName() {
   //get this from API lil' bitch boi!
@@ -38,7 +32,6 @@ function getAccountInformation() {
 }
 
 function draw() {
-
   game.display();
 }
 

@@ -15,11 +15,8 @@ function Button(x, y, xSize, ySize, size, texts) {
       fill(255, 0, 0);
       rectMode(CENTER);
       rect(this.x, this.y, this.xSize, this.ySize);
-
       fill(0);
-
       textSize(this.size);
-
       text(this.texts, this.x, this.y - (size * 5) / 33);
     }
   };

@@ -25,15 +25,18 @@ function Login(){
     httpDo(
       "/login",
       {
-        method: 'POST',
+        method: 'PUT',
         // Other Request options, like special headers for apis
-        headers: {
-          email: inp.value(), password: inp1.value()
+        data: {
+          email: inp.value(),
+          password: inp1.value()
         }
-
       },
       function(res) {
          console.log(res);
+      },
+      function(err) {
+        console.log(err);
       }
     );
   }

@@ -12,7 +12,7 @@ function preload() {
 
 function setup() {
 
-  socket = io.connect("127.0.0.1:3000");
+  socket = io.connect("https://play.triviabeat.io/");
   game.setup();
   socket.on("mouse", function (data) {
     console.log("Got: " + data.x + " " + data.y + " Clients: " + data.clients);

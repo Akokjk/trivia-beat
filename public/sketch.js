@@ -7,7 +7,7 @@ var clients =  0;
 var song
 function preload() {
   game = new Game(gridSize, gridSize, debug);
-  song = loadSound("assets/hit.wav")
+
 }
 
 function setup() {

@@ -1,27 +1,32 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const fs = require('fs');
-const proc = require('process');
+const fs = require("fs");
+const proc = require("process");
 const cors = require("cors");
 
 const app = express();
 const port = 3000;
 
-// redirecting console output to logfiles
-var sout = fs.createWriteStream("/var/log/triviabeatui/node.stdout.log", { flags: "a" });
-var serr = fs.createWriteStream("/var/log/triviabeatui/node.stderr.log", { flags: "a" });
-//var sout = fs.createWriteStream("node.stdout.log", { flags: "a" });
-//var serr = fs.createWriteStream("node.stderr.log", { flags: "a" });
-proc.stdout.write = sout.write.bind(sout);
-proc.stderr.write = serr.write.bind(serr);
-
-proc.on('uncaughtException', function(err) {
-  console.error((err && err.stack) ? err.stack : err);
+proc.on("uncaughtException", function (err) {
+  console.error(err && err.stack ? err.stack : err);
 });
 
+// if log folder exists
+if (fs.existsSync("/var/log/triviabeatui")) {
+  // redirecting console output to logfiles
+  var sout = fs.createWriteStream("/var/log/triviabeatui/node.stdout.log", { flags: "a" });
+  var serr = fs.createWriteStream("/var/log/triviabeatui/node.stderr.log", { flags: "a" });
+  proc.stdout.write = sout.write.bind(sout);
+  proc.stderr.write = serr.write.bind(serr);
+}
+
 var corsOptions = {
-  origin: [ "http://localhost:3000", "https://play.triviabeat.io", "https://api.triviabeat.io" ],
-  methods: ['GET', 'PUT', 'POST', 'DELETE'],
+  origin: [
+    "http://localhost:3000",
+    "https://play.triviabeat.io",
+    "https://api.triviabeat.io"
+  ],
+  methods: ["GET", "PUT", "POST", "DELETE"],
   optionsSuccessStatus: 204,
   credentials: true,
   preflightContinue: true
@@ -31,15 +36,9 @@ app.use(cors(corsOptions));
 
 app.use("/", express.static("public"));
 app.use("/lib", express.static("public/lib"));
-// app.get('/', (req, res) => {
-//   res.setHeader("")
-//    res.sendFile('index.html', {root: __dirname })
-// })
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://api.triviabeat.io");
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header("Access-Control-Allow-Origin", "*");
   next();
 });
 
@@ -49,8 +48,12 @@ var server = app.listen(port, "127.0.0.1", () => {
 
 var io = require("socket.io")(server, {
   cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
+    origin: [
+      "http://localhost:3000",
+      "https://play.triviabeat.io",
+      "https://api.triviabeat.io"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"]
   },
 });
 
@@ -69,13 +72,13 @@ io.sockets.on(
     socket.on("mouse", function (data) {
       // Data comes in as whatever was sent, including objects
       console.log("Received: 'mouse' " + data.x + " " + data.y);
-      io.sockets.emit('mouse', data);
+      io.sockets.emit("mouse", data);
 
       // This is a way to send to everyone including sender
       // io.sockets.emit('message', "this goes to everyone");
     });
     //socket.on("clients", function(data){
-      io.sockets.emit('clients', clients);
+    io.sockets.emit("clients", clients);
     //})
     socket.on("disconnect", function () {
       console.log("Client has disconnected");

@@ -7,12 +7,13 @@ function Game(gridX, gridY) {
   this.elements = [];
   this.text = loadFont("assets/SourceCodePro-Regular.ttf");
   this.elements.push(new Menu());
+  this.canvas;
 
   this.setup = function () {
-    createCanvas(windowWidth, windowHeight);
+    this.canvas = createCanvas(windowWidth, windowHeight);
     textFont(this.text);
     background(434);
-
+    canvas.mousePressed(pressed);
     // userID = getItem('userId');
     // sessionId = getItem("sessionId");
     // expiration = getItem("expiration");
@@ -22,6 +23,11 @@ function Game(gridX, gridY) {
     // }
 
   };
+
+
+function press(){
+  song.play(); 
+}
 
   this.display = function () {
     clear();

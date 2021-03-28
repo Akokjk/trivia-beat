@@ -11,7 +11,7 @@ function preload() {
 }
 
 function setup() {
-  song.play(); 
+  
   socket = io.connect("https://play.triviabeat.io");
   game.setup();
   socket.on("mouse", function (data) {

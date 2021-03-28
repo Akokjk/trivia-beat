@@ -5,7 +5,7 @@ function Game(gridX, gridY) {
   this.centerX = windowWidth / 2;
   this.centerY = windowHeight / 2;
   this.elements = [];
-
+  this.song;
   this.text = loadFont("assets/SourceCodePro-Regular.ttf");
   this.elements.push(new Menu());
 
@@ -13,6 +13,7 @@ function Game(gridX, gridY) {
     createCanvas(windowWidth, windowHeight);
     textFont(this.text);
     background(434);
+    this.song = createAudio("assets/Motivator")
     // userID = getItem('userId');
     // sessionId = getItem("sessionId");
     // expiration = getItem("expiration");
@@ -20,6 +21,7 @@ function Game(gridX, gridY) {
     //   console.log("unable to find session or user ID")
     //
     // }
+    song.autoplay(true);
   };
 
   this.display = function () {

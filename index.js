@@ -3,8 +3,12 @@ const cookieParser = require("cookie-parser");
 const fs = require("fs");
 const proc = require("process");
 const cors = require("cors");
+const https = require("https");
+const axios = require('axios');
+
 
 const app = express();
+app.use(express.json({ limit: '1mb' }));
 const port = 3000;
 
 proc.on("uncaughtException", function (err) {
@@ -38,37 +42,29 @@ app.use("/", express.static("public"));
 app.use("/lib", express.static("public/lib"));
 
 app.put('/login', (req, res) => {
-  var http = require("https");
 
-  var options = {
-    host: 'api.triviabeat.io',
-    port: '443',
-    path: '/session',
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
+  /*headers: {
+    "Content-Type": 'application/json'
+  }*/
+
+  var api = "https://api.triviabeat.io/session"
+  axios({
+    method: "PUT",
+    url: api,
+    data: {
+      'email': req.headers.email,
+      'password': req.headers.password
     }
-  };
+  })
+  .then(response => {
+    console.log(response);
+  })
+  .catch(error => {
+    console.log(error);
+  });
 
-  callback = function(response) {
-    var str = ''
 
-    response.on('data', function (chunk) {
-      str += chunk;
-    });
 
-    response.on('end', function () {
-      res.send(data);
-    });
-  };
-
-  var req = http.request(options, callback);
-  var body = {
-    "email": req.data.email,
-    "password": req.data.password
-  }
-  req.write(JSON.stringify(body));
-  req.end();
 })
 
 app.use((req, res, next) => {

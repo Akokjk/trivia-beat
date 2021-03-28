@@ -22,14 +22,13 @@ function Login(){
 
   function sub(){
     console.log(inp.value() + inp1.value())
+
     httpDo(
       "/login",
       {
         method: 'PUT',
-        // Other Request options, like special headers for apis
-        data: {
-          email: inp.value(),
-          password: inp1.value()
+        headers: {
+          email: inp.value(), password: inp1.value()
         }
       },
       function(res) {

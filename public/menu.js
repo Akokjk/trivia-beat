@@ -16,13 +16,14 @@ function Menu() {
 
   this.display = function () {
     //draw items
-    title(8, -10); //the x value determines the size of the line
-    grid();
 
 
-    for (var i = 0; i < this.items.length; i++) {
-
-      this.items[i].display();
+    if(this.visible){
+      title(8, -10); //the x value determines the size of the line
+      grid();
+      for (var i = 0; i < this.items.length; i++) {
+        this.items[i].display();
+      }
     }
   };
 }

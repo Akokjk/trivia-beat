@@ -8,19 +8,24 @@ function Game(gridX, gridY) {
   this.text = loadFont("assets/SourceCodePro-Regular.ttf");
   this.elements.push(new Menu());
   this.canvas;
+  var userID;
+  var sessionID;
+  var expiration;
   this.setup = function () {
     console.log("game starting")
     this.canvas = createCanvas(windowWidth, windowHeight);
     textFont(this.text);
     background(434);
     this.canvas.mousePressed(pressed);
-    // userID = getItem('userId');
-    // sessionId = getItem("sessionId");
-    // expiration = getItem("expiration");
-    // if(userID || sessionId == null){
-    //   console.log("unable to find session or user ID")
-    //
-    // }
+    userID = getItem('userId');
+    sessionId = getItem("sessionId");
+    expiration = getItem("expiration");
+    if(userID || sessionId == null){
+      console.log("unable to find session or user ID")
+      this.elements[0].visible = false; //setting the menu to false
+      //this.elements.push(new Login());
+      Login();
+    }
   };
 
 

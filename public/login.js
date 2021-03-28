@@ -21,8 +21,6 @@ function Login() {
   }
 
   function sub() {
-    console.log(inp.value() + inp1.value());
-
     httpDo(
       "/login",
       {

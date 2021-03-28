@@ -6,8 +6,8 @@ const cors = require("cors");
 const axios = require("axios");
 
 const app = express();
-app.use(express.json({ limit: "1mb" }));
 const port = 3000;
+const api = "https://api.triviabeat.io";
 
 proc.on("uncaughtException", function (err) {
   console.error(err && err.stack ? err.stack : err);
@@ -22,32 +22,16 @@ if (fs.existsSync("/var/log/triviabeatui")) {
   proc.stderr.write = serr.write.bind(serr);
 }
 
-var corsOptions = {
-  origin: [
-    "http://localhost:3000",
-    "https://play.triviabeat.io",
-    "https://api.triviabeat.io"
-  ],
-  methods: ["GET", "PUT", "POST", "DELETE"],
-  optionsSuccessStatus: 204,
-  credentials: true,
-  preflightContinue: true
-};
-
-app.use(cors(corsOptions));
+app.use(express.json({ limit: "1mb" }));
+app.use(cors());
 
 app.use("/", express.static("public"));
 app.use("/lib", express.static("public/lib"));
 
 app.put("/login", (req, res) => {
-  /*headers: {
-    "Content-Type": 'application/json'
-  }*/
-
-  var api = "https://api.triviabeat.io/session";
   axios({
     method: "PUT",
-    url: api,
+    url: api + "/session",
     data: {
       email: req.headers.email,
       password: req.headers.password,
@@ -72,12 +56,8 @@ var server = app.listen(port, "127.0.0.1", () => {
 
 var io = require("socket.io")(server, {
   cors: {
-    origin: [
-      "http://localhost:3000",
-      "https://play.triviabeat.io",
-      "https://api.triviabeat.io"
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE"]
+    origin: "*",
+    methods: ["GET", "POST"]
   },
 });
 

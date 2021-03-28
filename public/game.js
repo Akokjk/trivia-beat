@@ -13,7 +13,7 @@ function Game(gridX, gridY) {
     createCanvas(windowWidth, windowHeight);
     textFont(this.text);
     background(434);
-    this.song = createAudio("assets/Motivator")
+    this.song = createAudio("assets/Motivator.mp3")
     // userID = getItem('userId');
     // sessionId = getItem("sessionId");
     // expiration = getItem("expiration");

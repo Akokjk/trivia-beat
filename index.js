@@ -34,6 +34,7 @@ app.put("/login", (req, res) => {
   axios({
     method: "PUT",
     url: api + "/session",
+    timeout: 1000 * 10, // Wait for 10 seconds
     data: {
       email: req.headers.email,
       password: req.headers.password,
@@ -47,6 +48,11 @@ app.put("/login", (req, res) => {
       res.write(response.data);
     })
     .catch((error) => {
+      //this will say if a timeout happened
+      console.log(error.code)
+      console.log(error.message)
+      console.log(error.stack)
+      
       console.log("----- Response Failed -----");
       console.log(error.response.status);
       console.log("---------------------------");

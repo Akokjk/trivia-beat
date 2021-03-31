@@ -56,7 +56,7 @@
         width: 34%;
         float: left;
         text-align: center;
-        font-size: 300%;
+
       }
 
       #ad{
@@ -68,25 +68,71 @@
         font-size: 30px;
 
       }
+      #login{
+        visibility: hidden;
+      }
 
+
+      #starting{
+        text-align: center;
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto
+      }
+      #log{
+
+      }
     </style>
-
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap" rel="stylesheet">
 
     <title>Hello, world!</title>
   </head>
 
 
-  <div class="container-fluid float-left" id="currency">
-    <div style="color: red;" class="yes">0 ♡</div>
-    <div style="color: blue; width: 32%" class="yes" >0 ♦</div>
-      <div style="color: green;" class="yes" >$0</div>
-  </div>
+
 
   <body onresize="center(.96, 'box')" onload="center(.96, 'box')">
+    <div id="starting">
+      <h1>Welcome to Trivia Beat</h1>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked>
+        <label class="form-check-label" for="inlineRadio2" >Login</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" disabled>
+        <label class="form-check-label" for="inlineRadio3">Sign up (disabled)</label>
+      </div>
+      <form>
 
-    <button type="button" class="btn btn float-end">Logout</button>
+        <div class="row g-3 align-items-center">
+          <div class="col-auto">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+          </div>
+          <div class="col-auto">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+
+        </div>
+        <div class="row g-3 align-items-center">
+          <div class="col-auto">
+            <label for="inputPassword6" class="col-form-label">Password</label>
+          </div>
+          <div class="col-auto">
+            <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+          </div>
+
+        </div>
+        <button type="submit" class="btn btn-primary" id="log">Login</button>
+      </form>
+    </div>
+
+
+    <div id="login">
+    <div class="container-fluid float-left" id="currency">
+      <div style="color: red;" class="yes">0 ♡</div>
+      <div style="color: blue; width: 32%" class="yes" >0 ♦</div>
+        <div style="color: green;" class="yes" >$0</div>
+    </div>
+    <button type="button" class="btn btn-warning float-end">Logout</button>
     <div id="box">
       <!-- <div id="title">Trivia Beat</div> -->
       <div class="container-fluid">
@@ -115,8 +161,11 @@
 
     </div>
 
-    <div id="ad"><img src="assets/banner.gif" alt="Illuminati advertisement" width="100%" height="100%"></div>
+    <div id="ad">Ad Banner</div>
+    <!-- <img src="assets/banner.gif" alt="Illuminati advertisement" width="100%" height="100%"> -->
+  </div>
   </body>
+
 
   <script>
 
@@ -141,7 +190,10 @@
        }
        document.getElementsByClassName("badge")[0].style.fontSize = (window.innerHeight*size)*.04 + "px"
        document.getElementsByClassName("btn")[0].style.fontSize = (window.innerHeight*size)*.06 + "px"
-
+       document.getElementsByClassName("yes")[0].style.fontSize = "8vh";
+       document.getElementsByClassName("yes")[1].style.fontSize = "8vh";
+       document.getElementsByClassName("yes")[2].style.fontSize = "8vh";
+       document.getElementById("ad").style.fontSize = "8vh"
     }
     else {
        document.getElementById(id).style.width = (window.innerWidth*size) + "px";
@@ -150,7 +202,7 @@
         document.getElementById("currency").style.height = (window.innerWidth*.1) + "px";
        var translate = window.innerHeight/2 - (window.innerWidth*size)/2;
        var translateX = window.innerWidth/2 - (window.innerWidth*size)/2;
-       var translate2 = window.innerHeight/8 - (window.innerWidth*.1)/2;
+       var translate2 = window.innerHeight/7 - (window.innerWidth*.1)/2;
        document.getElementById(id).style.transform = "translate("+translateX+"px,"+translate+"px)"
       document.getElementById("currency").style.transform = "translate("+translateX+"px,"+translate2+"px)"
        //document.getElementById("title").style.transform = "translateY("+translate*.3+"px)"
@@ -160,13 +212,16 @@
          document.getElementsByClassName("btn-danger")[i].style.fontSize = (window.innerWidth*size)*.07 + "px"
 
        }
-        document.getElementsByClassName("yes")[0].style.fontSize = "8vh";
-        document.getElementsByClassName("yes")[1].style.fontSize = "8vh";
-        document.getElementsByClassName("yes")[2].style.fontSize = "8vh";
-        document.getElementById("ad").style.fontSize = "8vh"
+        document.getElementsByClassName("yes")[0].style.fontSize = "8vw";
+        document.getElementsByClassName("yes")[1].style.fontSize = "8vw";
+        document.getElementsByClassName("yes")[2].style.fontSize = "8vw";
+        document.getElementById("ad").style.fontSize = "8vw"
        document.getElementsByClassName("badge")[0].style.fontSize = (window.innerWidth*size)*.04 + "px"
        document.getElementsByClassName("btn")[0].style.fontSize = (window.innerWidth*size)*.06 + "px"
+
+
     }
+     document.getElementById("log").style.fontSize = "20px";
   }
 
   </script>

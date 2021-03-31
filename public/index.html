@@ -4,8 +4,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no" />
-
-
     <link  href="lib/bootstrap.min.css" type="text/css"  rel="stylesheet" >
 
     <style>
@@ -13,105 +11,174 @@
         margin: 0;
         overflow: hidden;
         padding: 0;
-        background-color: green;
+        background-color:
       }
-      .card{
-        margin-top: 100%;
-      }
-      .card-title{
 
-        text-align: center;
+      #box{
+        position: absolute;
+        margin-left:  auto;
+        margin-right: auto;
+        /* border: 10px solid black; */
+        height: 100px;
+        width: 100px;
+        border-radius: 10%;
+        box-sizing: border-box;
       }
-      .card-subtitle{
-        text-align: center;
-      }
-      .btn-danger{
-        margin-bottom: 2%;
-        margin-top: 0;
-        margin-left:0;
-        font-size: .8em;
-      }
-      h1{
-        justify-content: center;
+      #title{
+        margin-top: 15%;
+        font-size: 30px;
         text-align: center;
         text-decoration: underline;
-        /* background-color: green; */
       }
       .hidden{
         visibility: hidden;
-        width: 3px;
+        width: 10px;
       }
+      .btn-danger{
+        margin-bottom: 10px;
+        margin-top: 0;
+        margin-left:0;
+        font-size: 30px
+      }
+      .badge{
+        font-size: 15px;
+      }
+      #currency{
+        padding: 0;
+        width: 101vw;
+        height: 100px;
+
+        position: absolute;
+      }
+      .yes{
+        margin: 0;
+        height: 100%;
+        width: 34%;
+        float: left;
+        text-align: center;
+        font-size: 300%;
+      }
+
+      #ad{
+        text-align: center;
+        position: absolute;
+        height: 10vh;
+        width: 100%;
+        bottom: 0;
+        font-size: 30px;
+
+      }
+
     </style>
 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap" rel="stylesheet">
+
+    <title>Hello, world!</title>
   </head>
-  <body >
-    <!-- <h1>Hello, world!</h1> -->
-    <div class="position-relative">
-      <div class="position-absolute top-50 start-50 translate-middle">
-      <div class="card border-dark " style="width: 18rem;">
-        <div class="card-body">
 
-            <div class="container-fluid">
-                 <button type="button" class="btn btn-danger float-end">Logout</button>
-            </div>
-            <div class="container-fluid float-end">
-              <h1 class="card-title">Trivia Beat</h1>
 
-              <a href="#" class="btn btn-danger w-100">Play</a>
+  <div class="container-fluid float-left" id="currency">
+    <div style="color: red;" class="yes">0 ♡</div>
+    <div style="color: blue; width: 32%" class="yes" >0 ♦</div>
+      <div style="color: green;" class="yes" >$0</div>
+  </div>
 
-              <div class="d-flex bd-highlight">
-                <a href="#" class="btn btn-danger float-left w-50">Store</a>
-                <a href="#" class="   hidden"></a>
-                <a href="#" class="  btn btn-danger float-right w-50">Leaderboard</a>
-              </div>
-              <div class="d-flex bd-highlight">
-                <a href="#" class="btn btn-danger float-left w-50">Profile</a>
-                <a href="#" class="   hidden"></a>
-                <a href="#" class="  btn btn-danger float-right w-50">Contribute</a>
-              </div>
+  <body onresize="center(.96, 'box')" onload="center(.96, 'box')">
 
-              <div class="d-flex bd-highlight">
-                <span class="badge rounded-pill bg-dark">Active players: 0</span>
-              </div>
-            </div>
+    <button type="button" class="btn btn float-end">Logout</button>
+    <div id="box">
+      <!-- <div id="title">Trivia Beat</div> -->
+      <div class="container-fluid">
 
+      </div>
+      <div class="container-fluid float-end">
+        <h1 class="card-title h-75 " id="title">Trivia Beat</h1>
+
+        <a href="#" class="btn btn-danger w-100">Play</a>
+
+        <div class="d-flex bd-highlight">
+          <a href="#" class="btn btn-danger float-left w-50">Store</a>
+          <a href="#" class="   hidden"></a>
+          <a href="#" class="  btn btn-danger flsoat-right w-50">Leaderboard</a>
+        </div>
+        <div class="d-flex bd-highlight">
+          <a href="#" class="btn btn-danger float-left w-50">Profile</a>
+          <a href="#" class="   hidden"></a>
+          <a href="#" class="  btn btn-danger float-right w-50">Contribute</a>
+        </div>
+
+        <div class="d-flex bd-highlight">
+        <span class="badge rounded-pill bg-dark w-50">Active players: 0</span>
         </div>
       </div>
+
     </div>
-    </div>
 
-
-
-
-
-
-    <!-- <div class="d-flex bd-highlight">
-      <a href="#" class="btn btn-danger float-left flex-grow-1">Store</a>
-      <a href="#" class="   hidden"></a>
-      <a href="#" class="  btn btn-danger float-right">Leaderboard</a>
-    </div>
-    <div class="d-flex bd-highlight">
-      <a href="#" class="btn btn-danger float-left flex-grow-1">Profile</a>
-      <a href="#" class="   hidden"></a>
-      <a href="#" class="  btn btn-danger float-right">Contribute</a>
-    </div> -->
-
-
-
-
-
-    <script src="lib/bootstrap.bundle.min.js"></script>
-
-
-
-
-      <!-- <script src="lib/p5.min.js"></script>
-      <script src="lib/howler.js"></script>
-      <script src="lib/socket.io.js"></script>
-      <script src="login.js"></script>
-      <script src="sketch.js"></script>
-      <script src="button.js"></script>
-      <script src="game.js"></script>
-      <script src="menu.js"></script> -->
+    <div id="ad"><img src="assets/banner.gif" alt="Illuminati advertisement" width="100%" height="100%"></div>
   </body>
+
+  <script>
+
+  function center(size, id){
+    if(window.innerHeight < window.innerWidth){
+
+      document.getElementById(id).style.width = (window.innerHeight*size) + "px";
+       document.getElementById(id).style.height = (window.innerHeight*size) + "px";
+       document.getElementById("currency").style.width = (window.innerHeight*size) + "px";
+        document.getElementById("currency").style.height = (window.innerHeight*.1) + "px";
+       var translate = window.innerHeight/2 - (window.innerHeight*size)/2;
+       var translateX = window.innerWidth/2 - (window.innerHeight*size)/2;
+       var translate2 = window.innerHeight/8 - (window.innerHeight*.1)/2;
+       var translatex2 = window.innerWidth/8 - (window.innerHeight*.1)/2;
+       document.getElementById(id).style.transform = "translate("+translateX+"px,"+translate+"px)"
+       document.getElementById("currency").style.transform = "translate("+translateX+"px,"+translate2+"px)"
+       //document.getElementById("title").style.transform = "translateY("+translate*.3+"px)"
+       document.getElementById("title").style.fontSize = (window.innerHeight*size)/11*1.5 + "px"
+       for(var i = 0; i < document.getElementsByClassName("btn-danger").length; i++){
+         //document.getElementsByClassName("btn-danger")[i].style.transform = "translateY("+translate*.3+"px)"
+         document.getElementsByClassName("btn-danger")[i].style.fontSize = (window.innerHeight*size)*.07 + "px"
+       }
+       document.getElementsByClassName("badge")[0].style.fontSize = (window.innerHeight*size)*.04 + "px"
+       document.getElementsByClassName("btn")[0].style.fontSize = (window.innerHeight*size)*.06 + "px"
+
+    }
+    else {
+       document.getElementById(id).style.width = (window.innerWidth*size) + "px";
+       document.getElementById(id).style.height = (window.innerWidth*size) + "px";
+       document.getElementById("currency").style.width = (window.innerWidth*size) + "px";
+        document.getElementById("currency").style.height = (window.innerWidth*.1) + "px";
+       var translate = window.innerHeight/2 - (window.innerWidth*size)/2;
+       var translateX = window.innerWidth/2 - (window.innerWidth*size)/2;
+       var translate2 = window.innerHeight/8 - (window.innerWidth*.1)/2;
+       document.getElementById(id).style.transform = "translate("+translateX+"px,"+translate+"px)"
+      document.getElementById("currency").style.transform = "translate("+translateX+"px,"+translate2+"px)"
+       //document.getElementById("title").style.transform = "translateY("+translate*.3+"px)"
+       document.getElementById("title").style.fontSize = (window.innerWidth*size)/11*1.5 + "px"
+       for(var i = 0; i < document.getElementsByClassName("btn-danger").length; i++){
+          //document.getElementsByClassName("btn-danger")[i].style.transform = "translateY("+translate+"px)"
+         document.getElementsByClassName("btn-danger")[i].style.fontSize = (window.innerWidth*size)*.07 + "px"
+
+       }
+        document.getElementsByClassName("yes")[0].style.fontSize = "8vh";
+        document.getElementsByClassName("yes")[1].style.fontSize = "8vh";
+        document.getElementsByClassName("yes")[2].style.fontSize = "8vh";
+        document.getElementById("ad").style.fontSize = "8vh"
+       document.getElementsByClassName("badge")[0].style.fontSize = (window.innerWidth*size)*.04 + "px"
+       document.getElementsByClassName("btn")[0].style.fontSize = (window.innerWidth*size)*.06 + "px"
+    }
+  }
+
+  </script>
+
+
+    <!-- <script src="lib/p5.min.js"></script>
+        <script src="lib/howler.js"></script>
+        <script src="lib/socket.io.js"></script>
+        <script src="login.js"></script>
+        <script src="sketch.js"></script>
+        <script src="button.js"></script>
+        <script src="game.js"></script>
+        <script src="menu.js"></script> -->
+  <script src="lib/bootstrap.bundle.min.js"></script>
 </html>

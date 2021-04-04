@@ -133,10 +133,10 @@
           },
         })
           .done(function (res) {
-
+            // nothing here
           })
           .fail(function (res) {
-            alert("Unable to find account information.")
+            alert("Unable to find account information.");
             window.localStorage.removeItem("login");
             location.href = "/login";
             console.log(res);

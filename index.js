@@ -84,13 +84,12 @@ app.put("/login", cors(), (req, res, next) => {
       headers: { "Content-Type": "application/json" },
     })
     .then(function (response) {
-        if(JSON.stringify(response.data) !== void(0)){
+        if (JSON.stringify(response.data) !== void(0)) {
           const hash = encrypt(JSON.stringify(response.data));
           res.json(hash);
           res.end();
-        }
-        else{
-          res.end()
+        } else {
+          res.end();
         }
       }
     ).catch(function (error) {
@@ -102,21 +101,21 @@ app.put("/login", cors(), (req, res, next) => {
       //    // Something happened in setting up the request that triggered an Error
       //    console.log('Error', error.message);
       //  }
-       res.end();
+      res.end();
     });
 
 });
 
 app.put("/verify", cors(), (req, res, next) => {
-  //console.log(req.headers.data)
-  if(req.headers.data){
+  //console.log(req.headers.data);
+  if(req.headers.data) {
     var result = decrypt(JSON.parse(req.headers.data));
     //console.log(result);
     var date = new Date();
     if (result.expiration < date.getTime()) {
       res.sendStatus(400);
     }
-  }else{
+  } else {
     res.sendStatus(400);
   }
   res.end();

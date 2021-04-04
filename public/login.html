@@ -71,20 +71,17 @@
         timeout: 10000,
         headers: {
           email: document.getElementById("exampleInputEmail1").value,
-          password: CryptoJS.MD5(
-            document.getElementById("in2").value
-          ).toString()
+          password: CryptoJS.MD5(document.getElementById("in2").value).toString()
         }
       })
         .done(function (res) {
-          console.log(res)
-          if(res){
+          console.log(res);
+          if (res) {
             document.getElementById("box").style.backgroundColor = "green";
             window.localStorage.setItem("login", JSON.stringify(res));
             location.href = "/";
-          }else{
-
-            alert("Wrong email or password!")
+          } else {
+            alert("Wrong email or password!");
           }
         })
         .fail(function (res) {

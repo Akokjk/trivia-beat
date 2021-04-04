@@ -7,7 +7,9 @@
     <link  href="lib/bootstrap.min.css" type="text/css"  rel="stylesheet" >
 
     <style>
+    #log{
 
+    }
     </style>
 
     <title>Hello, world!</title>
@@ -43,19 +45,40 @@
             <label for="inputPassword6" class="col-form-label">Password</label>
           </div>
           <div class="col-auto">
-            <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+            <input type="password" id="in2" class="form-control" aria-describedby="passwordHelpInline">
           </div>
 
         </div>
-        <button type="submit" class="btn btn-primary" id="log">Login</button>
+        <button type="button" class="btn btn-primary" id="log" text="login" onClick="login()">Login</button>
       </form>
     </div>
 
 
   </body>
 
-
+  <script src="lib/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
   <script>
+      var response;
+      function login(){
+            $.ajax({
+                url: "/login",
+                type: 'PUT',
+                timeout: 10000,
+                headers:{
+                  email: document.getElementById('exampleInputEmail1').value,
+                  password: CryptoJS.MD5(document.getElementById('in2').value).toString()
+              }}).done(function(res){
+                document.getElementById("starting").style.backgroundColor = "green";
+                window.localStorage.setItem("login", JSON.stringify(res))
+                location.href = '/'
+              }).fail( function(res){
+                console.log(res)
+                document.getElementById("starting").style.backgroundColor = "red";
+              })
+
+    }
 
 
 

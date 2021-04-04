@@ -77,13 +77,13 @@
         }
       })
         .done(function (res) {
-          document.getElementById("starting").style.backgroundColor = "green";
+          document.getElementById("box").style.backgroundColor = "green";
           window.localStorage.setItem("login", JSON.stringify(res));
           location.href = "/";
         })
         .fail(function (res) {
           console.log(res);
-          document.getElementById("starting").style.backgroundColor = "red";
+          document.getElementById("box").style.backgroundColor = "red";
         });
     }
   </script>

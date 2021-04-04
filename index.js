@@ -94,14 +94,14 @@ app.put("/login", cors(), (req, res, next) => {
         }
       }
     ).catch(function (error) {
-      if (error.response) {
-         console.log(error.response.data);
-         console.log(error.response.status);
-         console.log(error.response.headers);
-       } else {
-         // Something happened in setting up the request that triggered an Error
-         console.log('Error', error.message);
-       }
+      // if (error.response) {
+      //    console.log(error.response.data);
+      //    console.log(error.response.status);
+      //    console.log(error.response.headers);
+      //  } else {
+      //    // Something happened in setting up the request that triggered an Error
+      //    console.log('Error', error.message);
+      //  }
        res.end();
     });
 
@@ -109,7 +109,7 @@ app.put("/login", cors(), (req, res, next) => {
 
 app.put("/verify", cors(), (req, res, next) => {
   //console.log(req.headers.data)
-  if(JSON.parse(req.headers.data) !== void(0)){
+  if(req.headers.data){
     var result = decrypt(JSON.parse(req.headers.data));
     console.log(result);
     var date = new Date();

@@ -140,6 +140,7 @@
             console.log(res);
           });
       } else {
+        window.localStorage.removeItem("login");
         location.href = "/login";
       }
     }

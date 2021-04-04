@@ -78,33 +78,45 @@ app.put("/login", cors(), (req, res, next) => {
   };
   JSON.stringify(reqBody);
   var exit;
-  axios
-    .put(api + "/session", reqBody, {
+  axios.put(api + "/session", reqBody, {
       timeout: 5000,
       json: true,
       headers: { "Content-Type": "application/json" },
     })
     .then(function (response) {
-      const hash = encrypt(JSON.stringify(response.data));
-      res.json(hash);
-      res.end();
-    })
-    .catch(function (error) {
-      if (error !== undefined) {
-        console.log("----- Response Failed -----");
-        console.log(error);
-        console.log("---------------------------");
-        res.end();
+        if(JSON.stringify(response.data) !== void(0)){
+          const hash = encrypt(JSON.stringify(response.data));
+          res.json(hash);
+          res.end();
+        }
+        else{
+          res.end()
+        }
       }
+    ).catch(function (error) {
+      if (error.response) {
+         console.log(error.response.data);
+         console.log(error.response.status);
+         console.log(error.response.headers);
+       } else {
+         // Something happened in setting up the request that triggered an Error
+         console.log('Error', error.message);
+       }
+       res.end();
     });
+
 });
 
 app.put("/verify", cors(), (req, res, next) => {
   //console.log(req.headers.data)
-  const result = decrypt(JSON.parse(req.headers.data));
-  console.log(result);
-  var date = new Date();
-  if (result.expiration < date.getTime()) {
+  if(JSON.parse(req.headers.data) !== void(0)){
+    var result = decrypt(JSON.parse(req.headers.data));
+    console.log(result);
+    var date = new Date();
+    if (result.expiration < date.getTime()) {
+      res.sendStatus(400);
+    }
+  }else{
     res.sendStatus(400);
   }
   res.end();

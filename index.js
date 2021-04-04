@@ -111,7 +111,7 @@ app.put("/verify", cors(), (req, res, next) => {
   //console.log(req.headers.data)
   if(req.headers.data){
     var result = decrypt(JSON.parse(req.headers.data));
-    console.log(result);
+    //console.log(result);
     var date = new Date();
     if (result.expiration < date.getTime()) {
       res.sendStatus(400);

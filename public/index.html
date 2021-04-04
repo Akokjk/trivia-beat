@@ -74,7 +74,7 @@
     <title>Trivia Beat</title>
   </head>
 
-  <body onresize="center(.96, 'box')" onload="verify(); center(.96, 'box');">
+  <body onresize="center(.96, 'box')" onload="center(.96, 'box'); verify(); ">
     <div class="container-fluid float-left" id="currency">
       <div style="color: red" class="yes">0 &#10084;</div>
       <div style="color: blue; width: 32%" class="yes">0 &diams;</div>
@@ -132,9 +132,10 @@
           },
         })
           .done(function (res) {
-            console.log("not expired");
+
           })
           .fail(function (res) {
+            alert("Unable to find account information.")
             window.localStorage.removeItem("login");
             location.href = "/login";
             console.log(res);

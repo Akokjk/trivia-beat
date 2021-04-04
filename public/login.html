@@ -82,9 +82,10 @@
             document.getElementById("box").style.backgroundColor = "green";
             window.localStorage.setItem("login", JSON.stringify(res));
             location.href = "/";
+          }else{
+
+            alert("Wrong email or password!")
           }
-          document.getElementById("box").style.backgroundColor = "red";
-          alert("Wrong email or password!")
         })
         .fail(function (res) {
           console.log(res);

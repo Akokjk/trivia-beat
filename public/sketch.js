@@ -56,7 +56,7 @@ function sendmouse(xpos, ypos) {
   // Make a little object with  and y
   var data = {
     x: xpos,
-    y: ypos,
+    y: ypos
   };
 
   // Send that object to the socket

@@ -26,8 +26,8 @@ function Login() {
         method: "PUT",
         headers: {
           email: inp.value(),
-          password: inp1.value(),
-        },
+          password: inp1.value()
+        }
       },
       function (res) {
         console.log(res);

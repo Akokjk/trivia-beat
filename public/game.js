@@ -9,7 +9,6 @@ function Game(gridX, gridY) {
   this.elements.push(new Menu());
   this.canvas;
   var userID;
-  var sessionID;
   var expiration;
   this.setup = function () {
     console.log("game starting");
@@ -18,7 +17,7 @@ function Game(gridX, gridY) {
     background(434);
     this.canvas.mousePressed(() => {
       sound = new Howl({
-        src: ["assets/hit.wav"],
+        src: ["assets/hit.wav"]
       });
       sound.play();
     });

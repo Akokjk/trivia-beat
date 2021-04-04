@@ -9,10 +9,17 @@
     <style>
       #box {
         text-align: center;
-        width: 70%;
+        width: 30%;
+        min-width: 450px;
         margin: auto;
+        padding: 20px;
         border: 2px solid black;
         border-radius: 10px;
+      }
+
+      #box .row {
+        margin-top: 3px;
+        margin-bottom: 3px;
       }
     </style>
 
@@ -31,19 +38,19 @@
         <label class="form-check-label" for="inlineRadio3">Sign up (disabled)</label>
       </div>
       <form>
-        <div class="row g-3 align-items-center">
-          <div class="col-auto">
+        <div class="row align-items-center">
+          <div class="col">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
           </div>
-          <div class="col-auto">
+          <div class="col-8">
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
           </div>
         </div>
-        <div class="row g-3 align-items-center">
-          <div class="col-auto">
+        <div class="row align-items-center">
+          <div class="col">
             <label for="inputPassword6" class="col-form-label">Password</label>
           </div>
-          <div class="col-auto">
+          <div class="col-8">
             <input type="password" id="in2" class="form-control" aria-describedby="passwordHelpInline" />
           </div>
         </div>

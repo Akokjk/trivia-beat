@@ -69,13 +69,6 @@
       #login {
         visibility: hidden;
       }
-
-      #starting {
-        text-align: center;
-        width: 70%;
-        margin-left: auto;
-        margin-right: auto;
-      }
     </style>
 
     <title>Trivia Beat</title>
@@ -145,7 +138,6 @@
             window.localStorage.removeItem("login");
             location.href = "/login";
             console.log(res);
-            document.getElementById("starting").style.backgroundColor = "red";
           });
       } else {
         location.href = "/login";

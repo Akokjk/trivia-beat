@@ -8,7 +8,7 @@ const crypto = require("crypto");
 
 const app = express();
 const port = 3000;
-const api = "https://api.triviabeat.io";
+const api = "https://api.triviabeat.io/api";
 
 const algorithm = "aes-256-ctr";
 const secretKey = "w4A0gFdUr3tG0VtHDHJhaVFm2pTMwV1b";

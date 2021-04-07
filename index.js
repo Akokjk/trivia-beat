@@ -126,7 +126,7 @@ app.use((req, res, next) => {
   next();
 });
 
-var server = app.listen(port, "127.0.0.1", () => {
+var server = app.listen(port, () => {
   console.log(`Trivia Beat app listening at port ${port}`);
 });
 

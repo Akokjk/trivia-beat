@@ -7,18 +7,78 @@
     <link href="lib/bootstrap.min.css" type="text/css" rel="stylesheet" />
 
     <style>
+      body {
+        cursor: crosshair;
+        margin: 0;
+        overflow: hidden;
+        padding: 0;
+        padding-top: 0;
+        visibility: visible;
+      }
 
+      nav {
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        /* background-color: red; */
+        margin-top: 5px;
+      }
+
+      #navy {
+        text-align: center;
+        /* text-decoration: underline; */
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 50%;
+        font-family: "assets/Roboto-Regular.ttf", Times, serif;
+        border: solid black;
+        border-width: 0px 0px 1px 0px;
+      }
     </style>
 
-    <title>Hello, world!</title>
+    <title>Contribute</title>
+
+    <script src="lib/bootstrap.bundle.min.js"></script>
+    <script src="lib/jquery-3.6.0.min.js"></script>
+    <script src="script/center.js"></script>
+    <script src="script/verify.js"></script>
   </head>
 
-  <body>
-
+  <body onresize="inbox()" onload="inbox()">
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid" id="navy">
+        <a href="#" class="navbar-brand">Create</a>
+        <a href="#" class="navbar-brand" id="nav2">Verify</a>
+      </div>
+      <div id="content"></div>
+    </nav>
   </body>
 
   <script>
+    function inbox() {
+      $('#navy').css("padding-left", 0);
+      $('#navy').css("padding-right", 0);
+      //$('#navy').css("background-color", "red");
+      $('#navy').css("margin-right", (window.innerWidth > window.innerHeight) ? "10vh": "10vw");
+      $('#navy').css("margin-left", (window.innerWidth > window.innerHeight) ? "10vh": "10vw");
+      $('.navbar-brand').css("margin-right", 0);
+      $('.navbar-brand').css("font-size", (window.innerWidth > window.innerHeight) ? "10vh": "10vw");
+      $('.navbar-brand').css("width", (window.innerWidth > window.innerHeight) ? "48%": "48%" );
+      $('.navbar-brand').css("height", (window.innerWidth > window.innerHeight) ? "15vh": "15vw");
+      //$('.navbar-brand').css("background-color", "green");
+      $('.navbar-brand').css("border", "solid black");
+      $('.navbar-brand').css("border-width", "1px 1px 0px 1px");
+      $('.navbar-brand').css("border-radius", "10px 10px 0px 0px");
+      $(".navbar").css("margin-bottom", "0");
 
+      //Inner content
+      $("#content").css("border", "dotted black");
+      $("#content").css("margin-top", "0");
+      $("#content").css("margin-left", "auto");
+      $("#content").css("margin-right", "auto");
+      $("#content").css("width", (window.innerWidth > window.innerHeight) ? "90vh": "90vw");
+      $("#content").css("height", (window.innerWidth > window.innerHeight) ? "80vh": "84vw");
+    }
   </script>
 
   <script src="lib/bootstrap.bundle.min.js"></script>

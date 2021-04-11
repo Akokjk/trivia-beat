@@ -1,0 +1,15 @@
+{
+  "id": 1,
+  "category": "food",
+  "question": "What is meat?",
+  "options": [ "Flesh that is eaten as food.", "Dead animals.", "Dead plants.", "Steak." ],
+  "answer":"1",
+  "difficulty":"0",
+  "author": "aaronb",
+  "verified": "true",
+  "asked": "0",
+  "correct_responses": "0",
+  "times_skipped": "0",
+  "sources": [ "https://en.wikipedia.org/wiki/Meat" ],
+  "verfiers": [ "aaronb" ]
+}

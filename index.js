@@ -71,12 +71,19 @@ app.use("/lib", express.static("public/lib"));
 app.get("/login", (req, res, next) => {
   res.sendFile("public/login.html", { root: __dirname });
 });
+
+app.get("/contribute", (req, res, next) => {
+  res.sendFile("public/contribute.html", { root: __dirname });
+});
+
 app.put("/login", cors(), (req, res, next) => {
   var reqBody = {
     email: req.headers.email,
     password: req.headers.password,
   };
-  JSON.stringify(reqBody);
+
+  console.log(JSON.stringify(reqBody));
+
   var exit;
   axios.put(api + "/session", reqBody, {
       timeout: 5000,
@@ -87,23 +94,73 @@ app.put("/login", cors(), (req, res, next) => {
         if (JSON.stringify(response.data) !== void(0)) {
           const hash = encrypt(JSON.stringify(response.data));
           res.json(hash);
+        }
+        res.end();
+      }
+    ).catch(function (error) {
+      if (error.response) {
+         console.log(error.response.data);
+         console.log(error.response.status);
+         console.log(error.response.headers);
+       } else {
+         // Something happened in setting up the request that triggered an Error
+         console.log('Error', error.message);
+       }
+       res.end();
+    });
+});
+
+app.put("/register", cors(), (req, res, next) => {
+  var tele = req.headers.phone;
+
+  if (tele.charAt(0) !== '+') {
+    tele = "+" + tele;
+  }
+
+  var formatted = "";
+
+  for (var i = 0; i < tele.length; i++) {
+    if (tele.charAt(i) !== ' ' && tele.charAt(i) !== '-') {
+      formatted += tele.charAt(i);
+    }
+  }
+
+  var reqBody = {
+    email: req.headers.email,
+    password: req.headers.password,
+    username: req.headers.username,
+    phone: formatted
+  };
+
+  JSON.stringify(reqBody);
+  console.log(reqBody)
+  var exit;
+
+  axios.post(api + "/register", reqBody, {
+      timeout: 40000,
+      json: true,
+      headers: { "Content-Type": "application/json" }
+    })
+    .then(function (response) {
+        if (JSON.stringify(response.data) !== void(0)) {
+          res.json(JSON.stringify(response.data));
           res.end();
         } else {
+          res.send("Error of the nth degree");
           res.end();
         }
       }
     ).catch(function (error) {
-      // if (error.response) {
-      //    console.log(error.response.data);
-      //    console.log(error.response.status);
-      //    console.log(error.response.headers);
-      //  } else {
-      //    // Something happened in setting up the request that triggered an Error
-      //    console.log('Error', error.message);
-      //  }
-      res.end();
+      if (error.response) {
+         console.log(error.response.data);
+         console.log(error.response.status);
+         console.log(error.response.headers);
+       } else {
+         // Something happened in setting up the request that triggered an Error
+         console.log('Error', error.message);
+       }
+       res.end();
     });
-
 });
 
 app.put("/verify", cors(), (req, res, next) => {

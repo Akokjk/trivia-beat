@@ -5,6 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no" />
     <link href="lib/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <script src="lib/bootstrap.bundle.min.js"></script>
+    <script src="lib/jquery-3.6.0.min.js"></script>
+    <script src="script/center.js"></script>
+    <script src="script/verify.js"></script>
 
     <style>
       body {
@@ -34,52 +38,271 @@
         border: solid black;
         border-width: 0px 0px 1px 0px;
       }
+      .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+      }
+
+      /* Style the buttons that are used to open the tab content */
+      .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+      }
+
+      /* Change background color of buttons on hover */
+      .tab button:hover {
+        background-color: #ddd;
+      }
+
+      /* Create an active/current tablink class */
+      .tab button.active {
+        background-color: #ccc;
+      }
+
+      /* Style the tab content */
+      .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+      }
+      #back{
+        background-color: red;
+        float: right;
+      }
     </style>
 
     <title>Contribute</title>
 
-    <script src="lib/bootstrap.bundle.min.js"></script>
-    <script src="lib/jquery-3.6.0.min.js"></script>
-    <script src="script/center.js"></script>
-    <script src="script/verify.js"></script>
+
   </head>
 
-  <body onresize="inbox()" onload="inbox()">
-    <nav class="navbar navbar-light bg-light">
+  <body onresize="" onload="">
+    <!-- <nav class="navbar navbar-light bg-light">
       <div class="container-fluid" id="navy">
         <a href="#" class="navbar-brand">Create</a>
         <a href="#" class="navbar-brand" id="nav2">Verify</a>
       </div>
-      <div id="content"></div>
-    </nav>
+      <div id="content">
+        </form>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Example textarea</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+        </form>
+        <form>
+          <div class="form-row">
+            <div class="col-md-4 mb-3">
+              <label for="validationServer01">First name</label>
+              <input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" value="Mark" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationServer02">Last name</label>
+              <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" value="Otto" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationServerUsername">Username</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupPrepend3">@</span>
+                </div>
+                <input type="text" class="form-control is-invalid" id="validationServerUsername" placeholder="Username" aria-describedby="inputGroupPrepend3" required>
+                <div class="invalid-feedback">
+                  Please choose a username.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="validationServer03">City</label>
+              <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="City" required>
+              <div class="invalid-feedback">
+                Please provide a valid city.
+              </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="validationServer04">State</label>
+              <input type="text" class="form-control is-invalid" id="validationServer04" placeholder="State" required>
+              <div class="invalid-feedback">
+                Please provide a valid state.
+              </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="validationServer05">Zip</label>
+              <input type="text" class="form-control is-invalid" id="validationServer05" placeholder="Zip" required>
+              <div class="invalid-feedback">
+                Please provide a valid zip.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
+              <label class="form-check-label" for="invalidCheck3">
+                Agree to terms and conditions
+              </label>
+              <div class="invalid-feedback">
+                You must agree before submitting.
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit form</button>
+        </form>
+
+      </div>
+    </nav> -->
+
+    <!-- Tab links -->
+    <div class="tab">
+      <button class="tablinks" onclick="openCity(event, 'Create')" id="defaultOpen">Create</button>
+      <button class="tablinks" onclick="openCity(event, 'Verify')">Verify</button>
+      <button class="tablinks" onclick="back()" id="back">Back</button>
+    </div>
+
+    <!-- Tab content -->
+    <div id="Create" class="tabcontent">
+      <h3 style="text-align: center">Create</h3>
+          <form>
+            <div class="form-group">
+              <label for="question">Question:</label>
+              <input class="form-control form-control-lg" id="question" type="text" placeholder="What is the meaning of life?">
+            </div>
+            <div class="form-group">
+              <label for="question">Catergory</label>
+              <input class="form-control form-control-sm" id="option1" type="text" placeholder="Philosophy">
+            </div>
+            <div class="form-group">
+              <label for="question">Option 1:</label>
+              <input class="form-control form-control-sm" id="option1" type="text" placeholder="42">
+            </div>
+            <div class="form-group">
+              <label for="question">Option 2:</label>
+              <input class="form-control form-control-sm" id="option2" type="text" placeholder="To be or not to be">
+            </div>
+            <div class="form-group">
+              <label for="question">Option 3:</label>
+              <input class="form-control form-control-sm" id="option3" type="text" placeholder="Meaningless">
+            </div>
+            <div class="form-group">
+              <label for="question">Option 4:</label>
+              <input class="form-control form-control-sm" id="option4" type="text" placeholder="What you make of it.">
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Answer</label>
+              <select class="form-control-sm" id="exampleFormControlSelect1">
+                <option>Option 1</option>
+                <option>Option 2</option>
+                <option>Option 3</option>
+                <option>Option 4</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="question">Source:</label>
+              <input class="form-control form-control-sm" id="option4" type="text" placeholder="Link to a source of question to help verify it.">
+            </div>
+          </form>
+    </div>
+
+    <div id="Verify" class="tabcontent">
+      <h3 style="text-align: center">Verify</h3>
+      <table class="table table-sm table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Question</th>
+            <th scope="col">Answer</th>
+            <th scope="col">True / False</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><a href="https://en.wikipedia.org/wiki/Meat" target="_blank">What is meat?</a></th>
+            <td>Flesh that is eaten as food.</td>
+
+            <td class="float-right" style="">
+              <button type="button" class="btn btn-success float-right" style="width: 30px; height: 30px"></button>
+              <button type="button" class="btn btn-danger float-right" style="width: 30px; height: 30px"></button>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row"><a href="https://en.wikipedia.org/wiki/War_of_1812" target="_blank">When did the war of 1812 end?</a></th>
+            <td>1815</td>
+
+            <td class="float-right" style="">
+              <button type="button" class="btn btn-success float-right" style="width: 30px; height: 30px"></button>
+              <button type="button" class="btn btn-danger float-right" style="width: 30px; height: 30px"></button>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+
   </body>
 
   <script>
-    function inbox() {
-      $('#navy').css("padding-left", 0);
-      $('#navy').css("padding-right", 0);
-      //$('#navy').css("background-color", "red");
-      $('#navy').css("margin-right", (window.innerWidth > window.innerHeight) ? "10vh": "10vw");
-      $('#navy').css("margin-left", (window.innerWidth > window.innerHeight) ? "10vh": "10vw");
-      $('.navbar-brand').css("margin-right", 0);
-      $('.navbar-brand').css("font-size", (window.innerWidth > window.innerHeight) ? "10vh": "10vw");
-      $('.navbar-brand').css("width", (window.innerWidth > window.innerHeight) ? "48%": "48%" );
-      $('.navbar-brand').css("height", (window.innerWidth > window.innerHeight) ? "15vh": "15vw");
-      //$('.navbar-brand').css("background-color", "green");
-      $('.navbar-brand').css("border", "solid black");
-      $('.navbar-brand').css("border-width", "1px 1px 0px 1px");
-      $('.navbar-brand').css("border-radius", "10px 10px 0px 0px");
-      $(".navbar").css("margin-bottom", "0");
+    function back(){
+      location.href = "/"
+    }
+    // function inbox() {
+    //   $('#navy').css("padding-left", 0);
+    //   $('#navy').css("padding-right", 0);
+    //   //$('#navy').css("background-color", "red");
+    //   $('#navy').css("margin-right", (window.innerWidth > window.innerHeight) ? "10vh": "10vw");
+    //   $('#navy').css("margin-left", (window.innerWidth > window.innerHeight) ? "10vh": "10vw");
+    //   $('.navbar-brand').css("margin-right", 0);
+    //   $('.navbar-brand').css("font-size", (window.innerWidth > window.innerHeight) ? "10vh": "10vw");
+    //   $('.navbar-brand').css("width", (window.innerWidth > window.innerHeight) ? "48%": "48%" );
+    //   $('.navbar-brand').css("height", (window.innerWidth > window.innerHeight) ? "15vh": "15vw");
+    //   //$('.navbar-brand').css("background-color", "green");
+    //   $('.navbar-brand').css("border", "solid black");
+    //   $('.navbar-brand').css("border-width", "1px 1px 0px 1px");
+    //   $('.navbar-brand').css("border-radius", "10px 10px 0px 0px");
+    //   $(".navbar").css("margin-bottom", "0");
+    //
+    //   //Inner content
+    //   $("#content").css("border", "dotted black");
+    //   $("#content").css("margin-top", "0");
+    //   $("#content").css("margin-left", "auto");
+    //   $("#content").css("margin-right", "auto");
+    //   $("#content").css("width", (window.innerWidth > window.innerHeight) ? "90vh": "90vw");
+    //   $("#content").css("height", (window.innerWidth > window.innerHeight) ? "80vh": "84vw");
+    // }
+    document.getElementById("defaultOpen").click();
+    function openCity(evt, cityName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
 
-      //Inner content
-      $("#content").css("border", "dotted black");
-      $("#content").css("margin-top", "0");
-      $("#content").css("margin-left", "auto");
-      $("#content").css("margin-right", "auto");
-      $("#content").css("width", (window.innerWidth > window.innerHeight) ? "90vh": "90vw");
-      $("#content").css("height", (window.innerWidth > window.innerHeight) ? "80vh": "84vw");
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
     }
   </script>
 
-  <script src="lib/bootstrap.bundle.min.js"></script>
+
 </html>

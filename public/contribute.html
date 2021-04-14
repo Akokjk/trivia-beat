@@ -71,6 +71,9 @@
         border: 1px solid #ccc;
         border-top: none;
       }
+      .form-group{
+        margin-bottom: 5px;
+      }
       #back{
         background-color: red;
         float: right;
@@ -171,7 +174,7 @@
     <!-- Tab content -->
     <div id="Create" class="tabcontent">
       <h3 style="text-align: center">Create</h3>
-          <form>
+          <form class="form-inline">
             <div class="form-group">
               <label for="question">Question:</label>
               <input class="form-control form-control-lg" id="question" type="text" placeholder="What is the meaning of life?" />
@@ -196,25 +199,45 @@
               <label for="question">Option 4:</label>
               <input class="form-control form-control-sm" id="option4" type="text" placeholder="What you make of it." />
             </div>
-            <div class="form-group">
-              <label for="exampleFormControlSelect1">Answer</label>
-              <select class="form-control-sm" id="exampleFormControlSelect1">
-                <option>Option 1</option>
-                <option>Option 2</option>
-                <option>Option 3</option>
-                <option>Option 4</option>
-              </select>
+            <div class="form-group" >
+              <div class="row">
+                <div class="col-auto">
+                  <label for="exampleFormControlSelect1">Answer: </label>
+                  <select class="form-control-sm" id="exampleFormControlSelect1">
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                    <option>Option 4</option>
+                  </select>
+                </div>
+                <div class="col-auto">
+                  <label for="diff">Difficultly: </label>
+                  <select class="form-control-sm" id="exampleFormControlSelect1">
+                    <option>Easy</option>
+                    <option>Moderate</option>
+                    <option>Difficult</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group mb-2">
+
             </div>
             <div class="form-group">
               <label for="question">Source:</label>
               <input class="form-control form-control-sm" id="source" type="text" placeholder="Link to a source of question to help verify it.">
+
             </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
           </form>
     </div>
 
     <div id="Verify" class="tabcontent">
       <h3 style="text-align: center">Verify</h3>
-      <table class="table table-sm table-dark">
+      <table class="table table-sm table-striped table-bordered">
         <thead>
           <tr>
             <th scope="col">Question</th>
@@ -251,30 +274,6 @@
       location.href = "/"
     }
 
-    // function inbox() {
-    //   $('#navy').css("padding-left", 0);
-    //   $('#navy').css("padding-right", 0);
-    //   //$('#navy').css("background-color", "red");
-    //   $('#navy').css("margin-right", (window.innerWidth > window.innerHeight) ? "10vh": "10vw");
-    //   $('#navy').css("margin-left", (window.innerWidth > window.innerHeight) ? "10vh": "10vw");
-    //   $('.navbar-brand').css("margin-right", 0);
-    //   $('.navbar-brand').css("font-size", (window.innerWidth > window.innerHeight) ? "10vh": "10vw");
-    //   $('.navbar-brand').css("width", (window.innerWidth > window.innerHeight) ? "48%": "48%" );
-    //   $('.navbar-brand').css("height", (window.innerWidth > window.innerHeight) ? "15vh": "15vw");
-    //   //$('.navbar-brand').css("background-color", "green");
-    //   $('.navbar-brand').css("border", "solid black");
-    //   $('.navbar-brand').css("border-width", "1px 1px 0px 1px");
-    //   $('.navbar-brand').css("border-radius", "10px 10px 0px 0px");
-    //   $(".navbar").css("margin-bottom", "0");
-
-    //   //Inner content
-    //   $("#content").css("border", "dotted black");
-    //   $("#content").css("margin-top", "0");
-    //   $("#content").css("margin-left", "auto");
-    //   $("#content").css("margin-right", "auto");
-    //   $("#content").css("width", (window.innerWidth > window.innerHeight) ? "90vh": "90vw");
-    //   $("#content").css("height", (window.innerWidth > window.innerHeight) ? "80vh": "84vw");
-    // }
 
     document.getElementById("defaultOpen").click();
 

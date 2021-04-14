@@ -1,0 +1,158 @@
+html {
+  background-color: white;
+  color: black;
+  margin: 0;
+  display: flex;
+  overflow: hidden;
+}
+html #container {
+  height: 100vh;
+}
+html #container button {
+  margin-top: 5px;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  float: right;
+  border: solid 2px red;
+  border-radius: 5px;
+  width: inherit;
+  height: 5vh;
+  font-size: inherit;
+  background-color: red;
+}
+html body {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: calc(100vh - 16px);
+}
+html body #menu {
+  display: grid;
+  grid-template-columns: 47.5vw 47.5vw;
+  grid-template-rows: 15vh 22.5vh 9.375vh 9.375vh 9.375vh 9.375vh;
+  grid-template-areas: "inventory inventory" " title title " "play play" "store leaderboard" "profile contribute" "active .";
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+  width: 95vw;
+}
+html body #menu i {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  text-decoration: underline;
+}
+html body #menu #title {
+  font-size: 5.1136363636vh;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 2;
+}
+html body #menu button {
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  border: solid 2px red;
+  border-radius: 5px;
+  width: inherit;
+  height: inherit;
+  font-size: inherit;
+  background-color: red;
+}
+html body #menu #inventory {
+  text-decoration: none;
+  font-size: 6.1363636364vh;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+html body #menu #inventory #hearts {
+  color: red;
+}
+html body #menu #inventory #diamonds {
+  color: blue;
+}
+html body #menu #inventory #bitcoin {
+  color: green;
+}
+html body #menu #inventory div {
+  display: inline-block;
+  margin-right: 4px;
+}
+html body #menu #play {
+  justify-self: center;
+  position: relative;
+  font-size: 3.75vh;
+  height: 7.125vh;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 3;
+}
+html body #menu #play button {
+  width: calc( ((75vh * 0.1) * 2.5) * 2 + 10px );
+}
+html body #menu #store {
+  justify-self: end;
+  margin-right: 5px;
+  position: relative;
+  font-size: 3.75vh;
+  height: 7.125vh;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 4;
+  grid-row-end: 4;
+  float: left;
+}
+html body #menu #store button {
+  width: 18.75vh;
+}
+html body #menu #leaderboard {
+  justify-self: start;
+  margin-left: 5px;
+  position: relative;
+  font-size: 2.625vh;
+  height: 7.125vh;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 4;
+}
+html body #menu #leaderboard button {
+  width: 18.75vh;
+}
+html body #menu #profile {
+  justify-self: start;
+  margin-left: 5px;
+  position: relative;
+  height: 7.125vh;
+  font-size: 3.75vh;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 5;
+  grid-row-end: 5;
+}
+html body #menu #profile button {
+  width: 18.75vh;
+}
+html body #menu #contribute {
+  justify-self: end;
+  margin-right: 5px;
+  position: relative;
+  height: 7.125vh;
+  font-size: 3vh;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 5;
+  grid-row-end: 5;
+}
+html body #menu #contribute button {
+  width: 18.75vh;
+}
+
+/*# sourceMappingURL=index.css.map */

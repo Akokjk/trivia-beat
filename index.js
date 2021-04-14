@@ -7,7 +7,7 @@ const axios = require("axios");
 const crypto = require("crypto");
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 5000;
 const api = "https://api.triviabeat.io/api";
 
 const algorithm = "aes-256-ctr";

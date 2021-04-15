@@ -164,7 +164,7 @@ var server = app.listen(port, () => {
 
 var io = require("socket.io")(server, {
   cors: {
-    origin: "https://trivia-beat.herokuapp.com/",
+    origin: "localhost:5000",
     methods: ["GET", "POST"]
   }
 });

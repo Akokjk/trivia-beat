@@ -6,7 +6,7 @@ $other-color-dark: #202523;
 $other-color-grey: #757e7b;
 $other-color-orange: #cb784e;
 $menu-width: 95vw;
-$menu-height: 75vh;
+$menu-height: 95vh;
 $fonttype: 'Noto Sans JP';
 
 html {
@@ -40,10 +40,11 @@ html {
       height: $menu-height;
       width: $menu-width;
       i {
+        display: inherit;
         align-items: center;
         text-align: center;
         justify-content: center;
-        text-decoration: underline;
+        width: auto;
       }
       #title {
          //11 is the number of characters in title insure that text size scalze propley
@@ -67,19 +68,23 @@ html {
         font-size: inherit;
         background-color: red;
       }
+
       #logout {
+        justify-self: start;
+        margin-left: 5px;
+        position: relative;
+        height: $menu-height * 0.1 * 0.95;
+        font-size: $menu-height * 0.1 * 0.5;
         grid-column-start: 2;
         grid-column-end: 3;
-        grid-row-start: -8;
-        grid-row-end: -8;
-        height: $menu-height * 0.1 * 0.95;
-        font-size: $menu-height * 0.1 * 0.3;
-
+        grid-row-start: 6;
+        grid-row-end: 6;
         button {
-          width: ($menu-height * 0.1) * 1.5;
+          width: ($menu-height * 0.1) * 2.5;
         }
-
       }
+
+
       #inventory {
         text-decoration: none;
         width: 90vw;
@@ -116,7 +121,7 @@ html {
         grid-row-end: 3;
         button {
           width: calc(
-            ((75vh * 0.1) * 2.5) * 2 + 10px
+            ((95vh * 0.1) * 2.5) * 2 + 10px
           ); //doesn't work well with sass must manual put in value
         }
       }
@@ -177,6 +182,22 @@ html {
           width: ($menu-height * 0.1) * 2.5;
         }
       }
+      #active{
+        justify-self: end;
+        margin-right: 5px;
+        position: relative;
+
+        height: $menu-height * 0.1 * 0.95;
+        font-size: $menu-height * 0.1 * 0.3; //this was determined to be the best work around for text bug
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 6;
+        grid-row-end: 6;
+        button {
+          width: ($menu-height * 0.1) * 2.5;
+        }
+      }
+
     }
   }
 }

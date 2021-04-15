@@ -40,8 +40,8 @@
       <i id="contribute">
         <button>Contribute</button>
       </i>
-      <i>
-        <button id="players">Online</button>
+      <i id="active">
+        <button >Online</button>
       </i>
     </div>
   </body>
@@ -86,7 +86,7 @@
     });
     socket.on("player", function (data) {
       clients = data;
-      document.getElementById("players").innerText = "Active players: " + data;
+      document.getElementById("active").innerText = "Active players: " + data;
     });
     console.log("test")
   </script>

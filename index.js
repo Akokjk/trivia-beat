@@ -4,7 +4,7 @@ const crypto = require("crypto");
 const mongodb = require("mongodb");
 const mongoose = require('mongoose');
 const User = require("./user.js")
-
+const cors = require("cors")
 
 //database
 const code = "ml9RkDGd4ctjmHTX"; //password
@@ -162,7 +162,12 @@ var server = app.listen(port, () => {
   console.log(`Trivia Beat app listening at port ${port}`);
 });
 
-var io = require("socket.io")(server);
+var io = require("socket.io")(server, {
+  cors: {
+    origin: "https://trivia-beat.herokuapp.com/",
+    methods: ["GET", "POST"]
+  }
+});
 
 var clients = 0;
 

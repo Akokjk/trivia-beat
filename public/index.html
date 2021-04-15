@@ -4,11 +4,11 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no" />
-    <link href="lib/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/index.css">
-
+    <script src="lib/jquery-3.6.0.min.js"></script>
+    <script src="lib/socket.io.js"></script>
     <title>Trivia Beat</title>
   </head>
 
@@ -40,13 +40,15 @@
       <i id="contribute">
         <button>Contribute</button>
       </i>
+      <i>
+        <button id="players">Online</button>
+      </i>
     </div>
   </body>
 
-  <script src="lib/jquery-3.6.0.min.js"></script>
-  <script src="lib/socket.io.js"></script>
+
   <script>
-    socket = io.connect("https://trivia-beat.herokuapp.com", { secure: true });
+    socket = io.connect("localhost:5000", { secure: true });
     function logout() {
       window.localStorage.removeItem("login");
       alert("Logging out...");
@@ -78,11 +80,15 @@
       }
     }
     var clients = 1;
+    socket.emit("player", clients);
+    socket.on("connection", function (data) {
+      console.log("Connected");
+    });
     socket.on("player", function (data) {
       clients = data;
-      document.getElementById("client").innerText = "Active players: " + data;
+      document.getElementById("players").innerText = "Active players: " + data;
     });
-
+    console.log("test")
   </script>
 
 </html>

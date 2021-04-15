@@ -170,24 +170,14 @@ var io = require("socket.io")(server, {
 });
 
 var clients = 0;
-
-// Register a callback function to run when we have an individual connection
-// This is run for each individual user that connects
-io.sockets.on(
-  "connection",
-  // We are given a websocket object in our function
+io.sockets.on("connection",
   function (socket) {
     console.log("We have a new client: " + socket.id);
     clients++;
-    // When this user emits, client side: socket.emit('otherevent',some data);
-    socket.broadcast.emit("player", clients);
     socket.on("player", function (data) {
       // Data comes in as whatever was sent, including objects
       io.sockets.emit("player", clients);
     });
-    //socket.on("clients", function(data){
-    //io.sockets.emit("clients", clients);
-    //})
     socket.on("disconnect", function () {
       console.log("Client has disconnected");
       clients--;

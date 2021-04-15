@@ -5,23 +5,8 @@ html {
   display: flex;
   overflow: hidden;
 }
-html #container {
-  height: 100vh;
-}
-html #container button {
-  margin-top: 5px;
-  text-decoration: none;
-  text-align: center;
-  color: white;
-  float: right;
-  border: solid 2px red;
-  border-radius: 5px;
-  width: inherit;
-  height: 5vh;
-  font-size: inherit;
-  background-color: red;
-}
 html body {
+  font-family: "Noto Sans JP";
   background-color: white;
   display: flex;
   justify-content: center;
@@ -46,11 +31,14 @@ html body #menu i {
   text-decoration: underline;
 }
 html body #menu #title {
-  font-size: 5.1136363636vh;
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 2;
   grid-row-end: 2;
+}
+html body #menu #title h1 {
+  font-family: "Noto Sans JP";
+  font-size: 7.1590909091vh;
 }
 html body #menu button {
   text-decoration: none;
@@ -63,8 +51,23 @@ html body #menu button {
   font-size: inherit;
   background-color: red;
 }
+html body #menu #logout {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: -8;
+  grid-row-end: -8;
+  height: 7.125vh;
+  font-size: 2.25vh;
+}
+html body #menu #logout button {
+  width: 11.25vh;
+}
 html body #menu #inventory {
   text-decoration: none;
+  width: 90vw;
+  justify-content: center;
+  display: flex;
+  justify-self: center;
   font-size: 6.1363636364vh;
   grid-column-start: 1;
   grid-column-end: 3;
@@ -116,7 +119,7 @@ html body #menu #leaderboard {
   justify-self: start;
   margin-left: 5px;
   position: relative;
-  font-size: 2.625vh;
+  font-size: 2.25vh;
   height: 7.125vh;
   grid-column-start: 2;
   grid-column-end: 3;

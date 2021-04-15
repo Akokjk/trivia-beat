@@ -1,37 +1,31 @@
 const express = require("express");
-const cookieParser = require("cookie-parser");
 const fs = require("fs");
-const process = require("process");
-const cors = require("cors");
-const axios = require("axios");
 const crypto = require("crypto");
+const mongodb = require("mongodb");
+const mongoose = require('mongoose');
+const User = require("./user.js")
+
+
+//database
+const code = "ml9RkDGd4ctjmHTX"; //password
+
+mongoose.connect('mongodb+srv://server:ml9RkDGd4ctjmHTX@cluster0.mlf9x.mongodb.net/triviabeat?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.set('useFindAndModify', false);
+const Cat = mongoose.model('Cat', { name: String });
+
+
+
+
+
 
 const app = express();
 const port = process.env.PORT || 5000;
-const api = "https://api.triviabeat.io/api";
+
 
 const algorithm = "aes-256-ctr";
 const secretKey = "w4A0gFdUr3tG0VtHDHJhaVFm2pTMwV1b";
 const iv = crypto.randomBytes(16);
 
-process.on("uncaughtException", function (err) {
-  console.error(err && err.stack ? err.stack : err);
-});
-
-var production = false;
-
-// if log folder exists
-if (fs.existsSync("/var/log/triviabeatui")) {
-  // redirecting console output to logfiles
-  var sout = fs.createWriteStream("/var/log/triviabeatui/console.log", { flags: "a" });
-  var serr = fs.createWriteStream("/var/log/triviabeatui/error.log", { flags: "a" });
-  process.stdout.write = sout.write.bind(sout);
-  process.stderr.write = serr.write.bind(serr);
-  production = true;
-}
-
-if (production)
-  process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
 const encrypt = (text) => {
   const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
@@ -57,26 +51,21 @@ const decrypt = (hash) => {
 };
 
 app.use(express.json({ limit: "1mb" }));
-var corsOptions = {
-  origin: "*",
-  "Access-Control-Allow-Origin": "*",
-  optionsSuccessStatus: 200, // For legacy browser support
-};
 
-app.use(cors(corsOptions));
+
 
 app.use("/", express.static("public"));
 app.use("/lib", express.static("public/lib"));
 
-app.get("/login", (req, res, next) => {
+app.get("/login", (req, res) => {
   res.sendFile("public/login.html", { root: __dirname });
 });
 
-app.get("/contribute", (req, res, next) => {
+app.get("/contribute", (req, res) => {
   res.sendFile("public/contribute.html", { root: __dirname });
 });
 
-app.put("/login", cors(), (req, res, next) => {
+app.put("/login", (req, res) => {
   var reqBody = {
     email: req.headers.email,
     password: req.headers.password,
@@ -110,60 +99,49 @@ app.put("/login", cors(), (req, res, next) => {
     });
 });
 
-app.put("/register", cors(), (req, res, next) => {
-  var tele = req.headers.phone;
 
+
+
+app.put("/register", (req, res) => {
+  var tele = req.headers.phone;
   if (tele.charAt(0) !== '+') {
     tele = "+" + tele;
   }
-
   var formatted = "";
-
   for (var i = 0; i < tele.length; i++) {
     if (tele.charAt(i) !== ' ' && tele.charAt(i) !== '-') {
       formatted += tele.charAt(i);
     }
   }
 
-  var reqBody = {
-    email: req.headers.email,
-    password: req.headers.password,
-    username: req.headers.username,
-    phone: formatted
-  };
-
-  JSON.stringify(reqBody);
-  console.log(reqBody)
-  var exit;
-
-  axios.post(api + "/register", reqBody, {
-      timeout: 40000,
-      json: true,
-      headers: { "Content-Type": "application/json" }
-    })
-    .then(function (response) {
-        if (JSON.stringify(response.data) !== void(0)) {
-          res.json(JSON.stringify(response.data));
-          res.end();
-        } else {
-          res.send("Error of the nth degree");
-          res.end();
-        }
-      }
-    ).catch(function (error) {
-      if (error.response) {
-         console.log(error.response.data);
-         console.log(error.response.status);
-         console.log(error.response.headers);
-       } else {
-         // Something happened in setting up the request that triggered an Error
-         console.log('Error', error.message);
-       }
-       res.end();
+  const reqBody = new User({
+      email:  req.headers.email,
+      password: req.headers.password,
+      name: req.headers.name,
+      phone: formatted,
+      dimonds: 0,
+      hearts: 10,
+      bitcoin: 0
     });
+    // User.find({ name: req.headers.name, email: req.headers.email, phone: formatted}, function(error, result){
+    //   console.log(result)
+    //   if(result.length == 0){
+        reqBody.save().then(() =>{
+
+           console.log('added User')
+           return res.status(200).send("success");
+         }).catch(function(error){
+           return res.status(400).send(error);
+         });
+       // }
+      // else{
+      //
+      // }
+
+    // });
 });
 
-app.put("/verify", cors(), (req, res, next) => {
+app.put("/verify", (req, res) => {
   //console.log(req.headers.data);
   if(req.headers.data) {
     var result = decrypt(JSON.parse(req.headers.data));
@@ -178,21 +156,13 @@ app.put("/verify", cors(), (req, res, next) => {
   res.end();
 });
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
+
 
 var server = app.listen(port, () => {
   console.log(`Trivia Beat app listening at port ${port}`);
 });
 
-var io = require("socket.io")(server, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"]
-  },
-});
+var io = require("socket.io")(server);
 
 var clients = 0;
 

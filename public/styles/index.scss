@@ -7,6 +7,7 @@ $other-color-grey: #757e7b;
 $other-color-orange: #cb784e;
 $menu-width: 95vw;
 $menu-height: 75vh;
+$fonttype: 'Noto Sans JP';
 
 html {
   background-color: $background-color;
@@ -14,24 +15,9 @@ html {
   margin: 0;
   display: flex;
   overflow: hidden;
-  #container{
-    button {
-      margin-top: 5px;
-     text-decoration: none;
-     text-align: center;
-     color: white;
-     float: right;
-     border: solid 2px red;
-     border-radius: 5px;
-     width: inherit;
-     height: 5vh;
-     font-size: inherit;
-     background-color: red;
-   }
-    height: 100vh;
-  }
 
   body {
+    font-family: $fonttype;
     background-color: white;
     display: flex;
     justify-content: center;
@@ -60,11 +46,15 @@ html {
         text-decoration: underline;
       }
       #title {
-        font-size: $menu-height * 0.3/11 * 2.5; //11 is the number of characters in title insure that text size scalze propley
+         //11 is the number of characters in title insure that text size scalze propley
         grid-column-start: 1;
         grid-column-end: 3;
         grid-row-start: 2;
         grid-row-end: 2;
+        h1{
+          font-family: $fonttype;
+          font-size: $menu-height * 0.3/11 * 3.5;
+        }
       }
       button {
         text-decoration: none;
@@ -77,8 +67,25 @@ html {
         font-size: inherit;
         background-color: red;
       }
+      #logout {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: -8;
+        grid-row-end: -8;
+        height: $menu-height * 0.1 * 0.95;
+        font-size: $menu-height * 0.1 * 0.3;
+
+        button {
+          width: ($menu-height * 0.1) * 1.5;
+        }
+
+      }
       #inventory {
         text-decoration: none;
+        width: 90vw;
+        justify-content: center;
+        display: flex;
+        justify-self: center;
         font-size: $menu-height * 0.3/11 * 3;
         grid-column-start: 1;
         grid-column-end: 3;
@@ -132,7 +139,7 @@ html {
         justify-self: start;
         margin-left: 5px;
         position: relative;
-        font-size: $menu-height * 0.1 * 0.35;
+        font-size: $menu-height * 0.1 * 0.30;
         height: $menu-height * 0.1 * 0.95;
         grid-column-start: 2;
         grid-column-end: 3;

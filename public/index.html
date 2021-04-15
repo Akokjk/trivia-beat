@@ -5,16 +5,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no" />
     <link href="lib/bootstrap.min.css" type="text/css" rel="stylesheet" />
-
-    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="styles/index.css">
 
     <title>Trivia Beat</title>
   </head>
 
   <body>
-    <div id="container">
-    <button id="logout"></button>
     <div id="menu">
+      <i id="logout">
+        <button>Logout</button>
+      </i>
       <i id="inventory">
         <div id="hearts">0 &#9825;</div>
         <div id="diamonds">0 &#10209;</div>
@@ -39,13 +41,12 @@
         <button>Contribute</button>
       </i>
     </div>
-    </div>
   </body>
 
   <script src="lib/jquery-3.6.0.min.js"></script>
   <script src="lib/socket.io.js"></script>
   <script>
-    socket = io.connect("https://play.triviabeat.io", { secure: true });
+    socket = io.connect("https://trivia-beat.herokuapp.com", { secure: true });
     function logout() {
       window.localStorage.removeItem("login");
       alert("Logging out...");

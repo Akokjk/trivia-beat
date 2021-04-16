@@ -12,6 +12,9 @@ const userSchema = new Schema(
       type: String,
       unique: true
     },
+    expire: {
+      type: Date
+    }, 
     phone:{
       type: String,
       unique: true
@@ -43,4 +46,4 @@ userSchema.path("name").validate(async (name) => {
 
 const User = mongoose.model("User", userSchema);
 
-module.exports = User; 
+module.exports = User;

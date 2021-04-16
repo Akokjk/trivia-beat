@@ -118,12 +118,14 @@ app.put("/register", (req, res) => {
       formatted += tele.charAt(i);
     }
   }
-
+  const date = new Date();
+  date.setDate(date.getDate() + 30);
   const reqBody = new User({
       email:  req.headers.email,
       password: req.headers.password,
       name: req.headers.name,
       phone: formatted,
+      expire: date,
       dimonds: 0,
       hearts: 10,
       bitcoin: 0
@@ -132,9 +134,8 @@ app.put("/register", (req, res) => {
     //   console.log(result)
     //   if(result.length == 0){
         reqBody.save().then(() =>{
-
-           console.log('added User')
-           return res.status(200).send("success");
+           console.log(JSON.stringify(reqBody._id + " " + reqBody.expire))
+           return res.status(200).send(encrypt(JSON.stringify(reqBody._id)))
          }).catch(function(error){
            return res.status(400).send(error);
          });

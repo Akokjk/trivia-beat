@@ -3,6 +3,7 @@ html {
   color: black;
   margin: 0;
   display: flex;
+  overflow: hidden;
 }
 html body {
   font-family: "Noto Sans JP";

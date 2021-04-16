@@ -48,7 +48,7 @@
 
 
   <script>
-    socket = io.connect("localhost:5000", { secure: true });
+    socket = io.connect("https://www.triviabeat.dev", { secure: true });
     function logout() {
       window.localStorage.removeItem("login");
       alert("Logging out...");

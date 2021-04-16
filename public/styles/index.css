@@ -5,13 +5,14 @@ html {
   background-color: white;
   color: black;
   margin: 0;
+  padding: 0;
   display: flex;
   overflow: hidden;
 }
 html body {
   font-family: "Noto Sans JP";
   background-color: white;
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
   width: 100vw;
@@ -20,7 +21,7 @@ html body {
 html body #menu {
   display: grid;
   grid-template-columns: 47.5vw 47.5vw;
-  grid-template-rows: 17vh 25.5vh 10.625vh 10.625vh 10.625vh 10.625vh;
+  grid-template-rows: 8.5vh 17vh 10.625vh 10.625vh 10.625vh 10.625vh;
   grid-template-areas: "inventory inventory" " title title " "play play" "store leaderboard" "profile contribute" "active .";
   justify-content: center;
   align-items: center;

@@ -1,17 +1,18 @@
 const express = require("express");
 const fs = require("fs");
-const crypto = require("crypto");
 const mongodb = require("mongodb");
 const mongoose = require('mongoose');
 const User = require("./user.js")
+const encrypt = require("./encrypt.js").encrypt
+const decrypt = require("./encrypt.js").decrypt
 const cors = require("cors")
 
+const app = express();
+const port = process.env.PORT || 5000;
 //database
-const code = "ml9RkDGd4ctjmHTX"; //password
 
+const code = "ml9RkDGd4ctjmHTX"; //password
 mongoose.connect('mongodb+srv://server:ml9RkDGd4ctjmHTX@cluster0.mlf9x.mongodb.net/triviabeat?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.set('useFindAndModify', false);
-const Cat = mongoose.model('Cat', { name: String });
 
 var corsOptions = {
     origin: '*',
@@ -19,93 +20,31 @@ var corsOptions = {
     optionsSuccessStatus: 200, // For legacy browser support
     methods: "GET, PUT"
 }
+app.use(cors(corsOptions));
 
-
-
-
-const app = express();
-const port = process.env.PORT || 5000;
-
-
-const algorithm = "aes-256-ctr";
-const secretKey = "w4A0gFdUr3tG0VtHDHJhaVFm2pTMwV1b";
-const iv = crypto.randomBytes(16);
-
-
-const encrypt = (text) => {
-  const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
-  const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
-
-  return {
-    iv: iv.toString("hex"),
-    content: encrypted.toString("hex"),
-  };
-};
-
-const decrypt = (hash) => {
-  const decipher = crypto.createDecipheriv(
-    algorithm,
-    secretKey,
-    Buffer.from(hash.iv, "hex")
-  );
-  const decrpyted = Buffer.concat([
-    decipher.update(Buffer.from(hash.content, "hex")),
-    decipher.final(),
-  ]);
-  return decrpyted.toString();
-};
 
 app.use(express.json({ limit: "1mb" }));
-
-app.use(cors(corsOptions));
 
 app.use("/", express.static("public"));
 app.use("/lib", express.static("public/lib"));
 
-app.get("/login", (req, res) => {
-  res.sendFile("public/login.html", { root: __dirname });
-});
+app.get("/:file", (req, res) =>{
+  res.status(200).sendFile("public/"+req.params.file+".html", { root: __dirname }, (err) =>{
+    if(err) return res.status(404).sendFile("public/404.html", { root: __dirname })
+  });
+})
 
-app.get("/contribute", (req, res) => {
-  res.sendFile("public/contribute.html", { root: __dirname });
-});
 
 app.put("/login", (req, res) => {
-  var reqBody = {
-    email: req.headers.email,
-    password: req.headers.password,
-  };
 
-  console.log(JSON.stringify(reqBody));
+  User.findOne({email: req.headers.email}, '_id expire password', function(err, result){
+    if(!result) return res.status(400).send(err || "Cannot find user");
+    if(result.password == req.headers.password){
 
-  var exit;
-  axios.put(api + "/session", reqBody, {
-      timeout: 5000,
-      json: true,
-      headers: { "Content-Type": "application/json" },
-    })
-    .then(function (response) {
-        if (JSON.stringify(response.data) !== void(0)) {
-          const hash = encrypt(JSON.stringify(response.data));
-          res.json(hash);
-        }
-        res.end();
-      }
-    ).catch(function (error) {
-      if (error.response) {
-         console.log(error.response.data);
-         console.log(error.response.status);
-         console.log(error.response.headers);
-       } else {
-         // Something happened in setting up the request that triggered an Error
-         console.log('Error', error.message);
-       }
-       res.end();
-    });
+      return res.status(200).send(encrypt(JSON.stringify(result._id)));
+    }
+  });
 });
-
-
-
 
 app.put("/register", (req, res) => {
   var tele = req.headers.phone;
@@ -126,25 +65,16 @@ app.put("/register", (req, res) => {
       name: req.headers.name,
       phone: formatted,
       expire: date,
-      dimonds: 0,
+      diamonds: 0,
       hearts: 10,
       bitcoin: 0
     });
-    // User.find({ name: req.headers.name, email: req.headers.email, phone: formatted}, function(error, result){
-    //   console.log(result)
-    //   if(result.length == 0){
-        reqBody.save().then(() =>{
-           console.log(JSON.stringify(reqBody._id + " " + reqBody.expire))
-           return res.status(200).send(encrypt(JSON.stringify(reqBody._id)))
-         }).catch(function(error){
-           return res.status(400).send(error);
-         });
-       // }
-      // else{
-      //
-      // }
-
-    // });
+      reqBody.save().then(() =>{
+         console.log(JSON.stringify(reqBody._id + " " + reqBody.expire))
+         return res.status(200).send(encrypt(JSON.stringify(reqBody._id)))
+       }).catch(function(error){
+         return res.status(400).send(error);
+       });
 });
 
 app.put("/verify", (req, res) => {

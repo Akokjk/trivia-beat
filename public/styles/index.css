@@ -8,8 +8,10 @@ html {
   padding: 0;
   display: flex;
   overflow: hidden;
+  position: fixed;
 }
 html body {
+  margin-left: 0;
   font-family: "Noto Sans JP";
   background-color: white;
   display: grid;
@@ -25,7 +27,7 @@ html body #menu {
   grid-template-areas: "inventory inventory" " title title " "play play" "store leaderboard" "profile contribute" "active .";
   justify-content: center;
   align-items: center;
-  height: 85vh;
+  height: 68vh;
   width: 95vw;
 }
 html body #menu i {
@@ -172,13 +174,16 @@ html body #menu #active {
   margin-right: 5px;
   position: relative;
   height: 8.075vh;
-  font-size: 2.55vh;
+  font-size: 1.7vh;
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 6;
   grid-row-end: 6;
 }
 html body #menu #active button {
+  border-radius: 40px;
+  border-color: black;
+  background-color: black;
   width: 21.25vh;
 }
 

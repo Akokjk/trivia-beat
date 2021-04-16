@@ -17,13 +17,15 @@ html {
   background-color: $background-color;
   color: $font-color;
   margin: 0;
+  padding: 0;
   display: flex;
   overflow: hidden;
-
+  position: fixed;
   body {
+    margin-left: 0;
     font-family: $fonttype;
     background-color: white;
-    display: flex;
+    display: grid;
     justify-content: center;
     align-items: center;
     width: 100vw;
@@ -31,7 +33,7 @@ html {
     #menu {
       display: grid;
       grid-template-columns: $menu-width/2 $menu-width/2;
-      grid-template-rows: $menu-height * 0.2 $menu-height * 0.3 $menu-height * 0.125 $menu-height * 0.125 $menu-height * 0.125 $menu-height * 0.125;
+      grid-template-rows: $menu-height * 0.1 $menu-height * 0.2 $menu-height * 0.125 $menu-height * 0.125 $menu-height * 0.125 $menu-height * 0.125;
       grid-template-areas:
         "inventory inventory"
         " title title "
@@ -41,7 +43,7 @@ html {
         "active .";
       justify-content: center;
       align-items: center;
-      height: $menu-height;
+      height: $menu-height*.8;
       width: $menu-width;
       i {
         display: inherit;
@@ -194,12 +196,15 @@ html {
         position: relative;
 
         height: $menu-height * 0.1 * 0.95;
-        font-size: $menu-height * 0.1 * 0.3; //this was determined to be the best work around for text bug
+        font-size: $menu-height * 0.1 * 0.2; //this was determined to be the best work around for text bug
         grid-column-start: 1;
         grid-column-end: 2;
         grid-row-start: 6;
         grid-row-end: 6;
         button {
+          border-radius: 40px;
+          border-color: black;
+          background-color: black;
           width: ($menu-height * 0.1) * 2.5;
         }
       }

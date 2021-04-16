@@ -16,7 +16,7 @@ const Cat = mongoose.model('Cat', { name: String });
 var corsOptions = {
     origin: '*',
     'Access-Control-Allow-Origin': '*',
-    optionsSuccessStatus: 200 // For legacy browser support
+    optionsSuccessStatus: 200, // For legacy browser support
     methods: "GET, PUT"
 }
 

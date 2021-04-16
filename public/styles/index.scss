@@ -51,6 +51,8 @@ html {
         width: auto;
       }
       #title {
+        justify-self: center;
+        position: relative;
          //11 is the number of characters in title insure that text size scalze propley
         grid-column-start: 1;
         grid-column-end: 3;

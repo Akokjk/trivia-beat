@@ -35,6 +35,8 @@ html body #menu i {
   width: auto;
 }
 html body #menu #title {
+  justify-self: center;
+  position: relative;
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 2;

@@ -13,7 +13,12 @@ mongoose.connect('mongodb+srv://server:ml9RkDGd4ctjmHTX@cluster0.mlf9x.mongodb.n
 mongoose.set('useFindAndModify', false);
 const Cat = mongoose.model('Cat', { name: String });
 
-
+var corsOptions = {
+    origin: '*',
+    'Access-Control-Allow-Origin': '*',
+    optionsSuccessStatus: 200 // For legacy browser support
+    methods: "GET, PUT"
+}
 
 
 
@@ -52,7 +57,7 @@ const decrypt = (hash) => {
 
 app.use(express.json({ limit: "1mb" }));
 
-
+app.use(cors(corsOptions));
 
 app.use("/", express.static("public"));
 app.use("/lib", express.static("public/lib"));

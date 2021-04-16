@@ -9,6 +9,10 @@ $menu-width: 95vw;
 $menu-height: 95vh;
 $fonttype: 'Noto Sans JP';
 
+@-ms-viewport{
+  width: device-width;
+}
+
 html {
   background-color: $background-color;
   color: $font-color;

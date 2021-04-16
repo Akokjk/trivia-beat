@@ -13,3 +13,7 @@ Thumbs.db
 
 # IntelliJ
 *.iws
+
+#sass
+*.scss
+*.css.map

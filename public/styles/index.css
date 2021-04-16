@@ -20,11 +20,11 @@ html body {
 html body #menu {
   display: grid;
   grid-template-columns: 47.5vw 47.5vw;
-  grid-template-rows: 19vh 28.5vh 11.875vh 11.875vh 11.875vh 11.875vh;
+  grid-template-rows: 17vh 25.5vh 10.625vh 10.625vh 10.625vh 10.625vh;
   grid-template-areas: "inventory inventory" " title title " "play play" "store leaderboard" "profile contribute" "active .";
   justify-content: center;
   align-items: center;
-  height: 95vh;
+  height: 85vh;
   width: 95vw;
 }
 html body #menu i {
@@ -42,7 +42,7 @@ html body #menu #title {
 }
 html body #menu #title h1 {
   font-family: "Noto Sans JP";
-  font-size: 9.0681818182vh;
+  font-size: 8.1136363636vh;
 }
 html body #menu button {
   text-decoration: none;
@@ -59,15 +59,15 @@ html body #menu #logout {
   justify-self: start;
   margin-left: 5px;
   position: relative;
-  height: 9.025vh;
-  font-size: 4.75vh;
+  height: 8.075vh;
+  font-size: 4.25vh;
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 6;
   grid-row-end: 6;
 }
 html body #menu #logout button {
-  width: 23.75vh;
+  width: 21.25vh;
 }
 html body #menu #inventory {
   text-decoration: none;
@@ -75,7 +75,7 @@ html body #menu #inventory {
   justify-content: center;
   display: flex;
   justify-self: center;
-  font-size: 7.7727272727vh;
+  font-size: 6.9545454545vh;
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 1;
@@ -97,22 +97,22 @@ html body #menu #inventory div {
 html body #menu #play {
   justify-self: center;
   position: relative;
-  font-size: 4.75vh;
-  height: 9.025vh;
+  font-size: 4.25vh;
+  height: 8.075vh;
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 3;
   grid-row-end: 3;
 }
 html body #menu #play button {
-  width: calc( ((95vh * 0.1) * 2.5) * 2 + 10px );
+  width: calc( ((85vh * 0.1) * 2.5) * 2 + 10px );
 }
 html body #menu #store {
   justify-self: end;
   margin-right: 5px;
   position: relative;
-  font-size: 4.75vh;
-  height: 9.025vh;
+  font-size: 4.25vh;
+  height: 8.075vh;
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 4;
@@ -120,63 +120,63 @@ html body #menu #store {
   float: left;
 }
 html body #menu #store button {
-  width: 23.75vh;
+  width: 21.25vh;
 }
 html body #menu #leaderboard {
   justify-self: start;
   margin-left: 5px;
   position: relative;
-  font-size: 2.85vh;
-  height: 9.025vh;
+  font-size: 2.55vh;
+  height: 8.075vh;
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 4;
   grid-row-end: 4;
 }
 html body #menu #leaderboard button {
-  width: 23.75vh;
+  width: 21.25vh;
 }
 html body #menu #profile {
   justify-self: start;
   margin-left: 5px;
   position: relative;
-  height: 9.025vh;
-  font-size: 4.75vh;
+  height: 8.075vh;
+  font-size: 4.25vh;
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 5;
   grid-row-end: 5;
 }
 html body #menu #profile button {
-  width: 23.75vh;
+  width: 21.25vh;
 }
 html body #menu #contribute {
   justify-self: end;
   margin-right: 5px;
   position: relative;
-  height: 9.025vh;
-  font-size: 3.8vh;
+  height: 8.075vh;
+  font-size: 3.4vh;
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 5;
   grid-row-end: 5;
 }
 html body #menu #contribute button {
-  width: 23.75vh;
+  width: 21.25vh;
 }
 html body #menu #active {
   justify-self: end;
   margin-right: 5px;
   position: relative;
-  height: 9.025vh;
-  font-size: 2.85vh;
+  height: 8.075vh;
+  font-size: 2.55vh;
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 6;
   grid-row-end: 6;
 }
 html body #menu #active button {
-  width: 23.75vh;
+  width: 21.25vh;
 }
 
 /*# sourceMappingURL=index.css.map */

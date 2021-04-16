@@ -6,7 +6,7 @@ $other-color-dark: #202523;
 $other-color-grey: #757e7b;
 $other-color-orange: #cb784e;
 $menu-width: 95vw;
-$menu-height: 95vh;
+$menu-height: 85vh;
 $fonttype: 'Noto Sans JP';
 
 @-ms-viewport{
@@ -125,7 +125,7 @@ html {
         grid-row-end: 3;
         button {
           width: calc(
-            ((95vh * 0.1) * 2.5) * 2 + 10px
+            ((85vh * 0.1) * 2.5) * 2 + 10px
           ); //doesn't work well with sass must manual put in value
         }
       }

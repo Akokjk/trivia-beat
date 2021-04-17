@@ -93,7 +93,7 @@ html body #loginPortal #sumbitLogin button {
 }
 html body #loginPortal #email {
   font-size: 4.5vw;
-  margin-left: 9vw;
+  margin-left: 4.5vw;
   justify-self: start;
   justify-content: start;
   grid-column-start: 1;
@@ -113,7 +113,7 @@ html body #loginPortal #textEmail {
 }
 html body #loginPortal #username {
   font-size: 4.5vw;
-  margin-left: 9vw;
+  margin-left: 4.5vw;
   justify-self: start;
   justify-content: start;
   grid-column-start: 1;
@@ -133,7 +133,7 @@ html body #loginPortal #textUsername {
 }
 html body #loginPortal #phone {
   font-size: 4.5vw;
-  margin-left: 9vw;
+  margin-left: 4.5vw;
   justify-self: start;
   justify-content: start;
   grid-column-start: 1;
@@ -152,7 +152,7 @@ html body #loginPortal #textPhone {
   grid-row-end: 5;
 }
 html body #loginPortal input {
-  width: 45vw;
+  width: 40.5vw;
   height: 3.2vh;
   font-size: 4.8vh;
   border: 1px solid black;
@@ -160,7 +160,7 @@ html body #loginPortal input {
 }
 html body #loginPortal #password {
   font-size: 4.5vw;
-  margin-left: 9vw;
+  margin-left: 4.5vw;
   justify-self: start;
   justify-content: start;
   grid-column-start: 1;

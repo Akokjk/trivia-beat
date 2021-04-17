@@ -57,13 +57,15 @@ html body #loginPortal #login {
   margin-top: 4vh;
 }
 html body #loginPortal #login button {
-  font-size: 5vh;
+  width: 31.5vw;
+  font-size: 3vh;
 }
 html body #loginPortal #register {
   margin-top: 4vh;
 }
 html body #loginPortal #register button {
-  font-size: 5vh;
+  width: 31.5vw;
+  font-size: 3vh;
 }
 html body #loginPortal #title {
   justify-self: center;

@@ -78,7 +78,7 @@ html body #loginPortal #title {
 html body #loginPortal #title h1 {
   color: black;
   font-family: "Noto Sans JP";
-  font-size: 7.6363636364vh;
+  font-size: 8.5909090909vw;
 }
 html body #loginPortal #sumbitLogin {
   justify-self: center;
@@ -92,7 +92,7 @@ html body #loginPortal #sumbitLogin button {
   font-size: 7.6363636364vh;
 }
 html body #loginPortal #email {
-  font-size: 3.2vh;
+  font-size: 4.5vw;
   margin-left: 9vw;
   justify-self: start;
   justify-content: start;
@@ -112,7 +112,7 @@ html body #loginPortal #textEmail {
   grid-row-end: 4;
 }
 html body #loginPortal #username {
-  font-size: 3.2vh;
+  font-size: 4.5vw;
   margin-left: 9vw;
   justify-self: start;
   justify-content: start;
@@ -132,7 +132,7 @@ html body #loginPortal #textUsername {
   grid-row-end: 3;
 }
 html body #loginPortal #phone {
-  font-size: 3.2vh;
+  font-size: 4.5vw;
   margin-left: 9vw;
   justify-self: start;
   justify-content: start;
@@ -159,7 +159,7 @@ html body #loginPortal input {
   border-radius: 10px;
 }
 html body #loginPortal #password {
-  font-size: 3.2vh;
+  font-size: 4.5vw;
   margin-left: 9vw;
   justify-self: start;
   justify-content: start;

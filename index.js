@@ -100,7 +100,7 @@ var server = app.listen(port, () => {
 
 var io = require("socket.io")(server, {
   cors: {
-    origin: "localhost:5000",
+    origin: "https://www.triviabeat.dev",
     methods: ["GET", "POST"]
   }
 });

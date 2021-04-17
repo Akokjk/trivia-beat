@@ -35,10 +35,10 @@ html body button {
 html body #loginPortal {
   display: grid;
   grid-template-columns: 45vw 45vw;
-  grid-template-rows: 5vh 15vh 10vh 10vh 10vh;
-  grid-template-areas: "Login Register" "title title" "email email" "password password" "submit submit";
+  grid-template-rows: 8vh 24vh 8vh 8vh 8vh 8vh 16vh;
+  grid-template-areas: "Login Register" "title title" "username username" "email email" "phone phone" "password password" "submit submit";
   width: 90vw;
-  height: 50vh;
+  height: 80vh;
   border: 1px solid white;
   border-radius: 30px;
   background-color: white;
@@ -54,18 +54,18 @@ html body #loginPortal i {
   width: auto;
 }
 html body #loginPortal #login {
-  margin-top: 4vh;
+  margin-top: 6.4vh;
 }
 html body #loginPortal #login button {
   width: 31.5vw;
-  font-size: 3vh;
+  font-size: 4.8vh;
 }
 html body #loginPortal #register {
-  margin-top: 4vh;
+  margin-top: 6.4vh;
 }
 html body #loginPortal #register button {
   width: 31.5vw;
-  font-size: 3vh;
+  font-size: 4.8vh;
 }
 html body #loginPortal #title {
   justify-self: center;
@@ -78,28 +78,28 @@ html body #loginPortal #title {
 html body #loginPortal #title h1 {
   color: black;
   font-family: "Noto Sans JP";
-  font-size: 4.7727272727vh;
+  font-size: 7.6363636364vh;
 }
 html body #loginPortal #sumbitLogin {
   justify-self: center;
   position: relative;
   grid-column-start: 1;
   grid-column-end: 3;
-  grid-row-start: 5;
-  grid-row-end: 5;
+  grid-row-start: 7;
+  grid-row-end: 7;
 }
 html body #loginPortal #sumbitLogin button {
-  font-size: 4.7727272727vh;
+  font-size: 7.6363636364vh;
 }
 html body #loginPortal #email {
-  font-size: 5.4vw;
+  font-size: 3.2vh;
   margin-left: 9vw;
   justify-self: start;
   justify-content: start;
   grid-column-start: 1;
   grid-column-end: 3;
-  grid-row-start: 3;
-  grid-row-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 4;
   width: 18vw;
 }
 html body #loginPortal #textEmail {
@@ -108,25 +108,65 @@ html body #loginPortal #textEmail {
   margin-right: 9vw;
   grid-column-start: 1;
   grid-column-end: 3;
-  grid-row-start: 3;
-  grid-row-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 4;
 }
-html body #loginPortal input {
-  width: 45vw;
-  height: 4vh;
-  font-size: 3vh;
-  border: 1px solid black;
-  border-radius: 10px;
-}
-html body #loginPortal #password {
-  font-size: 3vh;
+html body #loginPortal #username {
+  font-size: 3.2vh;
   margin-left: 9vw;
   justify-self: start;
   justify-content: start;
   grid-column-start: 1;
   grid-column-end: 3;
-  grid-row-start: 4;
-  grid-row-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 3;
+  width: 18vw;
+}
+html body #loginPortal #textUsername {
+  justify-self: end;
+  justify-content: end;
+  margin-right: 9vw;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 3;
+}
+html body #loginPortal #phone {
+  font-size: 3.2vh;
+  margin-left: 9vw;
+  justify-self: start;
+  justify-content: start;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 5;
+  grid-row-end: 5;
+  width: 18vw;
+}
+html body #loginPortal #textPhone {
+  justify-self: end;
+  justify-content: end;
+  margin-right: 9vw;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 5;
+  grid-row-end: 5;
+}
+html body #loginPortal input {
+  width: 45vw;
+  height: 6.4vh;
+  font-size: 4.8vh;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+html body #loginPortal #password {
+  font-size: 3.2vh;
+  margin-left: 9vw;
+  justify-self: start;
+  justify-content: start;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 6;
+  grid-row-end: 6;
   width: 18vw;
 }
 html body #loginPortal #textPassword {
@@ -135,8 +175,8 @@ html body #loginPortal #textPassword {
   margin-right: 9vw;
   grid-column-start: 1;
   grid-column-end: 3;
-  grid-row-start: 4;
-  grid-row-end: 4;
+  grid-row-start: 6;
+  grid-row-end: 6;
 }
 
-/*# sourceMappingURL=login.css.map */
+/*# sourceMappingURL=register.css.map */

@@ -35,10 +35,10 @@ html body button {
 html body #loginPortal {
   display: grid;
   grid-template-columns: 45vw 45vw;
-  grid-template-rows: 5vh 15vh 10vh 10vh 10vh;
+  grid-template-rows: 8vh 24vh 16vh 16vh 16vh;
   grid-template-areas: "Login Register" "title title" "email email" "password password" "submit submit";
   width: 90vw;
-  height: 50vh;
+  height: 80vh;
   border: 1px solid white;
   border-radius: 30px;
   background-color: white;
@@ -54,20 +54,20 @@ html body #loginPortal i {
   width: auto;
 }
 html body #loginPortal #login {
-  margin-top: 4vh;
+  margin-top: 6.4vh;
 }
 html body #loginPortal #login button {
   width: 31.5vw;
   font-size: 5.4vw;
-  height: 3vh;
+  height: 4.8vh;
 }
 html body #loginPortal #register {
-  margin-top: 4vh;
+  margin-top: 6.4vh;
 }
 html body #loginPortal #register button {
   width: 31.5vw;
   font-size: 5.4vw;
-  height: 3vh;
+  height: 4.8vh;
 }
 html body #loginPortal #title {
   justify-self: center;
@@ -91,7 +91,7 @@ html body #loginPortal #sumbitLogin {
   grid-row-end: 5;
 }
 html body #loginPortal #sumbitLogin button {
-  font-size: 4.7727272727vh;
+  font-size: 7.6363636364vh;
 }
 html body #loginPortal #email {
   font-size: 4.5vw;
@@ -115,8 +115,8 @@ html body #loginPortal #textEmail {
 }
 html body #loginPortal input {
   width: 45vw;
-  height: 4vh;
-  font-size: 3vh;
+  height: 6.4vh;
+  font-size: 4.8vh;
   border: 1px solid black;
   border-radius: 10px;
 }

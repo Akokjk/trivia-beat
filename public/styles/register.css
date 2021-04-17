@@ -59,7 +59,6 @@ html body #loginPortal #login {
 html body #loginPortal #login button {
   width: 31.5vw;
   font-size: 5.4vw;
-  height: 4.8vh;
 }
 html body #loginPortal #register {
   margin-top: 6.4vh;
@@ -67,7 +66,6 @@ html body #loginPortal #register {
 html body #loginPortal #register button {
   width: 31.5vw;
   font-size: 5.4vw;
-  height: 4.8vh;
 }
 html body #loginPortal #title {
   justify-self: center;

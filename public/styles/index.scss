@@ -1,13 +1,18 @@
 //https://www.color-hex.com/color-palette/106231
 
 $font-color: black;
-$background-color: white;
+$background-color: #483030;
+$button-color: #f0a800;
+$title-color: white;
 $other-color-dark: #202523;
 $other-color-grey: #757e7b;
 $other-color-orange: #cb784e;
 $menu-width: 95vw;
 $menu-height: 85vh;
 $fonttype: 'Noto Sans JP';
+$login-width: 90vw;
+$login-height: 50vh;
+$login-color: black;
 
 @-ms-viewport{
   width: device-width;
@@ -25,12 +30,125 @@ html {
   body {
     margin-left: 0;
     font-family: $fonttype;
-    background-color: white;
-    display: grid;
+    background-color: $background-color;
+    display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
     height: 100%;
+    button {
+      text-decoration: none;
+      text-align: center;
+      color: white;
+      border: solid 2px $button-color;
+      border-radius: 5px;
+      width: inherit;
+      height: inherit;
+      font-size: inherit;
+      background-color: $button-color;
+    }
+    #loginPortal{
+      display: grid;
+      grid-template-columns: $login-width/2 $login-width/2;
+      grid-template-rows:  $login-height*.1 $login-height*.3 $login-height*.2 $login-height*.2 $login-height*.2;
+      grid-template-areas:
+      "Login Register"
+      "title title"
+      "email email"
+      "password password"
+      "submit submit";
+      width: $login-width;
+      height: $login-height;
+      border: 1px solid white;
+      border-radius: 30px;
+      background-color: white;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      i {
+        display: grid;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        width: auto;
+      }
+      #title{
+        justify-self: center;
+        position: relative;
+         //11 is the number of characters in title insure that text size scalze propley
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        grid-row-end: 2;
+        h1{
+          color: $login-color;
+          font-family: $fonttype;
+          font-size: $login-height * 0.3/11 * 3.5;
+        }
+      }
+      #sumbitLogin{
+        justify-self: center;
+        position: relative;
+         //11 is the number of characters in title insure that text size scalze propley
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 5;
+        grid-row-end: 5;
+        button {
+          font-size: $login-height * 0.3/11 * 3.5;
+          width: ($menu-height * 0.1) * 2.5;
+        }
+      }
+      #email{
+        margin-left: $login-width *.1;
+        justify-self: start;
+        justify-content: start;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 3;
+        width: $login-width *.2;
+
+      }
+      #textEmail{
+        justify-self: end;
+        justify-content: end;
+        margin-right: $login-width *.1;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 3;
+      }
+      input{
+        width: $login-width *.6;
+        height: $login-height*.2 *.4;
+        font-size: $login-height*.2 *.3;
+        border: 1px solid black;
+        border-radius: 10px;
+      }
+      #password{
+        margin-left: $login-width *.1;
+        justify-self: start;
+        justify-content: start;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 4;
+        grid-row-end: 4;
+        width: $login-width *.2;
+
+      }
+      #textPassword{
+        justify-self: end;
+
+        justify-content: end;
+
+        margin-right: $login-width *.1;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 4;
+        grid-row-end: 4;
+      }
+    }
     #menu {
       display: grid;
       grid-template-columns: $menu-width/2 $menu-width/2;
@@ -41,7 +159,7 @@ html {
         "play play"
         "store leaderboard"
         "profile contribute"
-        "active .";
+        "active logout";
       justify-content: center;
       align-items: center;
       height: $menu-height*.8;
@@ -62,21 +180,12 @@ html {
         grid-row-start: 2;
         grid-row-end: 2;
         h1{
+          color: $title-color;
           font-family: $fonttype;
           font-size: $menu-height * 0.3/11 * 3.5;
         }
       }
-      button {
-        text-decoration: none;
-        text-align: center;
-        color: white;
-        border: solid 2px red;
-        border-radius: 5px;
-        width: inherit;
-        height: inherit;
-        font-size: inherit;
-        background-color: red;
-      }
+
 
       #logout {
         justify-self: start;

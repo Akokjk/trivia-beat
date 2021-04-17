@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const User = require("./user.js")
 const encrypt = require("./encrypt.js").encrypt
 const decrypt = require("./encrypt.js").decrypt
-const cors = require("cors")
+
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -14,13 +14,7 @@ const port = process.env.PORT || 5000;
 const code = "ml9RkDGd4ctjmHTX"; //password
 mongoose.connect('mongodb+srv://server:ml9RkDGd4ctjmHTX@cluster0.mlf9x.mongodb.net/triviabeat?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 
-var corsOptions = {
-    origin: '*',
-    'Access-Control-Allow-Origin': '*',
-    optionsSuccessStatus: 200, // For legacy browser support
-    methods: "GET, PUT"
-}
-app.use(cors(corsOptions));
+
 
 
 app.use(express.json({ limit: "1mb" }));
@@ -40,9 +34,9 @@ app.put("/login", (req, res) => {
   User.findOne({email: req.headers.email}, '_id expire password', function(err, result){
     if(!result) return res.status(400).send(err || "Cannot find user");
     if(result.password == req.headers.password){
-
       return res.status(200).send(encrypt(JSON.stringify(result._id)));
     }
+    else return res.status(403).send("Password Incorrect")
   });
 });
 

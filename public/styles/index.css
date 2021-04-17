@@ -2,7 +2,7 @@
   width: device-width;
 }
 html {
-  background-color: white;
+  background-color: #483030;
   color: black;
   margin: 0;
   padding: 0;
@@ -14,18 +14,120 @@ html {
 html body {
   margin-left: 0;
   font-family: "Noto Sans JP";
-  background-color: white;
-  display: grid;
+  background-color: #483030;
+  display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
   height: 100%;
 }
+html body button {
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  border: solid 2px #f0a800;
+  border-radius: 5px;
+  width: inherit;
+  height: inherit;
+  font-size: inherit;
+  background-color: #f0a800;
+}
+html body #loginPortal {
+  display: grid;
+  grid-template-columns: 45vw 45vw;
+  grid-template-rows: 5vh 15vh 10vh 10vh 10vh;
+  grid-template-areas: "Login Register" "title title" "email email" "password password" "submit submit";
+  width: 90vw;
+  height: 50vh;
+  border: 1px solid white;
+  border-radius: 30px;
+  background-color: white;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+html body #loginPortal i {
+  display: grid;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: auto;
+}
+html body #loginPortal #title {
+  justify-self: center;
+  position: relative;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 2;
+}
+html body #loginPortal #title h1 {
+  color: black;
+  font-family: "Noto Sans JP";
+  font-size: 4.7727272727vh;
+}
+html body #loginPortal #sumbitLogin {
+  justify-self: center;
+  position: relative;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 5;
+  grid-row-end: 5;
+}
+html body #loginPortal #sumbitLogin button {
+  font-size: 4.7727272727vh;
+  width: 21.25vh;
+}
+html body #loginPortal #email {
+  margin-left: 9vw;
+  justify-self: start;
+  justify-content: start;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 3;
+  width: 18vw;
+}
+html body #loginPortal #textEmail {
+  justify-self: end;
+  justify-content: end;
+  margin-right: 9vw;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 3;
+}
+html body #loginPortal input {
+  width: 54vw;
+  height: 4vh;
+  font-size: 3vh;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+html body #loginPortal #password {
+  margin-left: 9vw;
+  justify-self: start;
+  justify-content: start;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 4;
+  width: 18vw;
+}
+html body #loginPortal #textPassword {
+  justify-self: end;
+  justify-content: end;
+  margin-right: 9vw;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 4;
+}
 html body #menu {
   display: grid;
   grid-template-columns: 47.5vw 47.5vw;
   grid-template-rows: 8.5vh 17vh 10.625vh 10.625vh 10.625vh 10.625vh;
-  grid-template-areas: "inventory inventory" " title title " "play play" "store leaderboard" "profile contribute" "active .";
+  grid-template-areas: "inventory inventory" " title title " "play play" "store leaderboard" "profile contribute" "active logout";
   justify-content: center;
   align-items: center;
   height: 68vh;
@@ -47,19 +149,9 @@ html body #menu #title {
   grid-row-end: 2;
 }
 html body #menu #title h1 {
+  color: white;
   font-family: "Noto Sans JP";
   font-size: 8.1136363636vh;
-}
-html body #menu button {
-  text-decoration: none;
-  text-align: center;
-  color: white;
-  border: solid 2px red;
-  border-radius: 5px;
-  width: inherit;
-  height: inherit;
-  font-size: inherit;
-  background-color: red;
 }
 html body #menu #logout {
   justify-self: start;

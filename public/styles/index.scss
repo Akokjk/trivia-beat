@@ -21,6 +21,7 @@ html {
   display: flex;
   overflow: hidden;
   position: fixed;
+  height: 100%;
   body {
     margin-left: 0;
     font-family: $fonttype;
@@ -29,7 +30,7 @@ html {
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     #menu {
       display: grid;
       grid-template-columns: $menu-width/2 $menu-width/2;

@@ -9,6 +9,7 @@ html {
   display: flex;
   overflow: hidden;
   position: fixed;
+  height: 100%;
 }
 html body {
   margin-left: 0;
@@ -18,7 +19,7 @@ html body {
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
 }
 html body #menu {
   display: grid;

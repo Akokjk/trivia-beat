@@ -6,6 +6,8 @@
   width: device-width;
 }
 html {
+  min-height: -webkit-fill-available;
+  min-height: 100vh;
   color: black;
   margin: 0;
   padding: 0;

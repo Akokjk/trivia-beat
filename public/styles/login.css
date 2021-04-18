@@ -11,8 +11,10 @@ html {
   padding: 0;
   margin-top: 0;
   display: flex;
+  width: 100vw;
+  background-color: yellow;
   position: fixed;
-  height: 100vh;
+  height: 100%;
 }
 html body {
   margin-top: 0;
@@ -102,6 +104,9 @@ html body #loginPortal #textEmail {
   grid-column-end: 3;
   grid-row-start: 3;
   grid-row-end: 3;
+}
+html body #loginPortal #textEmail input {
+  width: 50vmin;
 }
 html body #loginPortal input {
   width: 42vmin;

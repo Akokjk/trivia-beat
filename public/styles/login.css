@@ -1,20 +1,24 @@
+:root {
+  --main-bg-color: pink;
+}
+
 @-ms-viewport {
   width: device-width;
 }
 html {
-  background-color: white;
   color: black;
   margin: 0;
   padding: 0;
+  margin-top: 0;
   display: flex;
   overflow: hidden;
   position: fixed;
   height: 100%;
 }
 html body {
+  margin-top: 0;
   margin-left: 0;
   font-family: "Noto Sans JP";
-  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,17 +37,11 @@ html body button {
   background-color: #f0a800;
 }
 html body #loginPortal {
-  background-color: yellow;
   display: grid;
-  border: 1px solid black;
-  border-radius: 30px;
-  grid-template-columns: 25.3125vh 25.3125vh;
-  grid-template-rows: 9vh 27vh 18vh 18vh 18vh;
+  grid-template-columns: 28.125vmin 28.125vmin;
+  grid-template-rows: 10vmin 30vmin 20vmin 20vmin 20vmin;
   grid-template-areas: "Login Register" "title title" "email email" "password password" "submit submit";
-  width: 50.625vh;
-  aspect-ratio: 16/9;
-  border: 1px solid white;
-  border-radius: 30px;
+  width: 56.25vmin;
   background-color: white;
   align-items: center;
   text-align: center;
@@ -56,31 +54,23 @@ html body #loginPortal i {
   justify-content: center;
   width: auto;
 }
-html body #loginPortal #login {
-  height: 9vh;
-}
 html body #loginPortal #login button {
-  width: 17.71875vh;
-  font-size: 3.0375vh;
-}
-html body #loginPortal #register {
-  height: 9vh;
+  font-size: 5.4545454545vmin;
 }
 html body #loginPortal #register button {
-  width: 17.71875vh;
-  font-size: 3.0375vh;
+  font-size: 5.4545454545vmin;
 }
 html body #loginPortal #title {
   justify-self: center;
+  justify-content: center;
+  text-align: center;
   position: relative;
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 2;
   grid-row-end: 2;
-  height: 27vh h1;
-  height-color: black;
-  height-font-family: "Noto Sans JP";
-  height-font-size: 4.8323863636vh;
+  height: 30vmin;
+  font-size: 30vmin;
 }
 html body #loginPortal #sumbitLogin {
   justify-self: center;
@@ -89,52 +79,52 @@ html body #loginPortal #sumbitLogin {
   grid-column-end: 3;
   grid-row-start: 5;
   grid-row-end: 5;
+  height: 12vmin;
 }
 html body #loginPortal #sumbitLogin button {
-  font-size: 8.5909090909vh;
+  font-size: 9.5454545455vmin;
 }
 html body #loginPortal #email {
-  font-size: 2.53125vh;
-  margin-left: 2.53125vh;
+  font-size: 10vmin;
+  margin-left: -15vmin;
   justify-self: start;
   justify-content: start;
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 3;
   grid-row-end: 3;
-  width: 10.125vh;
+  width: 11.25vmin;
 }
 html body #loginPortal #textEmail {
   justify-self: end;
   justify-content: end;
-  margin-right: 5.0625vh;
+  margin-right: -15vmin;
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 3;
   grid-row-end: 3;
 }
 html body #loginPortal input {
-  width: 22.78125vh;
-  height: 3.6vh;
-  font-size: 5.4vh;
+  width: 42vmin;
+  height: 10vmin;
+  font-size: 4vmin;
   border: 1px solid black;
-  border-radius: 10px;
 }
 html body #loginPortal #password {
-  font-size: 2.53125vh;
-  margin-left: 2.53125vh;
+  font-size: 10vmin;
+  margin-left: -15vmin;
   justify-self: start;
   justify-content: start;
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 4;
   grid-row-end: 4;
-  width: 10.125vh;
+  width: 11.25vmin;
 }
 html body #loginPortal #textPassword {
   justify-self: end;
   justify-content: end;
-  margin-right: 5.0625vh;
+  margin-right: -15vmin;
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 4;

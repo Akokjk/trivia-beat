@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="lib/petal.min.css">
+    <link rel="stylesheet/less"  type="text/css" href="styles/test.less">
+
+    <script>
+      less = {
+        env: "development",
+        async: false,
+        fileAsync: false,
+        poll: 1000,
+        functions: {},
+        dumpLineNumbers: "comments",
+        relativeUrls: false,
+        rootpath: ":/triviabeat.io/"
+      };
+    </script>
+    <script src="lib/less.min.js" ></script>
+    <script src="lib/jquery-3.6.0.min.js"></script>
+
+    <title>Welcome to Trivia Beat: Login</title>
+
+  </head>
+
+  <section>
+    <div class="fullpage-modal-container">
+      <div class="overlay"></div>
+      <div class="fullpage-modal-inner-wrap">
+        <div class="fullpage-modal">
+          <div class="modal-header">
+            <h3 class="modal-header-text">Welcome to Trivia Beat!</h3>
+            <p class="sub">Please Login.</p>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <div class="col-5">
+                  <label class="form-label" for="demoFormHorizontalEmail">Email</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-5 colspan-4">
+                  <input class="input" id="demoFormHorizontalEmail" type="email" placeholder="Email" />
+                  <p class="form-caption">Enter your email address.</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-5">
+                  <label class="form-label" for="demoFormHorizontalPassword">Password</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-5 colspan-4">
+                  <input class="input" id="demoFormHorizontalPassword" type="password" placeholder="Password" />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer btn-row">
+            <button class="btn hollow gray">Login</button>
+            <button class="btn red align-right">Register!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</html>

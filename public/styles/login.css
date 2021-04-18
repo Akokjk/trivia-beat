@@ -22,7 +22,7 @@ html body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   height: 100%;
 }
 html body button {
@@ -54,8 +54,14 @@ html body #loginPortal i {
   justify-content: center;
   width: auto;
 }
+html body #loginPortal #login {
+  padding-right: 10px;
+}
 html body #loginPortal #login button {
   font-size: 5.4545454545vmin;
+}
+html body #loginPortal #register {
+  padding-left: 10px;
 }
 html body #loginPortal #register button {
   font-size: 5.4545454545vmin;
@@ -108,7 +114,7 @@ html body #loginPortal #textEmail input {
   width: 50vmin;
 }
 html body #loginPortal input {
-  width: 42vmin;
+  width: 38vmin;
   height: 10vmin;
   font-size: 4vmin;
   border: 1px solid black;
@@ -117,6 +123,7 @@ html body #loginPortal input {
 html body #loginPortal #password {
   font-size: 10vmin;
   margin-left: -15vmin;
+  margin-right: 10px;
   justify-self: start;
   justify-content: start;
   grid-column-start: 1;

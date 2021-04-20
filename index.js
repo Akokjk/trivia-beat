@@ -11,7 +11,7 @@ const https = require("https");
 const helment = require("helmet")
 var KEY_FILE = fs.readFileSync("server.key");
 var CERT_FILE = fs.readFileSync("www_triviabeat_dev.crt");
-var INT_CERT_FILE = fs.readFileSync("im.crt");
+var INT_CERT_FILE = fs.readFileSync("ca-bundle-client.crt");
 var DH = fs.readFileSync("www.triviabeat.dev.pem");
 
 const app = express();
@@ -21,11 +21,11 @@ const port = process.env.PORT || 5000;
 _server_https = https.createServer({
     honorCipherOrder: true,
     rejectUnauthorized: false,
-    allowHTTP1: false,
+    allowHTTP1: true,
     ecdhCurve: 'auto',
     key: KEY_FILE,
     cert: CERT_FILE,
-    
+    dhparam: DH,
     ca: INT_CERT_FILE
 }, app).listen(port, 8080);
 

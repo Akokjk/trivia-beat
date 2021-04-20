@@ -8,15 +8,16 @@ const decrypt = require("./encrypt.js").decrypt
 const sts = require('strict-transport-security');
 const https = require("https");
 const tls = require("tls");
-
+const helment = require("helmet")
 var KEY_FILE = fs.readFileSync("server.key");
 var CERT_FILE = fs.readFileSync("www_triviabeat_dev.crt");
 var INT_CERT_FILE = fs.readFileSync("im.crt");
 var DH = fs.readFileSync("www.triviabeat.dev.pem");
 
 const app = express();
+app.use(helment());
 var _server_https = null;
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 _server_https = https.createServer({
     key: KEY_FILE,
     cert: CERT_FILE,

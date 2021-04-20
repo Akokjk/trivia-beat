@@ -16,14 +16,14 @@ var DH = fs.readFileSync("www.triviabeat.dev.pem");
 
 const app = express();
 var _server_https = null;
-
+const port = process.env.PORT || 5000;
 _server_https = https.createServer({
     key: KEY_FILE,
     cert: CERT_FILE,
     dhparam: DH,
     ca: INT_CERT_FILE
-}, app).listen(5000);
-const port = process.env.PORT || 5000;
+}, app).listen(port);
+
 //database
 
 

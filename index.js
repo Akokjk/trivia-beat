@@ -25,7 +25,7 @@ _server_https = https.createServer({
     ecdhCurve: 'auto',
     key: KEY_FILE,
     cert: CERT_FILE,
-    dhparam: DH,
+    
     ca: INT_CERT_FILE
 }, app).listen(port, 8080);
 

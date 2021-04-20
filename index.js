@@ -5,18 +5,21 @@ const mongoose = require('mongoose');
 const User = require("./user.js")
 const encrypt = require("./encrypt.js").encrypt
 const decrypt = require("./encrypt.js").decrypt
-
+const sts = require('strict-transport-security');
 
 const app = express();
 const port = process.env.PORT || 5000;
 //database
 
+
+
 const code = "ml9RkDGd4ctjmHTX"; //password
 mongoose.connect('mongodb+srv://server:ml9RkDGd4ctjmHTX@cluster0.mlf9x.mongodb.net/triviabeat?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 
 
+const globalSTS = sts.getSTS({'max-age':{'days': 30}});
 
-
+app.use(globalSTS);
 app.use(express.json({ limit: "1mb" }));
 
 app.use("/", express.static("public"));

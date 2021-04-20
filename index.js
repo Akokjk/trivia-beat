@@ -6,8 +6,23 @@ const User = require("./user.js")
 const encrypt = require("./encrypt.js").encrypt
 const decrypt = require("./encrypt.js").decrypt
 const sts = require('strict-transport-security');
+const https = require("https");
+const tls = require("tls");
+
+var KEY_FILE = fs.readFileSync("server.key");
+var CERT_FILE = fs.readFileSync("www_triviabeat_dev.crt");
+var INT_CERT_FILE = fs.readFileSync("im.crt");
+var DH = fs.readFileSync("www.triviabeat.dev.pem");
 
 const app = express();
+var _server_https = null;
+
+_server_https = https.createServer({
+    key: KEY_FILE,
+    cert: CERT_FILE,
+    dhparam: DH,
+    ca: INT_CERT_FILE
+}, app).listen(443);
 const port = process.env.PORT || 5000;
 //database
 
@@ -91,11 +106,11 @@ app.put("/verify", (req, res) => {
 
 
 
-var server = app.listen(port, () => {
-  console.log(`Trivia Beat app listening at port ${port}`);
-});
+// var server = app.listen(port, () => {
+//   console.log(`Trivia Beat app listening at port ${port}`);
+// });
 
-var io = require("socket.io")(server, {
+var io = require("socket.io")(_server_https, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"]

@@ -21,7 +21,7 @@ const port = process.env.PORT || 5000;
 _server_https = https.createServer({
     honorCipherOrder: true,
     rejectUnauthorized: false,
-    allowHTTP1: true,
+    allowHTTP1: false,
     ecdhCurve: 'auto',
     key: KEY_FILE,
     cert: CERT_FILE,

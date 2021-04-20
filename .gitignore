@@ -16,3 +16,7 @@ Thumbs.db
 
 #sass
 *.scss
+
+
+#secrets
+secrets.txt

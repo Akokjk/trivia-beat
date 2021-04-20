@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <script src="lib/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="lib/petal.min.css">
     <link rel="stylesheet/less"  type="text/css" href="styles/test.less">
 
@@ -21,6 +21,7 @@
       };
     </script>
     <script src="lib/less.min.js" ></script>
+    <script>less.watch();</script>
     <script src="lib/jquery-3.6.0.min.js"></script>
 
     <title>Welcome to Trivia Beat: Login</title>
@@ -37,24 +38,110 @@
           </div>
           <div class="modal-body">
             <form class="form-horizontal">
-              <div class="form-group">
+              <div class="form-group" >
                 <div class="col-1">
-                  <input class="input" id="demoFormHorizontalEmail" type="email" placeholder="Enter Email" />
+                  <div class="btn-group btn-group-segmented">
+                  <input type="radio" name="demoSegmented" id="demoSegmented1" disabled>
+                  <label for="demoSegmented1"><div class="btn" >Login</div></label>
+                  <input type="radio" name="demoSegmented" id="demoSegmented2">
+                  <label for="demoSegmented2"><div class="btn hollow red">Register</div></label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group register" style="display: none" >
+                <div class="input-group col-1">
+                  <input class="input" id="demoForm3Email" placeholder="Email" type="text">
+                  <span class="input-addon">@</span>
+                  <input class="input" id="demoForm3EmailB" placeholder="example.com" type="text">
+                </div>
+              </div>
+              <div class="form-group login" >
+                <div class="input-group col-1">
+                  <input class="input " id="demoFormEmail" type="email" placeholder="Email" />
                 </div>
               </div>
               <div class="form-group">
-                <div class="col-1 ">
-                  <input class="input" id="demoFormHorizontalPassword" type="password" placeholder="Enter Password" />
-                </div>
+                <div class="input-group col-1">
+                    <input class="input" id="password" type="password" placeholder="Password" />
+                    <input class="input" id="password1" type="text" placeholder="Password" style="display: none"/>
+                    <span class="input-addon-btn ">
+                      <button class="btn hollow blue petalicon petalicon-eye-closed"></button>
+                    </span>
+                  </div>
+              </div>
+              <div class="form-group register" style="display: none">
+                 <div class="input-group col-1">
+                   <input class="input" id="demoForm3Username" type="text"  placeholder="Username" />
+                   <span class="input-addon-btn">
+                     <button class="btn green" >Check</button>
+                   </span>
+                 </div>
+               </div>
+               <div class="form-group register" style="display: none">
+                 <div class="input-group col-1">
+                   <input type="checkbox" id="checkbox" class="checkbox validation error  col-1" required />
+                   <label for="checkbox" >I agree to terms of service.</label>
+                 </div>
               </div>
             </form>
           </div>
           <div class="modal-footer btn-row">
-            <button class="btn gray col-2">Login</button>
-            <button class="btn red align-right col-2">Register!</button>
+            <button class="btn red col-3" disabled>Submit</button>
+            <button class="btn red hollow align-right">Help</button>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <script>
+    $("#password1").val("");
+    $("#password").val("");
+
+    $('#demoSegmented2').click(function(){
+      $("#password1").val("");
+      $("#password").val("");
+      $(".register").css('display', "block");
+      $(".login").css('display', "none");
+      $("#demoSegmented1").prop('disabled', false);
+      $("#demoSegmented2").prop('disabled', true);
+      $(".petalicon").addClass("petalicon-eye");
+      $(".petalicon").removeClass("petalicon-eye-closed");
+      $("#password1").css("display", 'block');
+      $("#password").css("display", 'none');
+    });
+
+    $('#demoSegmented1').click(function(){
+      $("#password1").val("");
+      $("#password").val("");
+      $(".register").css('display', "none");
+      $(".login").css('display', "block");
+      $("#demoSegmented2").prop('disabled', false);
+      $("#demoSegmented1").prop('disabled', true);
+      $(".petalicon").removeClass("petalicon-eye");
+      $(".petalicon").addClass("petalicon-eye-closed");
+      $("#password1").css("display", 'none');
+      $("#password").css("display", 'block');
+    });
+
+
+    $('.petalicon').click(function(){
+      if($(".petalicon").hasClass('petalicon-eye-closed')){
+        $("#password1").val($("#password").val());
+        $(".petalicon").addClass("petalicon-eye");
+        $(".petalicon").removeClass("petalicon-eye-closed");
+        $("#password").css("display", 'none');
+        $("#password1").css("display", 'block');
+      }
+      else{
+        $("#password").val($("#password1").val());
+        $(".petalicon").removeClass("petalicon-eye");
+        $(".petalicon").addClass("petalicon-eye-closed");
+        $("#password1").css("display", 'none');
+        $("#password").css("display", 'block');
+      }
+    });
+
+  </script>
 </html>

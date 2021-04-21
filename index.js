@@ -103,15 +103,15 @@ app.put("/verify", (req, res) => {
 
 
 var server = app.listen({
-    honorCipherOrder: true,
-    rejectUnauthorized: false,
-    allowHTTP1: true,
-    ecdhCurve: 'auto',
-    ca: INT_CERT_FILE,
-    key: KEY_FILE,
-    cert: CERT_FILE,
-    dhparam: DH,
-    port: 5000
+    // honorCipherOrder: true,
+    // rejectUnauthorized: false,
+    // allowHTTP1: true,
+    // ecdhCurve: 'auto',
+    // ca: INT_CERT_FILE,
+    // key: KEY_FILE,
+    // cert: CERT_FILE,
+    // dhparam: DH,
+    port: port
 }, () => {
   console.log(`Trivia Beat app listening at port ${port}`);
 });

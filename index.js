@@ -10,9 +10,9 @@ const https = require("https");
 
 const helment = require("helmet")
 var KEY_FILE = fs.readFileSync("server.key");
-var CERT_FILE = fs.readFileSync("www_triviabeat_dev.crt");
-var INT_CERT_FILE = fs.readFileSync("ca-bundle-client.crt");
-var DH = fs.readFileSync("www.triviabeat.dev.pem");
+var CERT_FILE = fs.readFileSync("server.crt");
+var INT_CERT_FILE = fs.readFileSync("im.ca-bundle");
+var DH = fs.readFileSync("server.pem");
 
 const app = express();
 app.use(helment());
@@ -25,7 +25,7 @@ _server_https = https.createServer({
     ecdhCurve: 'auto',
     key: KEY_FILE,
     cert: CERT_FILE,
-    
+    dhparam: DH, 
     ca: INT_CERT_FILE
 }, app).listen(port, 8080);
 
@@ -111,7 +111,7 @@ app.put("/verify", (req, res) => {
 
 
 
-// var server = app.listen(port, () => {
+// var server = _server_https.listen(port, () => {
 //   console.log(`Trivia Beat app listening at port ${port}`);
 // });
 

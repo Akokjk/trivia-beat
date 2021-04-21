@@ -100,11 +100,11 @@ app.put("/verify", (req, res) => {
   res.end();
 });
 
-var server = https.createServer({
-    key: KEY_FILE,
-    cert: CERT_FILE,
-}, app);
-server.listen(port, ()=>{
+// var server = https.createServer({
+//     key: KEY_FILE,
+//     cert: CERT_FILE
+// }, app);
+var server = app.listen(port, ()=>{
   console.log("started on port "+port)
 });
 

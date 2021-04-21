@@ -23,7 +23,7 @@ _server_https = https.createServer({
     rejectUnauthorized: false,
     allowHTTP1: true,
     ecdhCurve: 'auto',
-    ca: INT_CERT_FILE, 
+    ca: INT_CERT_FILE,
     key: KEY_FILE,
     cert: CERT_FILE,
     dhparam: DH
@@ -111,9 +111,9 @@ app.put("/verify", (req, res) => {
 
 
 
-// var server = _server_https.listen(port, () => {
-//   console.log(`Trivia Beat app listening at port ${port}`);
-// });
+var server = app.listen(8000, () => {
+  console.log(`Trivia Beat app listening at port ${port}`);
+});
 
 var io = require("socket.io")(_server_https, {
   cors: {

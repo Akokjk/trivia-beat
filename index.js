@@ -17,7 +17,7 @@ var DH = fs.readFileSync("server.pem");
 const app = express();
 //app.use(helment());
 var _server_https = null;
-const port = process.env.PORT || 5000;
+const port = 443;
 
 
 //database
@@ -100,8 +100,18 @@ app.put("/verify", (req, res) => {
   res.end();
 });
 
-
-var server = app.listen(port, ()=>{
+var server = https.createServer({
+    key: KEY_FILE,
+    cert: CERT_FILE,
+    dhparams: DH,
+    ciphers: [
+        "ECDHE-RSA-AES128-SHA256",
+        "DHE-RSA-AES128-SHA256",
+        "AES128-GCM-SHA256",
+    ].join(':'),
+    honorCipherOrder: true
+}, app);
+server.listen(port, ()=>{
   console.log("started on port "+port)
 });
 

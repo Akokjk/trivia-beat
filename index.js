@@ -8,7 +8,6 @@ const decrypt = require("./encrypt.js").decrypt
 const sts = require('strict-transport-security');
 const https = require("https");
 
-const helment = require("helmet")
 var KEY_FILE = fs.readFileSync("server.key");
 var CERT_FILE = fs.readFileSync("www_triviabeat_dev.crt");
 var INT_CERT_FILE = fs.readFileSync("www_triviabeat_dev.ca-bundle");
@@ -103,13 +102,6 @@ app.put("/verify", (req, res) => {
 var server = https.createServer({
     key: KEY_FILE,
     cert: CERT_FILE,
-    dhparams: DH,
-    ciphers: [
-        "ECDHE-RSA-AES128-SHA256",
-        "DHE-RSA-AES128-SHA256",
-        "AES128-GCM-SHA256",
-    ].join(':'),
-    honorCipherOrder: true
 }, app);
 server.listen(port, ()=>{
   console.log("started on port "+port)

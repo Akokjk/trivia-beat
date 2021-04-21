@@ -9,8 +9,8 @@ const sts = require('strict-transport-security');
 const https = require("https");
 
 const helment = require("helmet")
-var KEY_FILE = fs.readFileSync("selfsigned.key");
-var CERT_FILE = fs.readFileSync("selfsigned.crt");
+var KEY_FILE = fs.readFileSync("server.key");
+var CERT_FILE = fs.readFileSync("www_triviabeat_dev.crt");
 var INT_CERT_FILE = fs.readFileSync("www_triviabeat_dev.ca-bundle");
 var DH = fs.readFileSync("server.pem");
 
@@ -103,7 +103,6 @@ app.put("/verify", (req, res) => {
 var server = https.createServer({
     key: KEY_FILE,
     cert: CERT_FILE,
-    dhparms: DH,
     ciphers: [
         "ECDHE-RSA-AES128-SHA256",
         "DHE-RSA-AES128-SHA256",

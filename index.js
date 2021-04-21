@@ -116,7 +116,7 @@ var server = https.createServer({
     ].join(':'),
     honorCipherOrder: true
 }, app);
-server.listen(5000);
+server.listen(port);
 
 var io = require("socket.io")(server, {
   cors: {

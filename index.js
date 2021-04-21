@@ -10,8 +10,8 @@ const https = require("https");
 
 const helment = require("helmet")
 var KEY_FILE = fs.readFileSync("server.key");
-var CERT_FILE = fs.readFileSync("server.crt");
-var INT_CERT_FILE = fs.readFileSync("im.ca-bundle");
+var CERT_FILE = fs.readFileSync("www_triviabeat_dev.crt");
+var INT_CERT_FILE = fs.readFileSync("www_triviabeat_dev.ca-bundle");
 var DH = fs.readFileSync("server.pem");
 
 const app = express();
@@ -25,7 +25,7 @@ _server_https = https.createServer({
     ecdhCurve: 'auto',
     key: KEY_FILE,
     cert: CERT_FILE,
-    dhparam: DH, 
+    dhparam: DH,
     ca: INT_CERT_FILE
 }, app).listen(port, 8080);
 

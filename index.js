@@ -16,7 +16,7 @@ var DH = fs.readFileSync("server.pem");
 const app = express();
 //app.use(helment());
 var _server_https = null;
-const port = 8443;
+const port = 443;
 
 
 //database

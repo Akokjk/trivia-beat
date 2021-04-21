@@ -15,7 +15,7 @@ var INT_CERT_FILE = fs.readFileSync("www_triviabeat_dev.ca-bundle");
 var DH = fs.readFileSync("server.pem");
 
 const app = express();
-app.use(helment());
+//app.use(helment());
 var _server_https = null;
 const port = process.env.PORT || 5000;
 
@@ -100,23 +100,25 @@ app.put("/verify", (req, res) => {
   res.end();
 });
 
+var server = https.createServer({
+    ca: INT_CERT_FILE,
+    key: KEY_FILE,
+    cert: CERT_FILE,
+    dhparam: DH,
+    ciphers: [
+        "ECDHE-RSA-AES128-SHA256",
+        "DHE-RSA-AES128-SHA256",
+        "AES128-GCM-SHA256",
+        "!RC4",
+        "HIGH",
+        "!MD5",
+        "!aNULL"
+    ].join(':'),
+    honorCipherOrder: true
+}, app);
+server.listen(5000);
 
-
-var server = app.listen({
-    // honorCipherOrder: true,
-    // rejectUnauthorized: false,
-    // allowHTTP1: true,
-    // ecdhCurve: 'auto',
-    // ca: INT_CERT_FILE,
-    // key: KEY_FILE,
-    // cert: CERT_FILE,
-    // dhparam: DH,
-    port: port
-}, () => {
-  console.log(`Trivia Beat app listening at port ${port}`);
-});
-
-var io = require("socket.io")(_server_https, {
+var io = require("socket.io")(server, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"]

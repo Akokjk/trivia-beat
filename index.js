@@ -23,6 +23,7 @@ _server_https = https.createServer({
     rejectUnauthorized: false,
     allowHTTP1: true,
     ecdhCurve: 'auto',
+    ca: INT_CERT_FILE, 
     key: KEY_FILE,
     cert: CERT_FILE,
     dhparam: DH

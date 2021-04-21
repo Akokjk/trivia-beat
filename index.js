@@ -104,7 +104,6 @@ var server = https.createServer({
     ca: INT_CERT_FILE,
     key: KEY_FILE,
     cert: CERT_FILE,
-    dhparam: DH,
     ciphers: [
         "ECDHE-RSA-AES128-SHA256",
         "DHE-RSA-AES128-SHA256",

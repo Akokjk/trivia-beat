@@ -18,16 +18,7 @@ const app = express();
 app.use(helment());
 var _server_https = null;
 const port = process.env.PORT || 5000;
-_server_https = https.createServer({
-    honorCipherOrder: true,
-    rejectUnauthorized: false,
-    allowHTTP1: true,
-    ecdhCurve: 'auto',
-    ca: INT_CERT_FILE,
-    key: KEY_FILE,
-    cert: CERT_FILE,
-    dhparam: DH
-}, app).listen(port, 8080);
+
 
 //database
 
@@ -111,7 +102,17 @@ app.put("/verify", (req, res) => {
 
 
 
-var server = app.listen(8000, () => {
+var server = app.listen({
+    honorCipherOrder: true,
+    rejectUnauthorized: false,
+    allowHTTP1: true,
+    ecdhCurve: 'auto',
+    ca: INT_CERT_FILE,
+    key: KEY_FILE,
+    cert: CERT_FILE,
+    dhparam: DH,
+    port: 5000
+}, () => {
   console.log(`Trivia Beat app listening at port ${port}`);
 });
 

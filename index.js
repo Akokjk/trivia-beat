@@ -103,12 +103,6 @@ app.put("/verify", (req, res) => {
 var server = https.createServer({
     key: KEY_FILE,
     cert: CERT_FILE,
-    ciphers: [
-        "ECDHE-RSA-AES128-SHA256",
-        "DHE-RSA-AES128-SHA256",
-        "AES128-GCM-SHA256",
-    ].join(':'),
-    honorCipherOrder: true
 }, app);
 server.listen(port, ()=>{
   console.log("started on port "+port)

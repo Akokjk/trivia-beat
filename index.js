@@ -7,6 +7,8 @@ const encrypt = require("./encrypt.js").encrypt
 const decrypt = require("./encrypt.js").decrypt
 const sts = require('strict-transport-security');
 const https = require("https");
+var helmet = require('helmet');
+
 
 var KEY_FILE = fs.readFileSync("server.key");
 var CERT_FILE = fs.readFileSync("www_triviabeat_dev.crt");
@@ -15,10 +17,15 @@ var DH = fs.readFileSync("server.pem");
 
 const app = express();
 //app.use(helment());
-var _server_https = null;
+
 const port = 443;
 
-
+var ONE_YEAR = 31536000000;
+app.use(helmet.hsts({
+    maxAge: ONE_YEAR,
+    includeSubDomains: true,
+    force: true
+}));
 //database
 
 
@@ -100,15 +107,27 @@ app.put("/verify", (req, res) => {
 });
 
 var server = https.createServer({
-    key: KEY_FILE,
-    cert: CERT_FILE,
-    dhparams: DH,
-    ciphers: [
-        "ECDHE-RSA-AES128-SHA256",
-        "DHE-RSA-AES128-SHA256",
-        "AES128-GCM-SHA256",
-    ].join(':'),
-    honorCipherOrder: true
+  key: KEY_FILE,
+  cert: CERT_FILE,
+  ca: INT_CERT_FILE,
+  ciphers: [
+    "ECDHE-RSA-AES256-SHA384",
+    "DHE-RSA-AES256-SHA384",
+    "ECDHE-RSA-AES256-SHA256",
+    "DHE-RSA-AES256-SHA256",
+    "ECDHE-RSA-AES128-SHA256",
+    "DHE-RSA-AES128-SHA256",
+    "HIGH",
+    "!aNULL",
+    "!eNULL",
+    "!EXPORT",
+    "!DES",
+    "!RC4",
+    "!MD5",
+    "!PSK",
+    "!SRP",
+    "!CAMELLIA"
+  ].join(':'),
 }, app);
 server.listen(port, ()=>{
   console.log("started on port "+port)

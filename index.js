@@ -3,12 +3,12 @@ const fs = require("fs");
 const mongodb = require("mongodb");
 const mongoose = require('mongoose');
 const User = require("./user.js")
+const Ip = require("./ip.js")
 const encrypt = require("./encrypt.js").encrypt
 const decrypt = require("./encrypt.js").decrypt
 const sts = require('strict-transport-security');
 const https = require("https");
 var helmet = require('helmet');
-
 
 var KEY_FILE = fs.readFileSync("server.key");
 var CERT_FILE = fs.readFileSync("www_triviabeat_dev.crt");
@@ -39,18 +39,41 @@ const globalSTS = sts.getSTS({'max-age':{'days': 30}});
 app.use(globalSTS);
 app.use(express.json({ limit: "1mb" }));
 
-app.use("/", express.static("public"));
 app.use("/lib", express.static("public/lib"));
-
+app.use("/styles", express.static("public/styles"));
+app.get("/", (req, res) =>{
+  return res.status(400).redirect('/test');
+})
 app.get("/:file", (req, res) =>{
-  res.status(200).sendFile("public/"+req.params.file+".html", { root: __dirname }, (err) =>{
-    if(err) return res.status(404).sendFile("public/404.html", { root: __dirname })
-  });
+  if(req.params.file == "login"){
+    return res.status(400).redirect('/test');
+  }
+  else{
+    Ip.findOne({ip: req.connection.remoteAddress}, '_id', function(err, result){
+      if(!result){
+        return res.status(200).sendFile("public/test.html", { root: __dirname })
+      }
+      res.status(200).sendFile("public/"+req.params.file+".html", { root: __dirname }, (err) =>{
+        if(err) return res.status(404).sendFile("public/404.html", { root: __dirname })
+      });
+    });
+  }
 })
 
+function check(req, res){
+  return new Promise(resolve => {
+    setTimeout(() => {
+      Ip.findOne({ip: req}, '_id', function(err, result){
+        if(!result) return res.status(403).send("Not Authorized")
+      });
+    }, 2000);
+  });
 
-app.put("/login", (req, res) => {
+}
 
+
+app.put("/login" , async (req, res) => {
+  await check(req.connection.remoteAddress, res);
   User.findOne({email: req.headers.email}, '_id expire password', function(err, result){
     if(!result) return res.status(400).send(err || "Cannot find user");
     if(result.password == req.headers.password){
@@ -77,6 +100,7 @@ app.put("/register", (req, res) => {
       email:  req.headers.email,
       password: req.headers.password,
       name: req.headers.name,
+      ip: req.connection.remoteAddress,
       phone: formatted,
       expire: date,
       diamonds: 0,
@@ -91,8 +115,9 @@ app.put("/register", (req, res) => {
        });
 });
 
-app.put("/verify", (req, res) => {
+app.put("/verify", async (req, res) => {
   //console.log(req.headers.data);
+  await check(req.connection.remoteAddress, res);
   if(req.headers.data) {
     var result = decrypt(JSON.parse(req.headers.data));
     //console.log(result);
@@ -105,6 +130,15 @@ app.put("/verify", (req, res) => {
   }
   res.end();
 });
+
+app.put("/username", (req, res) => {
+  User.findOne({name: req.headers.username}, '_id', function(err, result){
+    if(!result) return res.status(200).send(err || true);
+    else return res.status(200).send(false);
+  });
+});
+
+
 
 var server = https.createServer({
   key: KEY_FILE,

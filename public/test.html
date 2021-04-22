@@ -24,7 +24,7 @@
     <script>less.watch();</script>
     <script src="lib/jquery-3.6.0.min.js"></script>
 
-    <title>Welcome to Trivia Beat: Login</title>
+    <title>Log into Trivia Beat</title>
 
   </head>
 
@@ -41,22 +41,15 @@
               <div class="form-group" >
                 <div class="col-1">
                   <div class="btn-group btn-group-segmented">
-                  <input type="radio" name="demoSegmented" id="demoSegmented1" disabled>
+                  <input disabled type="radio" name="demoSegmented" id="demoSegmented1" >
                   <label for="demoSegmented1"><div class="btn" >Login</div></label>
                   <input type="radio" name="demoSegmented" id="demoSegmented2">
-                  <label for="demoSegmented2"><div class="btn hollow red">Register</div></label>
+                  <label for="demoSegmented2"><div class="btn red">Register</div></label>
                   </div>
                 </div>
               </div>
 
-              <div class="form-group register" style="display: none" >
-                <div class="input-group col-1">
-                  <input class="input" id="demoForm3Email" placeholder="Email" type="text">
-                  <span class="input-addon">@</span>
-                  <input class="input" id="demoForm3EmailB" placeholder="example.com" type="text">
-                </div>
-              </div>
-              <div class="form-group login" >
+              <div class="form-group" >
                 <div class="input-group col-1">
                   <input class="input " id="demoFormEmail" type="email" placeholder="Email" />
                 </div>
@@ -64,9 +57,9 @@
               <div class="form-group">
                 <div class="input-group col-1">
                   <input class="input" id="password" type="password" placeholder="Password" />
-                  <input class="input" id="password1" type="text" placeholder="Password" style="display: none"/>
+                  <input class="input " id="password1" type="text" placeholder="Password" style="display: none"/>
                   <span class="input-addon-btn ">
-                  <button class="btn hollow blue petalicon petalicon-eye-closed"></button>
+                  <button class="btn hollow blue petalicon petalicon-eye-closed inner1"></button>
                   </span>
                 </div>
               </div>
@@ -74,7 +67,7 @@
                  <div class="input-group col-1">
                    <input class="input" id="demoForm3Username" type="text"  placeholder="Username" />
                    <span class="input-addon-btn">
-                     <button class="btn green" >Check</button>
+                     <button disabled  class="btn red hollow petalicon petalicon-cross inner1"></button>
                    </span>
                  </div>
                </div>
@@ -98,29 +91,36 @@
   <script>
     $("#password1").val("");
     $("#password").val("");
+    $("#demoFormEmail").val("");
+    $("#demoForm3Username").val("");
+    $("#demoSegmented1").prop('disabled', true);
 
+    var check;
     $('#demoSegmented2').click(function(){
+      document.title = "Register: Trivia Beat"
+      check = setInterval(check_username, 1000);
       $("#password1").val("");
       $("#password").val("");
       $(".register").css('display', "block");
       $(".login").css('display', "none");
       $("#demoSegmented1").prop('disabled', false);
       $("#demoSegmented2").prop('disabled', true);
-      $(".petalicon").addClass("petalicon-eye");
-      $(".petalicon").removeClass("petalicon-eye-closed");
+      $(".petalicon-eye-closed").addClass("petalicon-eye");
+      $(".petalicon-eye").removeClass("petalicon-eye-closed");
       $("#password1").css("display", 'block');
       $("#password").css("display", 'none');
     });
-
     $('#demoSegmented1').click(function(){
+      document.title = "Log in: Trivia Beat"
+      clearInterval(check);
       $("#password1").val("");
       $("#password").val("");
       $(".register").css('display', "none");
       $(".login").css('display', "block");
       $("#demoSegmented2").prop('disabled', false);
       $("#demoSegmented1").prop('disabled', true);
-      $(".petalicon").removeClass("petalicon-eye");
-      $(".petalicon").addClass("petalicon-eye-closed");
+      $(".petalicon-eye").addClass("petalicon-eye-closed");
+      $(".petalicon-eye-closed").removeClass("petalicon-eye");
       $("#password1").css("display", 'none');
       $("#password").css("display", 'block');
     });
@@ -128,19 +128,52 @@
     $('.petalicon').click(function(){
       if($(".petalicon").hasClass('petalicon-eye-closed')){
         $("#password1").val($("#password").val());
-        $(".petalicon").addClass("petalicon-eye");
-        $(".petalicon").removeClass("petalicon-eye-closed");
+        $(".petalicon-eye-closed").addClass("petalicon-eye");
+        $(".petalicon-eye").removeClass("petalicon-eye-closed");
         $("#password").css("display", 'none');
         $("#password1").css("display", 'block');
       }
       else{
         $("#password").val($("#password1").val());
-        $(".petalicon").removeClass("petalicon-eye");
-        $(".petalicon").addClass("petalicon-eye-closed");
+        $(".petalicon-eye").addClass("petalicon-eye-closed");
+        $(".petalicon-eye-closed").removeClass("petalicon-eye");
         $("#password1").css("display", 'none');
         $("#password").css("display", 'block');
       }
     });
 
+
+    function check_username(){
+      var name = document.getElementById("demoForm3Username").value;
+      name = name.replace(/\s/g,"");
+      if(name.length != 0){
+        $.ajax({
+          url: "/username",
+          type: "PUT",
+          timeout: 1000,
+          headers: {
+            username: document.getElementById("demoForm3Username").value
+          }
+        }).done(function (res) {
+          if(res){
+            $(".petalicon-cross").addClass("petalicon-check")
+            $(".petalicon-cross").removeClass("petalicon-cross")
+            $(".petalicon-check").addClass("green")
+            $(".petalicon-check").removeClass("red")
+          }
+          else{
+            $(".petalicon-check").addClass("petalicon-cross")
+            $(".petalicon-check").removeClass("petalicon-check")
+            $(".petalicon-cross").addClass("red")
+            $(".petalicon-cross").removeClass("green")
+          }
+        });
+      }else if ($(".petalicon-check") || name.length == 0){
+        $(".petalicon-check").addClass("petalicon-cross")
+        $(".petalicon-check").removeClass("petalicon-check")
+        $(".petalicon-cross").addClass("red")
+        $(".petalicon-cross").removeClass("green")
+      }
+    }
   </script>
 </html>

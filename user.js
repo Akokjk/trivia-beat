@@ -14,10 +14,13 @@ const userSchema = new Schema(
     },
     expire: {
       type: Date
-    }, 
+    },
     phone:{
       type: String,
       unique: true
+    },
+    ip:{
+      type: [String]
     },
     password: String,
     diamonds: Number,

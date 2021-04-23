@@ -73,11 +73,12 @@ function check(req, res){
 
 
 app.put("/login" , async (req, res) => {
-  await check(req.connection.remoteAddress, res);
+  //await check(req.connection.remoteAddress, res);
   User.findOne({email: req.headers.email}, '_id expire password', function(err, result){
     if(!result) return res.status(400).send(err || "Cannot find user");
     if(result.password == req.headers.password){
-      return res.status(200).send(encrypt(JSON.stringify(result._id)));
+      //need to update expire token and check against known user ips send them a human test
+      return res.status(200).send(encrypt(JSON.stringify(result)));
     }
     else return res.status(403).send("Password Incorrect")
   });
@@ -107,12 +108,13 @@ app.put("/register", (req, res) => {
       hearts: 10,
       bitcoin: 0
     });
-      reqBody.save().then(() =>{
-         console.log(JSON.stringify(reqBody._id + " " + reqBody.expire))
-         return res.status(200).send(encrypt(JSON.stringify(reqBody._id)))
-       }).catch(function(error){
-         return res.status(400).send(error);
-       });
+    reqBody.save().then(() =>{
+       console.log(JSON.stringify(reqBody._id + " " + reqBody.expire))
+       return res.status(200).send(encrypt(JSON.stringify(reqBody._id)))
+     }).catch(function(error){
+       return res.status(400).send(error);
+     });
+
 });
 
 app.put("/verify", async (req, res) => {
@@ -133,6 +135,13 @@ app.put("/verify", async (req, res) => {
 
 app.put("/username", (req, res) => {
   User.findOne({name: req.headers.username}, '_id', function(err, result){
+    if(!result) return res.status(200).send(err || true);
+    else return res.status(200).send(false);
+  });
+});
+
+app.put("/email", (req, res) => {
+  User.findOne({email: req.headers.email}, '_id', function(err, result){
     if(!result) return res.status(200).send(err || true);
     else return res.status(200).send(false);
   });

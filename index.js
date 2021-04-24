@@ -42,22 +42,12 @@ app.use(express.json({ limit: "1mb" }));
 app.use("/lib", express.static("public/lib"));
 app.use("/styles", express.static("public/styles"));
 app.get("/", (req, res) =>{
-  return res.status(400).redirect('/test');
+    return res.status(200).sendFile("public/index.html", { root: __dirname });
 })
 app.get("/:file", (req, res) =>{
-  if(req.params.file == "login"){
-    return res.status(400).redirect('/test');
-  }
-  else{
-    Ip.findOne({ip: req.connection.remoteAddress}, '_id', function(err, result){
-      if(!result){
-        return res.status(200).sendFile("public/test.html", { root: __dirname })
-      }
-      res.status(200).sendFile("public/"+req.params.file+".html", { root: __dirname }, (err) =>{
-        if(err) return res.status(404).sendFile("public/404.html", { root: __dirname })
-      });
+    res.status(200).sendFile("public/"+req.params.file+".html", { root: __dirname }, (err) =>{
+      if(err) return res.status(404).sendFile("public/404.html", { root: __dirname })
     });
-  }
 })
 
 function check(req, res){
@@ -72,10 +62,10 @@ function check(req, res){
 }
 
 
-app.put("/login" , async (req, res) => {
+app.put("/login" , (req, res) => {
   //await check(req.connection.remoteAddress, res);
   User.findOne({email: req.headers.email}, '_id expire password', function(err, result){
-    if(!result) return res.status(400).send(err || "Cannot find user");
+    if(!result) return res.status(401).send(err || "Cannot find user");
     if(result.password == req.headers.password){
       //need to update expire token and check against known user ips send them a human test
       return res.status(200).send(encrypt(JSON.stringify(result)));

@@ -4,38 +4,298 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/login.css">
+    <script src="lib/jquery-3.6.0.min.js"></script>
+    <script src="lib/Crypto.js"></script>
+    <script src="lib/SHA256.js"></script>
+    <link rel="stylesheet" href="lib/petal.min.css">
+    <link rel="stylesheet/less"  type="text/css" href="styles/test.less">
+
+    <script>
+      less = {
+        env: "development",
+        async: false,
+        fileAsync: false,
+        poll: 1000,
+        functions: {},
+        dumpLineNumbers: "comments",
+        relativeUrls: false,
+        rootpath: ":/triviabeat.io/"
+      };
+    </script>
+    <script src="lib/less.min.js" ></script>
+    <!-- <script>less.watch();</script> -->
     <script src="lib/jquery-3.6.0.min.js"></script>
 
-    <title>Welcome to Trivia Beat: Login</title>
+    <title>Log into Trivia Beat</title>
+
   </head>
 
-  <body>
-      <div id="loginPortal">
-        <i id="login"><button>&middot;Login&middot;</button></i>
-        <i id="register"><button onclick="window.location.href='/register'">Register</button></i>
-        <i id="title">☺</i>
-        <i id="email">Email:</i>
-        <i id="textEmail">
-          <input
-            type="email"
-            
-            autocomplete="email"
-          />
-        </i>
-        <i id="password">Password:</i>
-        <i id="textPassword">
-          <input
-            type="password"
+  <section>
+    <div class="fullpage-modal-container">
+      <div class="overlay"></div>
+      <div class="fullpage-modal-inner-wrap">
+        <div class="fullpage-modal">
+          <div class="modal-header">
+            <h3 class="modal-header-text">Welcome to Trivia Beat!</h3>
+          </div>
+          <div class="modal-body">
+            <div class="form-horizontal" onsubmit="return false">
+              <div class="form-group" >
+                <div class="col-1">
+                  <div class="btn-group btn-group-segmented">
+                  <input disabled type="radio" name="demoSegmented" id="demoSegmented1" >
+                  <label for="demoSegmented1"><div class="btn" >Login</div></label>
+                  <input type="radio" name="demoSegmented" id="demoSegmented2">
+                  <label for="demoSegmented2"><div class="btn red">Register</div></label>
+                  </div>
+                </div>
+              </div>
 
-            autocomplete="current-password"
-          />
-        </i>
-        <i id="sumbitLogin"><button>Submit</button></i>
-        <!-- <i>Welcome to Trivia Beat!</i> -->
+              <div class="form-group" >
+                <div class="input-group col-1 " title="Must enter a unique email.">
+                  <input class="input " id="demoFormEmail" type="email" placeholder="Email"/>
+                  <span class="input-addon-btn ">
+                    <button disabled id="email"  class="btn red hollow petalicon petalicon-cross inner1 reg" style="display: block"></button>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group col-1">
+                  <input class="input" id="password" type="password" placeholder="Password"/>
+                  <input class="input " id="password1"  title="8-20 characters, 1 lowercase, 1 uppercase, 1 special character" type="text" placeholder="Password" style="display: none"/>
+
+                  <button title="show/hide password" class="btn hollow blue petalicon petalicon-eye-closed inner1"></button>
+
+                  <span class="input-addon-btn">
+                    <button disabled id="password2" title="8-20 characters, 1 lowercase, 1 uppercase, 1 special character"  class="btn red hollow  petalicon petalicon-cross inner1 reg"></button>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group register" title="2-20 characters" style="display: none">
+                 <div class="input-group col-1">
+                   <input class="input" id="demoForm3Username" type="text"  placeholder="Username" />
+                   <span class="input-addon-btn">
+                     <button disabled id="username"  class="btn red hollow petalicon petalicon-cross inner1"></button>
+                   </span>
+                 </div>
+               </div>
+               <div class="form-group register col-1" style="display: none">
+                 <div class="input-group ">
+                   <input type="checkbox" id="checkbox" class="checkbox" checked=false/>
+                   <label for="checkbox">I agree to the <a href="/tos" target="_blank">terms of service</a> of Trivia Beat.</label>
+                 </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer btn-row">
+            <button class="btn red col-3" id="submit" disabled>Submit</button>
+            <button class="btn red hollow align-right">Help</button>
+          </div>
+        </div>
       </div>
-      <span>
-      </span>
-  </body>
+    </div>
+  </section>
 
+  <script>
+    var check = false;
+    $("#checkbox").click(function(){
+      check = !check;
+    })
+    $("#checkbox").prop("checked", false)
+    $("#password1").val("");
+    $("#password").val("");
+    $("#demoFormEmail").val("");
+    $("#demoForm3Username").val("");
+    $("#demoSegmented1").prop('disabled', true);
+    $("#submit").prop('disabled', false);
+    $(".reg").css("display", "none");
+
+    var checkU;
+    var checkE;
+    var checkP;
+    var checkS;
+
+    $('#demoSegmented2').click(function(){
+      document.title = "Register: Trivia Beat"
+      checkU = setInterval(check_username, 1000);
+      checkE = setInterval(validateEmail, 1000);
+      checkP = setInterval(checkpassword, 500);
+      checkS= setInterval(checkform, 500);
+      $("#submit").prop('disabled', true);
+      $(".reg").css("display", "block");
+      $("#demoFormEmail").css("border-right", "0");
+      $("#password1").val("");
+      $("#password").val("");
+      $(".register").css('display', "block");
+      $(".login").css('display', "none");
+      $("#demoSegmented1").prop('disabled', false);
+      $("#demoSegmented2").prop('disabled', true);
+      $(".petalicon-eye-closed").addClass("petalicon-eye");
+      $(".petalicon-eye").removeClass("petalicon-eye-closed");
+      $("#password1").css("display", 'block');
+      $("#password").css("display", 'none');
+    });
+    $('#demoSegmented1').click(function(){
+      $("#submit").prop('disabled', false);
+      document.title = "Log in: Trivia Beat"
+      $(".reg").css("display", "none");
+      $("#demoFormEmail").css("border-right", "2px solid #b5b5b5");
+      clearInterval(checkU);
+      clearInterval(checkE);
+      clearInterval(checkP);
+      clearInterval(checkS);
+      $("#password1").val("");
+      $("#password").val("");
+      $(".register").css('display', "none");
+      $(".login").css('display', "block");
+      $("#demoSegmented2").prop('disabled', false);
+      $("#demoSegmented1").prop('disabled', true);
+      $(".petalicon-eye").addClass("petalicon-eye-closed");
+      $(".petalicon-eye-closed").removeClass("petalicon-eye");
+      $("#password1").css("display", 'none');
+      $("#password").css("display", 'block');
+    });
+
+    $('.petalicon').click(function(){
+      if($(".petalicon").hasClass('petalicon-eye-closed')){
+        $("#password1").val($("#password").val());
+        $(".petalicon-eye-closed").addClass("petalicon-eye");
+        $(".petalicon-eye").removeClass("petalicon-eye-closed");
+        $("#password").css("display", 'none');
+        $("#password1").css("display", 'block');
+      }
+      else{
+        $("#password").val($("#password1").val());
+        $(".petalicon-eye").addClass("petalicon-eye-closed");
+        $(".petalicon-eye-closed").removeClass("petalicon-eye");
+        $("#password1").css("display", 'none');
+        $("#password").css("display", 'block');
+      }
+    });
+
+    function validateEmail() {
+      var email = document.getElementById("demoFormEmail").value
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      $.ajax({
+        url: "/email",
+        type: "PUT",
+        timeout: 1000,
+        headers: {
+          email: email
+        }
+      }).done(function (res) {
+        if(res && re.test(String(email).toLowerCase())){
+          $("#email").addClass("petalicon-check")
+          $("#email").removeClass("petalicon-cross")
+          $("#email").addClass("green")
+          $("#email").removeClass("red")
+        }
+        else{
+          $("#email").addClass("petalicon-cross")
+          $("#email").removeClass("petalicon-check")
+          $("#email").addClass("red")
+          $("#email").removeClass("green")
+        }
+      });
+    }
+    function check_username(){
+      var name = document.getElementById("demoForm3Username").value;
+      var usernameRegex = /^[a-zA-Z0-9]+$/;
+      name = name.replace(/\s/g,"");
+      if(name.length >= 2 && name.length <= 20 &&  usernameRegex.test(name)){
+        $.ajax({
+          url: "/username",
+          type: "PUT",
+          timeout: 1000,
+          headers: {
+            username: document.getElementById("demoForm3Username").value
+          }
+        }).done(function (res) {
+          if(res){
+            $("#username").addClass("petalicon-check")
+            $("#username").removeClass("petalicon-cross")
+            $("#username").addClass("green")
+            $("#username").removeClass("red")
+          }
+          else{
+            $("#username").addClass("petalicon-cross")
+            $("#username").removeClass("petalicon-check")
+            $("#username").addClass("red")
+            $("#username").removeClass("green")
+          }
+        });
+      }else if ($("#username") || name.length == 0){
+        $("#username").addClass("petalicon-cross")
+        $("#username").removeClass("petalicon-check")
+        $("#username").addClass("red")
+        $("#username").removeClass("green")
+      }
+    }
+
+    function checkpassword(){
+      var password = $('#password1').val() || $('#password').val();
+      var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+      if ((password.length >= 8 && password.length <= 20) && strongRegex.test(password)) {
+        $("#password2").addClass("petalicon-check")
+        $("#password2").removeClass("petalicon-cross")
+        $("#password2").addClass("green")
+        $("#password2").removeClass("red")
+      }else{
+        $("#password2").addClass("petalicon-cross")
+        $("#password2").removeClass("petalicon-check")
+        $("#password2").addClass("red")
+        $("#password2").removeClass("green")
+      }
+    }
+    function checkform(){
+      if($("#password2").hasClass("petalicon-check") && $("#username").hasClass("petalicon-check") && $("#email").hasClass("petalicon-check") && check){
+        $("#submit").prop('disabled', false);
+      }
+      else $("#submit").prop('disabled', true);
+    }
+    $("#submit").click(function(){
+      if($("#demoSegmented1").is(':enabled')){
+        $.ajax({
+          url: "/register",
+          type: "PUT",
+          timeout: 1000,
+          headers: {
+            phone: null,
+            name: document.getElementById("demoForm3Username").value,
+            email: document.getElementById("demoFormEmail").value,
+            password: Crypto.SHA256(document.getElementById("password1").value || document.getElementById("password").value).toString()
+          }
+          }).done(function(res){ //if user logins in from uknown ip then make sure to human test them.
+              if(res){
+                window.localStorage.setItem("login", JSON.stringify(res))
+                location.href = "/";
+              }else{
+                alert("Wrong email or password!");
+              }
+
+          });
+      }
+      else{
+        console.log("attempt login")
+        var yes  = $.ajax({
+          url: "/login",
+          type: "PUT",
+          timeout: 1000,
+          headers: {
+            email: document.getElementById("demoFormEmail").value,
+            password: Crypto.SHA256(document.getElementById("password").value || document.getElementById("password1").value).toString()
+          }
+        })
+        yes.done(function(res){ //if user logins in from uknown ip then make sure to human test them.
+          if(res){
+            window.localStorage.setItem("login", JSON.stringify(res))
+            location.href = "/";
+          }
+      })
+      yes.fail(function(){
+          alert("Wrong email or password!");
+      });
+    }
+  });
+  </script>
 </html>

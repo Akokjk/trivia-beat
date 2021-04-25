@@ -9,7 +9,7 @@
     <script src="lib/SHA256.js"></script>
     <link rel="stylesheet" href="lib/petal.min.css">
     <link rel="stylesheet/less"  type="text/css" href="styles/test.less">
-
+  
     <script>
       less = {
         env: "development",
@@ -267,10 +267,9 @@
           }
           }).done(function(res){ //if user logins in from uknown ip then make sure to human test them.
               if(res){
-                window.localStorage.setItem("login", JSON.stringify(res))
-                location.href = "/";
+                location.href = "/index";
               }else{
-                alert("Wrong email or password!");
+                alert("Submitted with wrong input");
               }
 
           });
@@ -288,8 +287,7 @@
         })
         yes.done(function(res){ //if user logins in from uknown ip then make sure to human test them.
           if(res){
-            window.localStorage.setItem("login", JSON.stringify(res))
-            location.href = "/";
+            location.href = "/index";
           }
       })
       yes.fail(function(){

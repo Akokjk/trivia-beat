@@ -6,9 +6,12 @@ const User = require("./user.js")
 const Ip = require("./ip.js")
 const encrypt = require("./encrypt.js").encrypt
 const decrypt = require("./encrypt.js").decrypt
+const secret = require("./encrypt.js").secretKey
 const sts = require('strict-transport-security');
 const https = require("https");
 var helmet = require('helmet');
+var cookieParser = require('cookie-parser');
+var evercookie = require('evercookie');
 
 var KEY_FILE = fs.readFileSync("server.key");
 var CERT_FILE = fs.readFileSync("www_triviabeat_dev.crt");
@@ -17,7 +20,8 @@ var DH = fs.readFileSync("server.pem");
 
 const app = express();
 //app.use(helment());
-
+app.use(evercookie.backend());
+app.use(cookieParser("w3A0xFdUg3tG6VtHDHJhaVFm2pTMwF2c"))
 const port = 443;
 
 var ONE_YEAR = 31536000000;
@@ -42,33 +46,36 @@ app.use(express.json({ limit: "1mb" }));
 app.use("/lib", express.static("public/lib"));
 app.use("/styles", express.static("public/styles"));
 app.get("/", (req, res) =>{
-    return res.status(200).sendFile("public/index.html", { root: __dirname });
+
+    return res.status(200).sendFile("public/login.html", { root: __dirname });
 })
 app.get("/:file", (req, res) =>{
-    res.status(200).sendFile("public/"+req.params.file+".html", { root: __dirname }, (err) =>{
-      if(err) return res.status(404).sendFile("public/404.html", { root: __dirname })
-    });
+
+  var today =new Date()
+  console.log("signed cookies: " + JSON.stringify(req.signedCookies))
+  if(req.signedCookies.login == undefined) return res.status(200).sendFile("public/login.html", { root: __dirname });
+  User.findOne({_id: req.signedCookies.login}, '_id', function(err, result){
+    if(!result)  res.status(200).sendFile("public/login.html", { root: __dirname });
+    else{
+      res.status(200).sendFile("public/"+req.params.file+".html", { root: __dirname }, (err) =>{
+        if(err) return res.status(404).sendFile("public/404.html", { root: __dirname })
+      });
+    }
+  });
 })
 
-function check(req, res){
-  return new Promise(resolve => {
-    setTimeout(() => {
-      Ip.findOne({ip: req}, '_id', function(err, result){
-        if(!result) return res.status(403).send("Not Authorized")
-      });
-    }, 2000);
-  });
 
-}
 
 
 app.put("/login" , (req, res) => {
-  //await check(req.connection.remoteAddress, res);
-  User.findOne({email: req.headers.email}, '_id expire password', function(err, result){
+  var date = new Date();
+  date.setDate(date.getDate() + 30);
+  User.findOne({email:  decrypt(JSON.stringify(req.headers.email))}, '_id password', function(err, result){
     if(!result) return res.status(401).send(err || "Cannot find user");
-    if(result.password == req.headers.password){
-      //need to update expire token and check against known user ips send them a human test
-      return res.status(200).send(encrypt(JSON.stringify(result)));
+    if(result.password == decrypt(JSON.stringify(req.headers.password))){
+      res.cookie("login", encrypt(JSON.stringify(result._id)),
+      {signed: true, httpOnly: true, secure: true, sameSite: true, expires: date, overwrite: true})
+      return res.status(200).send("success");
     }
     else return res.status(403).send("Password Incorrect")
   });
@@ -88,19 +95,18 @@ app.put("/register", (req, res) => {
   const date = new Date();
   date.setDate(date.getDate() + 30);
   const reqBody = new User({
-      email:  req.headers.email,
-      password: req.headers.password,
-      name: req.headers.name,
+      email:  encrypt(req.headers.email),
+      password: encrypt(req.headers.password),
+      name: encrypt(req.headers.name),
       ip: req.connection.remoteAddress,
-      phone: formatted,
-      expire: date,
+      expire: date.valueOf(),
       diamonds: 0,
       hearts: 10,
       bitcoin: 0
     });
     reqBody.save().then(() =>{
        console.log(JSON.stringify(reqBody._id + " " + reqBody.expire))
-       return res.status(200).send(encrypt(JSON.stringify(reqBody._id)))
+       return res.status(200).cookie('login', res._id, {signed: true}).send("success")
      }).catch(function(error){
        return res.status(400).send(error);
      });

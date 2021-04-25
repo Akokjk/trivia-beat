@@ -31,4 +31,4 @@ const decrypt = (hash) => {
 };
 
 
-module.exports = {encrypt, decrypt}
+module.exports = {encrypt, decrypt, secretKey}

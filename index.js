@@ -12,15 +12,20 @@ const https = require("https");
 var helmet = require('helmet');
 var cookieParser = require('cookie-parser');
 var evercookie = require('evercookie');
-
+var cors = require('cors')
 var KEY_FILE = fs.readFileSync("server.key");
 var CERT_FILE = fs.readFileSync("www_triviabeat_dev.crt");
 var INT_CERT_FILE = fs.readFileSync("www_triviabeat_dev.ca-bundle");
 var DH = fs.readFileSync("server.pem");
 
 const app = express();
-//app.use(helment());
+//app.use(helmet());
 app.use(evercookie.backend());
+app.use(cors({
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "optionsSuccessStatus": 204
+}))
 app.use(cookieParser("w3A0xFdUg3tG6VtHDHJhaVFm2pTMwF2c"))
 const port = 443;
 
@@ -49,20 +54,31 @@ app.get("/", (req, res) =>{
 
     return res.status(200).sendFile("public/login.html", { root: __dirname });
 })
-app.get("/:file", (req, res) =>{
-
-  var today =new Date()
-  console.log("signed cookies: " + JSON.stringify(req.signedCookies))
-  if(req.signedCookies.login == undefined) return res.status(200).sendFile("public/login.html", { root: __dirname });
-  User.findOne({_id: req.signedCookies.login}, '_id', function(err, result){
-    if(!result)  res.status(200).sendFile("public/login.html", { root: __dirname });
-    else{
-      res.status(200).sendFile("public/"+req.params.file+".html", { root: __dirname }, (err) =>{
-        if(err) return res.status(404).sendFile("public/404.html", { root: __dirname })
-      });
-    }
-  });
+app.get("/question", (req, res) => {
+  res.header({
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Header': '*',
+  })
+  return res.status(200).send({
+    question: "What is cunt?", 
+    options: ["cunt", "pussy", "wet", "female"],
+    answer: 1 
+  })
 })
+// app.get("/:file", (req, res) =>{
+
+//   var today =new Date()
+//   console.log("signed cookies: " + JSON.stringify(req.signedCookies))
+//   if(req.signedCookies.login == undefined) return res.status(200).sendFile("public/login.html", { root: __dirname });
+//   User.findOne({_id: req.signedCookies.login}, '_id', function(err, result){
+//     if(!result)  res.status(200).sendFile("public/login.html", { root: __dirname });
+//     else{
+//       res.status(200).sendFile("public/"+req.params.file+".html", { root: __dirname }, (err) =>{
+//         if(err) return res.status(404).sendFile("public/404.html", { root: __dirname })
+//       });
+//     }
+//   });
+// })
 
 
 

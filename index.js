@@ -22,6 +22,8 @@ const app = express();
 //app.use(helmet());
 app.use(evercookie.backend());
 app.use(cors({
+  "Cross-Origin-Embedder-Policy": 'require-corp',
+ 'Cross-Origin-Opener-Policy': 'same-origin', 
   "origin": "*",
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
   "optionsSuccessStatus": 204
@@ -56,6 +58,8 @@ app.get("/", (req, res) =>{
 })
 app.get("/question", (req, res) => {
   res.header({
+    'Cross-Origin-Embedder-Policy': 'require-corp',
+	'Cross-Origin-Opener-Policy': 'same-origin', 
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Header': '*',
   })

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,  user-scalable=no ,initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/index.css">
+    <script src="lib/jquery-3.6.0.min.js"></script>
+    <script src="lib/socket.io.js"></script>
+    <title>Trivia Beat</title>
+  </head>
+
+  <body>
+    <div id="menu">
+      <i id="logout">
+        <button>Logout</button>
+      </i>
+      <i id="inventory">
+        <div id="hearts">0 &#9825;</div>
+        <div id="diamonds">0 &#10209;</div>
+        <div id="bitcoin">&#8383; 0</div>
+      </i>
+      <i id="title">
+        <h1>Trivia Beat</h1>
+      </i>
+      <i id="play">
+        <button>Play</button>
+      </i>
+      <i id="store">
+        <button>Store</button>
+      </i>
+      <i id="leaderboard">
+        <button>Leaderboard</button>
+      </i>
+      <i id="profile">
+        <button>Profile</button>
+      </i>
+      <i id="contribute">
+        <button>Contribute</button>
+      </i>
+      <i id="active">
+        <button id="players">Active Players</button>
+      </i>
+    </div>
+  </body>
+
+
+  <script>
+    socket = io.connect("https://www.triviabeat.dev", { secure: true });
+    function logout() {
+      window.localStorage.removeItem("login");
+      alert("Logging out...");
+      location.href = "/login";
+    }
+    function verify() {
+      if (window.localStorage.login !== undefined) {
+        //decrypt and verify login and experation
+        $.ajax({
+          url: "/verify",
+          type: "PUT",
+          timeout: 1000,
+          headers: {
+            data: window.localStorage.login,
+          },
+        })
+          .done(function (res) {
+            // nothing here
+          })
+          .fail(function (res) {
+            alert("Unable to find account information.");
+            window.localStorage.removeItem("login");
+            location.href = "/login";
+            console.log(res);
+          });
+      } else {
+        window.localStorage.removeItem("login");
+        location.href = "/login";
+      }
+    }
+    var clients = 1;
+    socket.emit("player", clients);
+    socket.on("connection", function (data) {
+      console.log("Connected");
+    });
+    socket.on("player", function (data) {
+      clients = data;
+      document.getElementById("players").innerText = "Active players: " + data;
+    });
+    console.log("test")
+  </script>
+
+</html>

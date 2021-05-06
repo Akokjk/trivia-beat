@@ -19,9 +19,6 @@ const userSchema = new Schema(
       type: String,
       unique: true
     },
-    ip:{
-      type: [String]
-    },
     password: String,
     diamonds: Number,
     hearts: Number,

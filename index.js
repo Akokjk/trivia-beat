@@ -4,11 +4,13 @@ const mongodb = require("mongodb");
 const mongoose = require('mongoose');
 const User = require("./user.js")
 const Ip = require("./ip.js")
+const Question = require('./question.js')
 const encrypt = require("./encrypt.js").encrypt
 const decrypt = require("./encrypt.js").decrypt
 const secret = require("./encrypt.js").secretKey
 const sts = require('strict-transport-security');
 const https = require("https");
+const http = require("http");
 var helmet = require('helmet');
 var cookieParser = require('cookie-parser');
 var cors = require('cors')
@@ -28,7 +30,7 @@ app.use(cors({
   "optionsSuccessStatus": 204
 }))
 app.use(cookieParser("w3A0xFdUg3tG6VtHDHJhaVFm2pTMwF2c"))
-const port = 443;
+const port = 8080;
 
 var ONE_YEAR = 31536000000;
 app.use(helmet.hsts({
@@ -53,13 +55,13 @@ app.use("/", express.static("public/"));
 app.get("/question", (req, res) => {
   res.header({
     'Cross-Origin-Embedder-Policy': 'require-corp',
-	'Cross-Origin-Opener-Policy': 'same-origin',
+	  'Cross-Origin-Opener-Policy': 'same-origin',
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Header': '*',
   })
   return res.status(200).send({
-    question: "What is cunt?",
-    options: ["cunt", "pussy", "wet", "female"],
+    question: "What do you want?",
+    options: ["apples", "money", "gold", "happiness"],
     answer: 1
   })
 })
@@ -158,7 +160,46 @@ app.put("/email", (req, res) => {
 });
 
 
+app.put("/uq", (req, res) => { //unverifiedquestions
+  //params needed, userid, amount
+  //not verified, not the author, not verified by 10 users, limit to amount
 
+  var find = Question.find({verified: false, author: {$ne: req.headers.userid}}, //nverifiers: {$lt: 10}},
+    "title options answer").limit(parseInt(req.headers.amount));
+    find.exec(function(err, result){
+      //  console.log(result)
+      return res.status(200).send(result || "nothing much wow" || err);
+    })
+});
+
+app.put("/mq", (req, res) => {
+  const date = new Date();
+  var options = req.headers.options
+  var cat = req.headers.category
+  var src = req.headers.sources
+  const reqBody = new Question({
+      title: req.headers.title,
+      options: options.split(','),
+      answer: req.headers.answer,
+      author: req.headers.author,    //should grab from cookie holding encrypted user id
+      category: cat.split(','),
+      difficulty: req.headers.difficulty,
+      verified: false,
+      sources: src.split(','),
+      reports: 0,
+      nverifiers: 0,
+      date: date,
+    });
+    reqBody.save().then(() =>{
+       console.log(JSON.stringify("Added  new question: " + reqBody.title))
+       return res.status(200).send("success")
+     }).catch(function(error){
+       return res.status(400).send(error);
+     });
+});
+
+
+var server1 = http.createServer(app);
 var server = https.createServer({
   key: KEY_FILE,
   cert: CERT_FILE,
@@ -182,7 +223,7 @@ var server = https.createServer({
     "!CAMELLIA"
   ].join(':'),
 }, app);
-server.listen(port, ()=>{
+server1.listen(port, ()=>{
   console.log("started on port "+port)
 });
 //

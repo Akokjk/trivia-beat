@@ -50,7 +50,7 @@ const globalSTS = sts.getSTS({'max-age':{'days': 30}});
 
 app.use(globalSTS);
 app.use(express.json({ limit: "1mb" }));
-app.use("/", express.static("public/"));
+app.use("/", express.static("public/build"));
 
 app.get("/question", (req, res) => {
   res.header({
@@ -69,7 +69,7 @@ app.get("/:file", (req, res) =>{
 
   var today =new Date()
   console.log("signed cookies: " + JSON.stringify(req.signedCookies))
-  if(req.signedCookies.login == undefined) return res.status(200).sendFile("public/login.html", { root: __dirname });
+  if(req.signedCookies.login == undefined) return res.status(200).sendFile("public/old/login.html", { root: __dirname });
   User.findOne({_id: req.signedCookies.login}, '_id', function(err, result){
     if(!result)  res.status(200).sendFile("public/old/login.html", { root: __dirname });
     else{

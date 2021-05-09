@@ -71,10 +71,10 @@ app.get("/:file", (req, res) =>{
   console.log("signed cookies: " + JSON.stringify(req.signedCookies))
   if(req.signedCookies.login == undefined) return res.status(200).sendFile("public/login.html", { root: __dirname });
   User.findOne({_id: req.signedCookies.login}, '_id', function(err, result){
-    if(!result)  res.status(200).sendFile("public/login.html", { root: __dirname });
+    if(!result)  res.status(200).sendFile("public/old/login.html", { root: __dirname });
     else{
       res.status(200).sendFile("public/"+req.params.file+".html", { root: __dirname }, (err) =>{
-        if(err) return res.status(404).sendFile("public/404.html", { root: __dirname })
+        if(err) return res.status(404).sendFile("public/old/404.html", { root: __dirname })
       });
     }
   });

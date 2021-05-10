@@ -20,3 +20,7 @@ Thumbs.db
 
 #secrets
 secrets.txt
+
+
+#app
+app/ 

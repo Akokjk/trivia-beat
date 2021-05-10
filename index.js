@@ -66,7 +66,7 @@ const globalSTS = sts.getSTS({'max-age':{'days': 30}});
 
 app.use(globalSTS);
 app.use(express.json({ limit: "1mb" }));
-app.use("/", express.static("public/triviabeat-react/build"));
+app.use("/", express.static("public/react/build"));
 
 app.get("/question", (req, res) => {
   res.header({

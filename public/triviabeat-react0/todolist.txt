@@ -1,0 +1,36 @@
+Todolist:
+
+
+1. Game
+  formating:
+    1. recreate the flex display that I created in react native
+    2. Add the sockets so that data can be send to the user
+  game logic:
+    1. Add players to the queue inform them when the game starts with a countdown
+    2. Prior to the countdown show ads that will open in a new tab
+    2. When they enter queue generate the questions to ask each user based question history
+    3. Users will need a array of question id's they have seen separate
+    them by ones they answered correctly and incorrectly
+    4. Collate all the incorrectly answered arrays of each user in one array to generate the list of questions to ask
+    5. randomize the order the questions and send a array holding all of the question data
+    6. Verify answer are right on the server side with sockets
+    7. The entire payload for each player should generated no longer than the 10 second countdown if they
+    cant load the payload by then boot them from the game 
+
+2. Leaderboard
+3. Store
+4. Contribute
+  verify:
+    1. make a function to render new question objects
+    2. make an api call to grab list of questions that need to be verified
+    3. as the user scrolls down the page grab more questions
+    4. do not show questions that have been voted on by the user
+    5. if the user wants to reject the question it will prompt to reason why
+    possible reasons: bad question, bad format, grammar, offensive, bot made
+  create:
+    1. Create a google search style question title generator
+    2. Category generator
+    3. Difficulty adjuster which makes the question stay for 5, 6, or 7 seconds
+
+5. Account
+6. Login / Register

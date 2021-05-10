@@ -1,0 +1,139 @@
+#header{
+  height: 5%;
+  max-height: 200px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-self: center;
+  position: absolute;
+  top: 0;
+  justify-content: center;
+
+}
+
+.answer{
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: space-around;
+
+}
+
+#question{
+  display: flex;
+  max-height: 400px;
+  width: 100%;
+  max-width: 500px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+  position: relative;
+  justify-content: flex-start;
+}
+.title{
+  border-top: 5px solid black;
+  border-left: 5px solid black;
+  border-right: 5px solid black;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-top: 10px;
+  width: 90%;
+  color: white;
+  max-width: 500px;
+  display: flex;
+  background-color: black;
+  align-items: center;
+  text-align: center;
+  height: 100px;
+  font-size: 150%;
+  justify-content: center;
+}
+.option{
+  border-left: 4px solid black;
+  border-right: 4px solid black;
+  border-top: 2px dashed white;
+  flex-direction: row;
+  width: 90%;
+  font-size: 75%;
+  color: white;
+  max-width: 500px;
+  display: flex;
+  background-color: black;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  flex-wrap: wrap;
+}
+
+.option .list{
+  display: inline-flex;
+  flex: 1;
+  height: 100%;
+  background-color: black;
+}
+
+
+.option .content{
+  display: inline-flex;
+  flex: 9;
+  align-items: flex-start;
+  padding-left: 10px;
+  height: 100%;
+  background-color: black;
+}
+
+
+.choice{
+  height: 50px;
+  width: 90%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  border-left: 4px solid black;
+  border-right: 4px solid black;
+  border-bottom: 5px solid black;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top: 2px solid black;
+}
+.choice div{
+  border-collapse: collapse;
+  width: 50%;
+  height: 50px;
+  display: inline-flex;
+
+  background-color: red;
+}
+.choice .a{
+  border-bottom-left-radius: 10px;
+  background-color: green;
+}
+.choice .b{
+  border-bottom-right-radius: 10px;
+  background-color: red;
+}
+
+#verify::-webkit-scrollbar{
+    background: #FF0000;
+    display: none;  /* Safari and Chrome */
+}
+
+#verify{
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+  position: absolute;
+  height: 80%;
+  top: 10%;
+  max-width: 500px;
+  display: flex;
+  color: white;
+  overflow-y: scroll;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 10px;
+  padding-bottom: 100px;
+}
+
+#back{
+
+}

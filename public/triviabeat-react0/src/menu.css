@@ -1,0 +1,58 @@
+
+
+#menu{
+  margin-top: 0;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column;
+
+}
+#currency{
+  display: -webkit-flex;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  flex-direction: row;
+  margin-bottom: 10px;
+  margin-top: 0;
+  bottom: 0;
+  height: 50px;
+}
+#currency p{
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  font-stretch: extra-condensed;
+  letter-spacing: normal;
+  font-kerning: normal;
+  padding-left: 10px;
+  font-size: 200%;
+  color: #e94560;
+}
+button{
+  background-color: #16213e;
+  color: #e94560;
+  border-style: outset;
+  border-radius: 10px;
+  border-color: #0f3460;
+  font-family:  serif;
+  align-items: center;
+  font-size: 200%;
+  justify-content: center;
+  display: flex;
+  width: 80vw;
+  max-width: 300px;
+  height: 10vh;
+  margin-bottom: 10px;
+}
+h1{
+  margin-top: 0;
+  color: #e94560;
+  font-size: 150%;
+  text-decoration: underline;
+  font-family: 'Press Start 2P', cursive;
+}

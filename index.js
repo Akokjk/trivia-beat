@@ -12,6 +12,11 @@ const sts = require('strict-transport-security');
 const https = require("https");
 const http = require("http");
 var helmet = require('helmet');
+const db = require('./db')
+var format = require('pg-format');
+
+
+
 var cookieParser = require('cookie-parser');
 var cors = require('cors')
 var KEY_FILE = fs.readFileSync("server.key");
@@ -30,6 +35,17 @@ app.use(cors({
   "optionsSuccessStatus": 204
 }))
 app.use(cookieParser("w3A0xFdUg3tG6VtHDHJhaVFm2pTMwF2c"))
+
+function IsAuthenticated(req,res,next){
+    if(req.isAuthenticated()){
+        next();
+    }else{
+        next(new Error(401));
+    }
+}
+
+
+
 const port = 8080;
 
 var ONE_YEAR = 31536000000;
@@ -163,13 +179,20 @@ app.put("/email", (req, res) => {
 app.put("/uq", (req, res) => { //unverifiedquestions
   //params needed, userid, amount
   //not verified, not the author, not verified by 10 users, limit to amount
+  //var params = [req.headers.userid, req.headers.amount]
+  //console.log(params);
+  db.query(format("select title, options, answer from questions where id != %s and verified <> true limit %s", req.headers.userid, req.headers.amount), (err, result) =>{
+    //console.log(err || result);
+    return res.status(200).send(result.rows || "nothing much wow" || err);
+  })
 
-  var find = Question.find({verified: false, author: {$ne: req.headers.userid}}, //nverifiers: {$lt: 10}},
-    "title options answer").limit(parseInt(req.headers.amount));
-    find.exec(function(err, result){
-      //  console.log(result)
-      return res.status(200).send(result || "nothing much wow" || err);
-    })
+  //mongodb way of this bullshit
+  // var find = Question.find({verified: false, author: {$ne: req.headers.userid}}, //nverifiers: {$lt: 10}},
+  //   "title options answer").limit(parseInt(req.headers.amount));
+  //   find.exec(function(err, result){
+  //     //  console.log(result)
+  //     return res.status(200).send(result || "nothing much wow" || err);
+  //   })
 });
 
 app.put("/mq", (req, res) => {

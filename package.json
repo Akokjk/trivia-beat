@@ -25,6 +25,8 @@
     "mongoose": "^5.12.3",
     "passport": "^0.4.1",
     "petal.less": "^0.12.4",
+    "pg": "^8.6.0",
+    "pg-format": "^1.0.4",
     "sass-unitconverter": "^2.5.2",
     "socket.io": "^4.0.0",
     "strict-transport-security": "^0.3.0"

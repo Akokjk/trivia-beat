@@ -201,7 +201,7 @@ app.put("/cq", (req, res) => { //check question
 
   db.query(format("select title from questions where title like '%s' and verified <> true limit 1", ("%"+req.headers.title+"%")), (err, result) =>{
     console.log(err || result);
-    return res.status(200).send(result|| "nothing much wow" || err);
+    return res.status(200).send(result.rows|| "nothing much wow" || err);
   })
 
   //mongodb way of this bullshit

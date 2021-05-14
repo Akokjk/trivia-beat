@@ -56,6 +56,17 @@ function Verify({items, isLoaded}){
 }
 
 
+function Add({}){
+  <div>
+    <form action="/action_page.php">
+      <label for="qtitle"></label>
+      <input type="text" id="qtitle" name="qtitle"><br><br>
+      <input type="submit" value="Submit">
+    </form>
+
+  </div>
+}
+
 export default function Contribute({setDisplay}){
   const [mode, setMode] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -82,8 +93,6 @@ export default function Contribute({setDisplay}){
             console.log(res);
           });
   }, [])
-
-
 
   console.log("tEst")
   return(

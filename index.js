@@ -195,6 +195,26 @@ app.put("/uq", (req, res) => { //unverifiedquestions
   //   })
 });
 
+app.put("/uq", (req, res) => { //check question
+  //params needed is the question
+  //not verified, not the author, not verified by 10 users, limit to amount
+
+  db.query(format("select title from questions where title == %s and verified <> true limit %s", req.headers.title), (err, result) =>{
+    //console.log(err || result);
+    return res.status(200).send(result.rows || "nothing much wow" || err);
+  })
+
+  //mongodb way of this bullshit
+  // var find = Question.find({verified: false, author: {$ne: req.headers.userid}}, //nverifiers: {$lt: 10}},
+  //   "title options answer").limit(parseInt(req.headers.amount));
+  //   find.exec(function(err, result){
+  //     //  console.log(result)
+  //     return res.status(200).send(result || "nothing much wow" || err);
+  //   })
+});
+
+
+
 app.put("/mq", (req, res) => {
   const date = new Date();
   var options = req.headers.options

@@ -8,8 +8,68 @@
   align-self: center;
   position: absolute;
   top: 0;
-  justify-content: center;
+  justify-content: flex-start;
 
+}
+
+#add{
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  background-color: green;
+  justify-content: flex-start;
+}
+
+
+
+#qtitle{
+  display: flex;
+  border-radius: 10px;
+  border-style: none;
+  width: 90%;
+  height: 200px;
+  margin-top: 10px;
+  background-color: white;
+  vertical-align: middle;
+  justify-content: center;
+  align-content: center;
+  resize: none;
+  color: black;
+  overflow:hidden;
+  font-size: 150%;
+}
+
+#count{
+  display: flex;
+  align-self: flex-end;
+  color: black;
+  position: relative;
+  bottom: 40px;
+  right: 10px;  
+  margin-bottom: 0;
+  margin-right: 5%;
+  padding: 0;
+
+}
+#holder{
+  display: flex;
+  border-radius: 2px;
+  width: 90%;
+  height: 200px;
+
+  justify-content: flex-start;
+}
+
+
+.trans{
+  opacity: 80%;
+  top: 110px;
+  width: 1;
+  height: 1;
+  font-family: serif;
+  text-decoration: none;
+  color: black;
+  position: absolute;
 }
 
 .answer{
@@ -27,6 +87,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
   align-items: center;
+
   position: relative;
   justify-content: flex-start;
 }
@@ -124,6 +185,7 @@
   position: absolute;
   height: 80%;
   top: 10%;
+
   max-width: 500px;
   display: flex;
   color: white;

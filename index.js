@@ -199,7 +199,7 @@ app.put("/cq", (req, res) => { //check question
   //params needed is the question
   //not verified, not the author, not verified by 10 users, limit to amount
 
-  db.query(format("select title from questions where title == %s and verified <> true limit %s", req.headers.title), (err, result) =>{
+  db.query(format("select title from questions where title == %s and verified <> true limit 1", req.headers.title), (err, result) =>{
     //console.log(err || result);
     return res.status(200).send(result.rows || "nothing much wow" || err);
   })

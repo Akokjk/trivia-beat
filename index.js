@@ -195,7 +195,7 @@ app.put("/uq", (req, res) => { //unverifiedquestions
   //   })
 });
 
-app.put("/uq", (req, res) => { //check question
+app.put("/cq", (req, res) => { //check question
   //params needed is the question
   //not verified, not the author, not verified by 10 users, limit to amount
 

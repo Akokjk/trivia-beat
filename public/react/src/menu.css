@@ -31,17 +31,17 @@
   font-kerning: normal;
   padding-left: 10px;
   font-size: 200%;
-  color: #e94560;
+  color: yellow;
 }
 button{
-  background-color: #16213e;
-  color: #e94560;
-  border-style: outset;
-  border-radius: 10px;
-  border-color: #0f3460;
+  background-color: black;
+  color: white;
+  border-style: none;
+  border-radius: 0px;
+  border-color: white;
   font-family:  serif;
   align-items: center;
-  font-size: 200%;
+  font-size: 300%;
   justify-content: center;
   display: flex;
   width: 80vw;
@@ -49,10 +49,15 @@ button{
   height: 10vh;
   margin-bottom: 10px;
 }
+
+button:hover{
+  text-decoration: underline;
+}
+
 h1{
   margin-top: 0;
-  color: #e94560;
-  font-size: 150%;
+  color: yellow;
+  font-size: 50px;
   text-decoration: underline;
-  font-family: 'Press Start 2P', cursive;
+  font-family: sans-serif;
 }

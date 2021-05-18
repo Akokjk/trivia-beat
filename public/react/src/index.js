@@ -29,7 +29,7 @@ function App(){
           timeout: 10000,
           headers: {
             userid: 1,
-            amount: amount
+            amount: 3
           }
         })
           .done(function (res) {

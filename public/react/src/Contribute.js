@@ -57,12 +57,14 @@ function Verify({items, isLoaded}){
 
 function Add(){
   const editableRef = useRef();
+  const editableRef1 = useRef();
   const [play] = useSound(boopSfx, {
     volume: .05,
     playbackRate: 1,
     interrupt: true,
   });
   const [count, setCount] = useState("title")
+  const [options, setOptions] = useState(["A", "B", "C", "D"])
   const [possible, setPossible] = useState("title")
   let regex = new RegExp("^\\s+[A-Za-z,;'\"\\s]+[?]$")
 
@@ -90,21 +92,61 @@ function Add(){
                   }
                 })
                   .done(function (res) {
-                    if (res) {
-                      //setItems(res);
-                      console.log(res)
-                      //setIsLoaded(true);
-
+                    if (res[0] !== undefined) {
+                      setPossible(res[0].title);
+                      console.log(possible.slice(html.length, possible.length))
                     }
                   })
                   .fail(function (res) {
                     console.log(res);
                   })
+              //setPossible(possible.slice(html.length, possible.length))
+              //console.log(possible)
               setCount(html);
             }}
           />
         <p id="count">{count.length} /150</p>
+
+          <ContentEditable
+              innerRef={editableRef1}
+              tagName="div"
+              id="qtitle"
+              html={options[0]}
+              onPaste={(e) => {
+                e.preventDefault();
+                const text = e.clipboardData.getData("text");
+                document.execCommand("insertText", false, text);
+              }}
+              onChange={(e) => {
+                const html = e.target.value;
+                const yes = options
+                yes[0] = html;
+                setOptions(yes);
+              }}
+            />
+          <p id="count">{options[0].length} /150</p>
+            <ContentEditable
+                innerRef={editableRef1}
+                tagName="div"
+                id="qtitle"
+                html={options[1]}
+                onPaste={(e) => {
+                  e.preventDefault();
+                  const text = e.clipboardData.getData("text");
+                  document.execCommand("insertText", false, text);
+                }}
+                onChange={(e) => {
+                  const html = e.target.value;
+                  const yes = options
+                  yes[1] = html;
+                  setOptions(yes);
+                }}
+              />
+            <p id="count">{options[1].length} /150</p>
+
       </div>
+
+
 
     </div>
   )

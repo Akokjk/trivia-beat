@@ -29,6 +29,7 @@
     "pg-format": "^1.0.4",
     "sass-unitconverter": "^2.5.2",
     "socket.io": "^4.0.0",
-    "strict-transport-security": "^0.3.0"
+    "strict-transport-security": "^0.3.0",
+    "uuid": "^8.3.2"
   }
 }

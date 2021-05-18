@@ -1,0 +1,1 @@
+insert into questions (title, options, answer, author, category, difficulty, verified, reports, created, banned, seen_by, wrong_responses) values ('Do you want to drink icewater', 'Yes, No, Maybe, IDK', 3, 635784008, 'dumb stupid broken', 1, false, 14, '8/27/2020', false, '', 40);

@@ -20,7 +20,25 @@
   justify-content: flex-start;
 }
 
+#qtitle1{
+  display: flex;
+  border-radius: 10px;
+  border-style: none;
+  width: 90%;
+  opacity: 50%;
+  bottom: 205px;
+  height: 200px;
+  pointer-events: none;
+  position: relative;
 
+  vertical-align: middle;
+  justify-content: center;
+  align-content: center;
+  resize: none;
+  color: black;
+  overflow:hidden;
+  font-size: 150%;
+}
 
 #qtitle{
   display: flex;
@@ -45,7 +63,7 @@
   color: black;
   position: relative;
   bottom: 40px;
-  right: 10px;  
+  right: 10px;
   margin-bottom: 0;
   margin-right: 5%;
   padding: 0;
@@ -106,7 +124,7 @@
   align-items: center;
   text-align: center;
   height: 100px;
-  font-size: 150%;
+  font-size: 200%;
   justify-content: center;
 }
 .option{
@@ -115,7 +133,7 @@
   border-top: 2px dashed white;
   flex-direction: row;
   width: 90%;
-  font-size: 75%;
+  font-size: 120%;
   color: white;
   max-width: 500px;
   display: flex;
@@ -147,6 +165,7 @@
 .choice{
   height: 50px;
   width: 90%;
+  font-size: 250%;
   display: flex;
   align-items: flex-start;
   flex-direction: row;

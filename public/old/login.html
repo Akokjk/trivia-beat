@@ -9,7 +9,7 @@
     <script src="lib/SHA256.js"></script>
     <link rel="stylesheet" href="lib/petal.min.css">
     <link rel="stylesheet/less"  type="text/css" href="styles/test.less">
-  
+
     <script>
       less = {
         env: "development",
@@ -117,8 +117,8 @@
 
     $('#demoSegmented2').click(function(){
       document.title = "Register: Trivia Beat"
-      checkU = setInterval(check_username, 1000);
-      checkE = setInterval(validateEmail, 1000);
+      checkU = setInterval(check_username, 2000);
+      checkE = setInterval(validateEmail, 2000);
       checkP = setInterval(checkpassword, 500);
       checkS= setInterval(checkform, 500);
       $("#submit").prop('disabled', true);
@@ -179,7 +179,7 @@
       $.ajax({
         url: "/email",
         type: "PUT",
-        timeout: 1000,
+        timeout: 2000,
         headers: {
           email: email
         }
@@ -206,7 +206,7 @@
         $.ajax({
           url: "/username",
           type: "PUT",
-          timeout: 1000,
+          timeout: 2000,
           headers: {
             username: document.getElementById("demoForm3Username").value
           }
@@ -258,7 +258,7 @@
         $.ajax({
           url: "/register",
           type: "PUT",
-          timeout: 1000,
+          timeout: 2000,
           headers: {
             phone: null,
             name: document.getElementById("demoForm3Username").value,
@@ -279,7 +279,7 @@
         var yes  = $.ajax({
           url: "/login",
           type: "PUT",
-          timeout: 1000,
+          timeout: 2000,
           headers: {
             email: document.getElementById("demoFormEmail").value,
             password: Crypto.SHA256(document.getElementById("password").value || document.getElementById("password1").value).toString()

@@ -1,6 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 
+
 const encrypt = require("./encrypt.js").encrypt
 const decrypt = require("./encrypt.js").decrypt
 const secret = require("./encrypt.js").secretKey
@@ -52,7 +53,6 @@ app.use(helmet.hsts({
 
 
 
-
 const globalSTS = sts.getSTS({'max-age':{'days': 30}});
 
 app.use(globalSTS);
@@ -61,7 +61,7 @@ app.use("/", express.static("public/old"));
 
 
 app.get("/", (req, res) =>{
-  if(req.signedCookies.login == undefined) return res.status(200).sendFile("public/old/login.html", { root: __dirname });
+  if(req.cookies.login == undefined) return res.status(200).sendFile("public/old/login.html", { root: __dirname });
   else return res.sendFile("public/react/build", { root: __dirname })
 })
 
@@ -71,17 +71,22 @@ app.get("/:file", (req, res) =>{
 })
 
 
+
+
+
 app.put("/login" , (req, res) => {
   //params needed: email, password
+  var date = new Date();
   db.query(format("select id from player where email = '%s' AND password = '%s' limit 1", req.headers.email, req.headers.password), (err, result) =>{
 
-    return res.status(200).cookie('login', uuidv4(), {expire: Date.now()+ 2592000, secure: true, sameSite: true, httpOnly: true }).send(err || result.rowCount == 1 ? true: false);
+     res.status(200).cookie('login', uuidv4(), {expire: date.getDate() + 30, secure: false, sameSite: true, httpOnly: true }).send(err || result.rowCount == 1 ? true: false);
   })
 });
 
 app.put("/register", (req, res) => {
   //params needed username, email, password
-  db.query(format(""), (err, result)=>{
+
+  db.query(format("insert into player (username, email, password, session_id) values ('%s', '%s', '%s', '%s'", req.headers.username, req.headers.email, req.headers.password), (err, result)=>{
 
   })
 

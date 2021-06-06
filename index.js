@@ -162,6 +162,14 @@ app.put("/mq", (req, res) => {
 });
 
 
+app.put("/info", (req, res) =>{
+  db.query(format("select gems, hearts, wei from player where session_id = '%s' limit 1", req.headers.login), (err, result) =>{
+    return res.status(200).send(result.rows);
+  })
+})
+
+
+
 var server = http.createServer(app);
 
 server.listen(port, ()=>{

@@ -254,6 +254,8 @@
       else $("#submit").prop('disabled', true);
     }
     $("#submit").click(function(){
+      //check_username();
+      //validateEmail();
       if($("#demoSegmented1").is(':enabled')){
         $.ajax({
           url: "/register",
@@ -261,13 +263,13 @@
           timeout: 2000,
           headers: {
             phone: null,
-            name: document.getElementById("demoForm3Username").value,
+            username: document.getElementById("demoForm3Username").value,
             email: document.getElementById("demoFormEmail").value,
             password: Crypto.SHA256(document.getElementById("password1").value || document.getElementById("password").value).toString()
           }
           }).done(function(res){ //if user logins in from uknown ip then make sure to human test them.
               if(res){
-                location.href = "/index";
+                location.reload();
               }else{
                 alert("Submitted with wrong input");
               }
@@ -287,7 +289,7 @@
         })
         yes.done(function(res){ //if user logins in from uknown ip then make sure to human test them.
           if(res){
-            location.href = "/index";
+            location.reload();
           }
       })
       yes.fail(function(){

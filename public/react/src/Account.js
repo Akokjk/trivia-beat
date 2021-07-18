@@ -20,7 +20,7 @@ export default function Account({setDisplay}){
         })
           .done(function (res) {
             if (res) {
-              setUser([res[0].username, res[0].id, res[0].role]);
+              setUser([res[0].username, res[0].id, res[0].role, res[0].added, res[0].seen, res[0].bio]);
               console.log(res)
             }
           })
@@ -37,22 +37,23 @@ export default function Account({setDisplay}){
         <div id="info">
           <div>
             <div id="infon">
-              Username
+              <p>{user[0]}</p>
             </div>
             <div id="infon1">
-              ID #
+              ID # {user[1]}
             </div>
 
           </div>
-          <div>Whats up bro?</div>
+          <div>
+            <p>{user[5]}</p>
+          </div>
         </div>
       </div>
       <div id="stats">
         <div id="itext">
           <div id="stitle">Stats</div>
-          <p>Questions Answered:</p>
-          <p>Questions Contributed:</p>
-          <p>Last login: </p>
+          <p>Questions Answered: {user[4]}</p>
+          <p>Questions Contributed: {user[3]}</p>
         </div>
         <div id="role"><img src={rank} alt="rank" id="role"/></div>
       </div>

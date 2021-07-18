@@ -169,7 +169,7 @@ app.put("/info", (req, res) =>{
 })
 
 app.put("/stats", (req, res) => {
- db.query(format("select id, role, username from player where session_id = '%s' limit 1", req.headers.login), (err, result) =>{
+ db.query(format("select id, role, username, seen, added, bio from player where session_id = '%s' limit 1", req.headers.login), (err, result) =>{
    return res.status(200).send(result.rows);
  })
 });

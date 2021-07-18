@@ -66,14 +66,14 @@ app.get("/", (req, res) =>{
   //var session = res.cookies.login
   db.query(format("select id from player where session_id = '%s'", req.cookies.login), (err,result) =>{
     if(result.rowCount == 1) return res.sendFile("public/react/build/index.html", { root: __dirname })
-    else return res.sendFile("public/old/login.html" , { root: __dirname })
+    else return res.sendFile("not_used/old_html/login.html" , { root: __dirname })
   })
 
 
 })
 
 app.get("/:file", (req, res) =>{
-  if(req.params.file == "tos") return res.sendFile("public/old/tos.html", { root: __dirname })
+  if(req.params.file == "tos") return res.sendFile("not_used/old_html/tos.html", { root: __dirname })
   return res.redirect("/");
 })
 

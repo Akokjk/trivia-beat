@@ -11,6 +11,10 @@
   flex-direction: column;
 
 }
+#currency img{
+  width: 30px;
+  height: 30px;
+}
 #currency{
   display: -webkit-flex;
   display: flex;

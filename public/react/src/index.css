@@ -4,7 +4,7 @@ html{
   height: 100%;
   width: 100%;
   margin-top: 0;
-  color: yellow; 
+  color: yellow;
 }
 
 body{
@@ -27,7 +27,7 @@ body{
 }
 
 div{
-  margin-top: 20;
+  margin-top: 20px;
   flex-shrink: 0;
   display: -webkit-flex;
   display: flex;
